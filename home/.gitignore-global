@@ -1,6 +1,0 @@
-.idea/
-atlassian*
-*.py[co]
-.DS_Store
-.vagrant/
-**/Vagrantfile

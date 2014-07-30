@@ -5,7 +5,7 @@
 	default = matching
 [core]
 	editor = vim
-	excludesfile = /Users/kyle.rich/.gitignore-global
+	excludesfile = ~/.gitignore
 [diff]
 	tool = diffmerge
 [difftool "diffmerge"]
@@ -18,9 +18,8 @@
 [alias]
 	co = checkout
 	br = branch
-	ci = commit
+	c = commit
 	st = status
 	unstage = reset HEAD --
-	last = log -1 HEAD
 [credential]
 	helper = osxkeychain
