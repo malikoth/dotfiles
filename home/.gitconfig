@@ -1,0 +1,26 @@
+[user]
+	name = Kyle Rich
+	email = kyle.rich@dealertrack.com
+[push]
+	default = matching
+[core]
+	editor = vim
+	excludesfile = /Users/kyle.rich/.gitignore-global
+[diff]
+	tool = diffmerge
+[difftool "diffmerge"]
+	cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
+[merge]
+	tool = diffmerge
+[mergetool "diffmerge"]
+	cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
+	trustExitCode = true
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD
+[credential]
+	helper = osxkeychain

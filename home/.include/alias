@@ -1,0 +1,28 @@
+# Config
+alias ${CURR_SHELL}rc='$EDITOR'" ~/.${CURR_SHELL}rc"
+alias rl=". ~/.${CURR_SHELL}rc"
+alias ohmyzsh='$EDITOR ~/.oh-my-zsh'
+
+# Alias Management
+alias sa='alias | grep -i'
+
+# File / System
+alias la='ls -AlhG'
+alias lt='ls -AlhGrt'
+alias hl='history | less'
+alias apt-up='sudo apt-get update && sudo apt-get upgrade'
+
+# Vagrant
+alias use_packer='unset DTWEB_USE_DT20DBEXPC_ORAXE_BOX'
+
+# Git
+alias glk="git log --no-merges --date=short --pretty=format:'%Cblue%h%Creset %C(yellow)(%cd)%Creset %Cgreen[%an]%Creset -%Cred%d%Creset %s'"
+alias glks="glk --numstat"
+alias gcam='git commit -am'
+alias gsh='git show'
+
+# Miscellaneous
+# TODO: Make this only print those that are actually font files
+alias ff='for font in `figlist`; do echo $font; figlet -f $font Hello Kyle; done'
+
+# Uncategorized
