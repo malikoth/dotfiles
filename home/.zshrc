@@ -68,7 +68,7 @@ ZSH_GIT_PROMPT_CLEAN=""
 
 PROMPT='
 ${d}[${name}${d}@${host}${d}] [${green}$(collapse_pwd)${d}] $(git_prompt_info)
-${d}$(virtualenv_prompt_info) ${white}$(prompt_char)'
+${d}$(virtualenv_prompt_info) ${white}$(prompt_char) '
 
 setopt prompt_subst
 RPROMPT="${d}[${tstamp}${d}]${white}"

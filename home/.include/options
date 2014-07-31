@@ -10,5 +10,6 @@ else if [[ $CURR_SHELL = zsh ]]
     setopt CSH_JUNKIE_HISTORY
     setopt KSH_GLOB
     setopt EXTENDED_GLOB
+    setopt DOT_GLOB
 
 fi
