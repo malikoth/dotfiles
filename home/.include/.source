@@ -1,0 +1,16 @@
+# Run personal setup scripts
+
+# Setup vars
+CURR_SHELL=$(ps ch -o command $$ | grep -iv command)
+INCLUDE_DIR=$(dirname $(readlink -f "$0"))
+
+# Set options
+if [ $CURR_SHELL = bash ]; then
+    shopt -u dotglob
+else if [ $CURR_SHELL = zsh ]; then
+    setopt no_dot_glob
+
+# Source scripts
+for file in $INCLUDE_DIR/*; do
+    . $file
+done
