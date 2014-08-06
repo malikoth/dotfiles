@@ -20,6 +20,7 @@ alias glk="git log --no-merges --date=short --pretty=format:'%Cblue%h%Creset %C(
 alias glks="glk --numstat"
 alias gcam='git commit -am'
 alias gsh='git show'
+alias gcf='git diff --name-only --diff-filter=U | cat'
 
 # Miscellaneous
 # TODO: Make this only print those that are actually font files

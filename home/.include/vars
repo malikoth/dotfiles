@@ -1,5 +1,4 @@
 # Local vars
-CURR_SHELL=$(ps ch -o command $$ | grep -iv command)
 
 # Global vars
 # TODO: Make PATH specific to which shell or box I'm on
@@ -12,6 +11,6 @@ export LSCOLORS='GxFxCxDxBxegedabagaced'
 
 ## Packer / Vagrant
 #export DTWEB_USE_DT20DBEXPC_ORAXE_BOX='1'
-export DT20_VBOX_DIR=~/dev/boxes
-export DT20_PROVISION_FILES_DIR=~/dev/dt20-devbox/files
-export DT20_DEVELOP_DIR=~/dev
+export DT20_VBOX_DIR='~/dev/boxes'
+export DT20_PROVISION_FILES_DIR='~/dev/dt20-devbox/files'
+export DT20_DEVELOP_DIR='~/dev'
