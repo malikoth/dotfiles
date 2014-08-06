@@ -11,6 +11,7 @@ if [ $CURR_SHELL = bash ]; then
     shopt -u dotglob
 else if [ $CURR_SHELL = zsh ]; then
     setopt no_dot_glob
+fi
 
 mkdir -p ~/.backup
 for file in home/*; do
