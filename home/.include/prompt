@@ -39,5 +39,6 @@ if [ $CURR_SHELL = zsh ]; then
     PROMPT=$(getPrompt)
     RPROMPT="${d}[${tstamp}${d}]${white}"
 else
-    PS1=$(getPrompt)
+    # TODO: Get an equivalent-ish prompt working for Bash
+    # PS1=$(getPrompt)
 fi
