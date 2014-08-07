@@ -31,8 +31,7 @@ getPrompt() (
     ZSH_GIT_PROMPT_UNTRACKED="%{$FX[reset]$FG[070]%}?"
     ZSH_GIT_PROMPT_CLEAN=""
 
-    echo "${d}[${name}${d}@${host}${d}] [${green}$(collapse_pwd)${d}] $(git_prompt_info)
-${d}$(virtualenv_prompt_info) ${white}$(prompt_char) "
+    echo "${d}[${name}${d}@${host}${d}] [${green}"'$(collapse_pwd)'"${d}] "'$(git_prompt_info)'"\n${d}"'$(virtualenv_prompt_info)'" ${white}"'$(prompt_char) '
 )
 
 if [ $CURR_SHELL = zsh ]; then
