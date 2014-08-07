@@ -1,9 +1,9 @@
 function aa {
-	echo "alias $1='$2'" >> $INCLUDE/alias
+	echo "alias $1='$2'" >> $INCLUDE_DIR/alias
 }
 
 function ee {
-    $EDITOR $INCLUDE/$1
+    $EDITOR $INCLUDE_DIR/$1
 }
 
 function mcd() {
