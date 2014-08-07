@@ -33,3 +33,5 @@ set autoindent
 
 nnoremap <F3> :set expandtab!<CR>
 nnoremap <F4> :set number!<CR>
+
+set viminfo='100,<1000,s10,h
