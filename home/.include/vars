@@ -2,8 +2,7 @@
 
 # Global vars
 # TODO: Make PATH specific to which shell or box I'm on
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/sbin:/usr/local/bin:~/dev/misc/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin"
-export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$(man -w)"
+export PATH="/usr/local/sbin:/usr/local/bin:~/dev/misc/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin"
 export EDITOR='vim'
 export GREP_OPTIONS='--color=auto'
 export CLICOLOR='1'
@@ -14,3 +13,9 @@ export LSCOLORS='GxFxCxDxBxegedabagaced'
 export DT20_VBOX_DIR='~/dev/boxes'
 export DT20_PROVISION_FILES_DIR='~/dev/dt20-devbox/files'
 export DT20_DEVELOP_DIR='~/dev'
+
+case $( uname -s ) in
+    Darwin ) # Mac
+        export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+        export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$(man -w)"
+esac
