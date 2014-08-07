@@ -41,4 +41,5 @@ if [ $CURR_SHELL = zsh ]; then
 else
     # TODO: Get an equivalent-ish prompt working for Bash
     # PS1=$(getPrompt)
+    :
 fi
