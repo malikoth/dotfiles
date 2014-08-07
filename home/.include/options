@@ -1,5 +1,6 @@
 if [ $CURR_SHELL = zsh ]; then
 
+    # Globbing
     setopt NO_DOT_GLOB
     setopt NULL_GLOB
     setopt EXTENDED_GLOB
@@ -10,9 +11,11 @@ if [ $CURR_SHELL = zsh ]; then
 
 else
 
+    # Globbing
     shopt -u dotglob
     shopt -s nullglob
     shopt -s extglob
 
+    shopt -s autocd
 
 fi
