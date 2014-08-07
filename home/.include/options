@@ -1,10 +1,4 @@
-if [[ $CURR_SHELL = bash ]]; then
-
-    shopt -u dotglob
-    shopt -s nullglob
-    shopt -s extglob
-
-else if [[ $CURR_SHELL = zsh ]]
+if [ $CURR_SHELL = zsh ]; then
 
     setopt NO_DOT_GLOB
     setopt NULL_GLOB
@@ -13,5 +7,12 @@ else if [[ $CURR_SHELL = zsh ]]
     setopt KSH_GLOB
     setopt NO_HIST_VERIFY
     setopt CSH_JUNKIE_HISTORY
+
+else
+
+    shopt -u dotglob
+    shopt -s nullglob
+    shopt -s extglob
+
 
 fi

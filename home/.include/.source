@@ -2,17 +2,16 @@
 
 # Setup vars
 CURR_SHELL=$(ps ch -o command $$ | grep -iv command)
-INCLUDE_DIR=$(dirname $(readlink -f "$0"))
+INCLUDE_DIR=$(dirname $(readlink -f "$0"))/home/.include
 
 # Set options
-if [ $CURR_SHELL = bash ]; then
-    shopt -u dotglob
-elif [ $CURR_SHELL = zsh ]; then
+if [ $CURR_SHELL = zsh ]; then
     setopt no_dot_glob
+else
+    shopt -u dotglob
 fi
 
 # Source scripts
 for file in $INCLUDE_DIR/*; do
     source $file
 done
-

@@ -19,7 +19,8 @@ CURR_SHELL=$(ps ch -o command $$ | grep -iv command)
     mkdir -p ~/.backup
     for file in home/*; do
         # Archive old version of file / folder
-        if [ -a ~/${file##*/} ]; then
+        if [ -e ~/${file##*/} ]; then
+            
             mv -f ~/${file##*/} ~/.backup/
         fi
 
@@ -38,6 +39,3 @@ CURR_SHELL=$(ps ch -o command $$ | grep -iv command)
         fi
     done
 )
-
-source home/.include/.source
-
