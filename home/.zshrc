@@ -31,6 +31,9 @@ HIST_STAMPS="yyyy-mm-dd"
 plugins=(git atom brew brew-cask colored-man colorize common-aliases django github gitignore gnu-utils jira jsontools node npm osx pep8 pip python rsync sudo svn vagrant virtualenv vundle)
 source $ZSH/oh-my-zsh.sh
 
+# Init prompt
+autoload -U promptinit && promptinit
+
 # Run personal setup scripts
 source ~/.include/.source
 
