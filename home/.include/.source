@@ -2,7 +2,7 @@
 
 # Setup vars
 CURR_SHELL=$(ps ch -o command $$ | grep -iv command)
-INCLUDE_DIR=$(dirname $(readlink -f "$0"))/home/.include
+INCLUDE_DIR=$(dirname $(readlink -f "$0"))
 
 # Set options
 if [ $CURR_SHELL = zsh ]; then

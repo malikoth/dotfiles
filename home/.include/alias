@@ -1,6 +1,6 @@
 # Config
 alias ${CURR_SHELL}rc='$EDITOR'" ~/.${CURR_SHELL}rc"
-alias rl=". ~/.${CURR_SHELL}rc"
+alias rl="source ~/.${CURR_SHELL}rc"
 alias ohmyzsh='$EDITOR ~/.oh-my-zsh'
 
 # Alias Management

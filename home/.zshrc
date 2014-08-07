@@ -32,11 +32,7 @@ plugins=(git atom brew brew-cask colored-man colorize common-aliases django gith
 source $ZSH/oh-my-zsh.sh
 
 # Run personal setup scripts
-INCLUDE=~/.include
-. $INCLUDE/vars
-for file in $INCLUDE/*; do
-    . $file
-done
+source ~/.include/.source
 
 # TODO: Setup prompt for git status
 

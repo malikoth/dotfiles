@@ -8,19 +8,13 @@ CURR_SHELL=$(ps ch -o command $$ | grep -iv command)
 
 (
     # Set options
-    if [ $CURR_SHELL = zsh ]; then
-        setopt dot_glob
-        setopt null_glob
-    else
-        shopt -s dotglob
-        shopt -s nullglob
-    fi
+    shopt -s dotglob
+    shopt -s nullglob
 
     mkdir -p ~/.backup
     for file in home/*; do
         # Archive old version of file / folder
         if [ -e ~/${file##*/} ]; then
-            
             mv -f ~/${file##*/} ~/.backup/
         fi
 
