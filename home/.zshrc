@@ -34,42 +34,7 @@ source $ZSH/oh-my-zsh.sh
 # Run personal setup scripts
 source ~/.include/.source
 
-# TODO: Setup prompt for git status
-
-# Prompt
-function collapse_pwd {
-    echo $(pwd | sed -e "s,^$HOME,~,")
-}
-
-function prompt_char {
-    git branch >/dev/null 2>/dev/null && echo '±' && return
-    hg root >/dev/null 2>/dev/null && echo '☿' && return
-    echo '○'
-}
-
-autoload -U promptinit && promptinit
-
-local d="%{$FX[reset]$FG[025]%}"
-local name="%{$FX[reset]$FG[133]%}%n"
-local host="%{$FX[reset]$FG[136]%}%M"
-local green="%{$FX[reset]$FG[070]%}"
-local white="%{$FX[reset]$FG[012]%}"
-local tstamp="%{$FG[037]%}%*"
-
-ZSH_GIT_PROMPT_PREFIX=" [%{$FX[reset]$FG[133]%}"
-ZSH_GIT_PROMPT_SUFFIX="%{$FX[reset]$FG[025]%}]"
-ZSH_GIT_PROMPT_DIRTY="%{$FX[reset]$FG[070]%}?"
-ZSH_GIT_PROMPT_UNTRACKED="%{$FX[reset]$FG[070]%}?"
-ZSH_GIT_PROMPT_CLEAN=""
-
-PROMPT='
-${d}[${name}${d}@${host}${d}] [${green}$(collapse_pwd)${d}] $(git_prompt_info)
-${d}$(virtualenv_prompt_info) ${white}$(prompt_char) '
-
-setopt prompt_subst
-RPROMPT="${d}[${tstamp}${d}]${white}"
-
 ### Welcome ###
-toilet -t -f smslant -d /usr/local/Cellar/figlet/2.2.5/share/figlet/fonts Hello Kyle
+toilet -t -f smslant -d $(figlet -I2) Hello Kyle
 echo
 fortune
