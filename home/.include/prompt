@@ -17,23 +17,25 @@ function current_branch() {
   echo ${ref#refs/heads/}
 }
 
-local d="%{$FX[reset]$FG[025]%}"
-local name="%{$FX[reset]$FG[133]%}%n"
-local host="%{$FX[reset]$FG[136]%}%M"
-local green="%{$FX[reset]$FG[070]%}"
-local white="%{$FX[reset]$FG[012]%}"
-local tstamp="%{$FG[037]%}%*"
+getPrompt() (
+    d="%{$FX[reset]$FG[025]%}"
+    name="%{$FX[reset]$FG[133]%}%n"
+    host="%{$FX[reset]$FG[136]%}%M"
+    green="%{$FX[reset]$FG[070]%}"
+    white="%{$FX[reset]$FG[012]%}"
+    tstamp="%{$FG[037]%}%*"
 
-ZSH_GIT_PROMPT_PREFIX=" [%{$FX[reset]$FG[133]%}"
-ZSH_GIT_PROMPT_SUFFIX="%{$FX[reset]$FG[025]%}]"
-ZSH_GIT_PROMPT_DIRTY="%{$FX[reset]$FG[070]%}?"
-ZSH_GIT_PROMPT_UNTRACKED="%{$FX[reset]$FG[070]%}?"
-ZSH_GIT_PROMPT_CLEAN=""
+    ZSH_GIT_PROMPT_PREFIX=" [%{$FX[reset]$FG[133]%}"
+    ZSH_GIT_PROMPT_SUFFIX="%{$FX[reset]$FG[025]%}]"
+    ZSH_GIT_PROMPT_DIRTY="%{$FX[reset]$FG[070]%}?"
+    ZSH_GIT_PROMPT_UNTRACKED="%{$FX[reset]$FG[070]%}?"
+    ZSH_GIT_PROMPT_CLEAN=""
 
-PROMPT='
-${d}[${name}${d}@${host}${d}] [${green}$(collapse_pwd)${d}] $(git_prompt_info)
+    echo '${d}[${name}${d}@${host}${d}] [${green}$(collapse_pwd)${d}] $(git_prompt_info)
 ${d}$(virtualenv_prompt_info) ${white}$(prompt_char) '
+)
 
+PROMPT=$(getPrompt)
 if [ $CURR_SHELL = zsh ]; then
     setopt prompt_subst
     RPROMPT="${d}[${tstamp}${d}]${white}"
