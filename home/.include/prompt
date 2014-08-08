@@ -31,13 +31,17 @@ getPrompt() (
     ZSH_GIT_PROMPT_UNTRACKED="%{$FX[reset]$FG[070]%}?"
     ZSH_GIT_PROMPT_CLEAN=""
 
-    echo "${d}[${name}${d}@${host}${d}] [${green}"'$(collapse_pwd)'"${d}] "'$(git_prompt_info)'"\n${d}"'$(virtualenv_prompt_info)'" ${white}"'$(prompt_char) '
+    if [ $1 = l ]; then
+        echo "${d}[${name}${d}@${host}${d}] [${green}"'$(collapse_pwd)'"${d}] "'$(git_prompt_info)'"\n${d}"'$(virtualenv_prompt_info)'" ${white}"'$(prompt_char) '
+    elif [ $1 = r ]; then
+        echo "${d}[${tstamp}${d}]${white}"
+    fi
 )
 
 if [ $CURR_SHELL = zsh ]; then
     setopt prompt_subst
-    PROMPT=$(getPrompt)
-    RPROMPT="${d}[${tstamp}${d}]${white}"
+    PROMPT=$(getPrompt l)
+    RPROMPT=$(getPrompt r)
 else
     # TODO: Get an equivalent-ish prompt working for Bash
     # PS1=$(getPrompt)
