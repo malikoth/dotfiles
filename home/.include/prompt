@@ -32,7 +32,7 @@ getPrompt() (
     ZSH_GIT_PROMPT_CLEAN=""
 
     if [ $1 = l ]; then
-        echo "${d}[${name}${d}@${host}${d}] [${green}"'$(collapse_pwd)'"${d}] "'$(git_prompt_info)'"\n${d}"'$(virtualenv_prompt_info)'" ${white}"'$(prompt_char) '
+        echo "\n${d}[${name}${d}@${host}${d}] [${green}"'$(collapse_pwd)'"${d}] "'$(git_prompt_info)'"\n${d}"'$(virtualenv_prompt_info)'" ${white}"'$(prompt_char) '
     elif [ $1 = r ]; then
         echo "${d}[${tstamp}${d}]${white}"
     fi

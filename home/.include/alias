@@ -18,9 +18,11 @@ alias use_packer='unset DTWEB_USE_DT20DBEXPC_ORAXE_BOX'
 # Git
 alias glk="git log --no-merges --date=short --pretty=format:'%Cblue%h%Creset %C(yellow)(%cd)%Creset %Cgreen[%an]%Creset -%Cred%d%Creset %s'"
 alias glks="glk --numstat"
+alias glkfp="glk --first-parent"
 alias gcam='git commit -am'
 alias gsh='git show'
 alias gcf='git diff --name-only --diff-filter=U | cat'
+alias gbv='git branch -v'
 
 # Miscellaneous
 # TODO: Make this only print those that are actually font files
