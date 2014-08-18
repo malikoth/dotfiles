@@ -10,6 +10,9 @@ function mcd() {
 	mkdir -p "$1" && cd "$1";
 }
 
+function cde() {
+    cd $(dirname $(which $1))
+}
 
 function extract() {
 	unset REMOVE_ARCHIVE
