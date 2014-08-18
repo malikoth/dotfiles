@@ -11,7 +11,7 @@ function mcd() {
 }
 
 function cde() {
-    cd $(dirname $(which $1))
+    cd "$(dirname $(which $1))"
 }
 
 function extract() {
