@@ -111,7 +111,7 @@ function getPrompt() (
     if [ $1 = l ]; then
         getPrompt_return=(
             "\n${d}[${name}${d}@${host}${d}]"
-            "${green}"'$(collapse_pwd)'"${d}]"
+            "[${green}"'$(collapse_pwd)'"${d}]"
             '$(git_prompt_info)'
             '\n$(prompt_wrap virtualenv_info)'
             '$(prompt_char) '"${reset}"
