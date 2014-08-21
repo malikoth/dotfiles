@@ -13,7 +13,6 @@ else
 
     # Globbing
     shopt -u dotglob
-    shopt -s nullglob
     shopt -s extglob
 
     shopt -s autocd
