@@ -4,3 +4,4 @@ atlassian*
 .DS_Store
 .vagrant/
 **/Vagrantfile
+env/
