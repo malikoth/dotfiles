@@ -24,9 +24,11 @@ alias gcam='git commit -am'
 alias gsh='git show'
 alias gcf='git diff --name-only --diff-filter=U | cat'
 alias gbv='git branch -v'
+alias gt='git tag'
 
 # Miscellaneous
 # TODO: Make this only print those that are actually font files
-alias ff='for font in `figlist`; do echo $font; figlet -f $font Hello Kyle; done'
+alias ff='for font in `figlist | head -$(echo $(figlist | grep -n "Figlet control files" | cut -d : -f 1) - 1 | bc) | tail -n +4`; do echo $font; figlet -f $font Hello Kyle; done'
 
 # Uncategorized
+alias socks='ssh -f -N -D 27823 kyle@50.160.16.124'
