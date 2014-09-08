@@ -33,9 +33,9 @@ alias socks='ssh -f -q -N -D 27823 -o "GatewayPorts yes" kyle@klr.t28.net'
 # Platform dependant
 case $( uname -s ) in
     Darwin ) # Mac
-        alias updatedb='sudo /usr/libexec/locate.updatedb'
+        alias updatedb='sudo /usr/libexec/locate.updatedb' ;;
     Linux ) # Everything else
-        alias apt-up='sudo apt-get update && sudo apt-get upgrade'
+        alias apt-up='sudo apt-get update && sudo apt-get upgrade' ;;
 esac
 
 # Uncategorized
