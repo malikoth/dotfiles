@@ -26,9 +26,10 @@ alias gbv='git branch -v'
 alias gt='git tag'
 
 # Miscellaneous
-# TODO: Make this only print those that are actually font files
 alias ff='for font in `figlist | head -$(echo $(figlist | grep -n "Figlet control files" | cut -d : -f 1) - 1 | bc) | tail -n +4`; do echo $font; figlet -f $font Hello Kyle; done'
-alias socks='ssh -f -q -N -D 27823 -o "GatewayPorts yes" kyle@klr.t28.net'
+alias socks='ssh -f -q -N -D 27823 -o "GatewayPorts yes" kyle@klr.blue'
+alias sshs='ps ax | grep ssh'
+alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
 
 # Platform dependant
 case $( uname -s ) in
