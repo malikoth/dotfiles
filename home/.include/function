@@ -6,15 +6,19 @@ function ee {
     $EDITOR $INCLUDE_DIR/$1
 }
 
-function mcd() {
+function freeport {
+    lsof -it tcp:$1 | xargs kill -9
+}
+
+function mcd {
 	mkdir -p "$1" && cd "$1";
 }
 
-function cde() {
+function cde {
     cd "$(dirname $(which $1))"
 }
 
-function extract() {
+function extract {
 	unset REMOVE_ARCHIVE
 
 	if test "$1" = "-r"; then

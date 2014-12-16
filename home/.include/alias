@@ -11,6 +11,7 @@ alias la='ls -AlhGH'
 alias lt='ls -AlhGHrt'
 alias hl='history | less'
 alias tree='tree -shC --du | less'
+alias ht='history | tail'
 
 # Vagrant
 alias use_packer='unset DTWEB_USE_DT20DBEXPC_ORAXE_BOX'

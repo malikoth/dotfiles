@@ -3,6 +3,8 @@ filetype off
 
 syntax enable
 set background=dark
+let more_fontface='mixed'
+color moria
 
 set nu
 set ruler

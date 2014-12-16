@@ -5,3 +5,7 @@ atlassian*
 .vagrant/
 **/Vagrantfile
 env/
+node_modules/
+*.sqlite3
+*.sqlite
+*.db
