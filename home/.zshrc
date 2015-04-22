@@ -30,12 +30,25 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git atom brew brew-cask colored-man colorize common-aliases django github gitignore gnu-utils jira jsontools node npm osx pep8 pip python rsync sudo svn vagrant virtualenv vundle)
 source $ZSH/oh-my-zsh.sh
+source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Init prompt
 autoload -U promptinit && promptinit
 
 # Run personal setup scripts
 source ~/.include/.source
+
+# Virtualenvwrapper
+export WORKON_HOME=$HOME/.venvs
+export PROJECT_HOME=$HOME/dev
+source /usr/local/bin/virtualenvwrapper.sh
+
+# Docker
+eval "$(boot2docker shellinit)" > /dev/null
+
+# Miscellaneous other setup
+. `brew --prefix`/etc/profile.d/z.sh
+# . /usr/local/bin/activate.sh
 
 ### Welcome ###
 toilet -t -f smslant -d $(figlet -I2) Hello Kyle

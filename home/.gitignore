@@ -9,3 +9,5 @@ node_modules/
 *.sqlite3
 *.sqlite
 *.db
+.env/
+*.egg-info
