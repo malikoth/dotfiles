@@ -37,9 +37,11 @@ alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade --trusted
 # Platform dependant
 case $( uname -s ) in
     Darwin ) # Mac
-        alias updatedb='sudo /usr/libexec/locate.updatedb' ;;
+        alias updatedb='sudo /usr/libexec/locate.updatedb'
+        alias fjson='pbpaste | python -m json.tool | pbcopy' ;;
     Linux ) # Everything else
-        alias apt-up='sudo apt-get update && sudo apt-get upgrade' ;;
+        alias apt-up='sudo apt-get update && sudo apt-get upgrade'
+        alias fjson='xclip -o | python -m json.tool | xclip' ;;
 esac
 
 # Uncategorized
