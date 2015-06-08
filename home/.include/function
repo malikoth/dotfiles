@@ -18,6 +18,10 @@ function cde {
     cd "$(dirname $(which $1))"
 }
 
+function ws {
+    python -m SimpleHTTPServer $1
+}
+
 function extract {
 	unset REMOVE_ARCHIVE
 

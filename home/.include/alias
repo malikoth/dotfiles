@@ -14,9 +14,6 @@ alias hl='history | less'
 alias tree='tree -shC --du | less'
 alias ht='history | tail'
 
-# Vagrant
-alias use_packer='unset DTWEB_USE_DT20DBEXPC_ORAXE_BOX'
-
 # Git
 alias glk="git log --no-merges --date=short --pretty=format:'%Cblue%h%Creset %C(yellow)(%cd)%Creset %Cgreen[%an]%Creset -%Cred%d%Creset %s'"
 alias glks="glk --numstat"
@@ -38,10 +35,13 @@ alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade --trusted
 case $( uname -s ) in
     Darwin ) # Mac
         alias updatedb='sudo /usr/libexec/locate.updatedb'
-        alias fjson='pbpaste | python -m json.tool | pbcopy' ;;
+        alias fjson='pbpaste | python -m json.tool | pbcopy'
+        alias bubu='brew update && brew upgrade --all && brew cleanup'
+        ;;
     Linux ) # Everything else
         alias apt-up='sudo apt-get update && sudo apt-get upgrade'
-        alias fjson='xclip -o | python -m json.tool | xclip' ;;
+        alias fjson='xclip -o | python -m json.tool | xclip'
+        ;;
 esac
 
 # Uncategorized

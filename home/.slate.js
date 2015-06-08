@@ -16,7 +16,7 @@ function shiftWin(win, dir) {
     newRect.height = winRect.height / srcRect.height * dstRect.height;
     newRect.screen = dstScreenId;
     newRect.x += dstRect.x;
-    newRect.y += dstRect.y
+    newRect.y += dstRect.y;
 
     win.doOperation(S.operation("move", newRect)); 
 }
