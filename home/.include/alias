@@ -30,6 +30,7 @@ alias ff='for font in `figlist | head -$(echo $(figlist | grep -n "Figlet contro
 alias socks='ssh -f -q -N -D 27823 -o "GatewayPorts yes" klr'
 alias sshs='ps ax | grep ssh'
 alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade --trusted-host 10.134.8.12'
+alias pat='pygmentize -g'
 
 # Platform dependant
 case $( uname -s ) in
