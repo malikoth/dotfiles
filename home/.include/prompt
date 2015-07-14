@@ -112,11 +112,11 @@ function getPrompt() (
         getPrompt_return=(
             "\n${d}[${name}${d}@${host}${d}]"
             "[${green}%~${d}]"
-            '$(git_prompt_info)$(git-untracked)'
+            '$(git_prompt_info)$(git-untracked)'"${reset}"
             "%(?..${d}[${red}!%?${reset}${d}])"
             "%(1j.${d}[$FG[226]%%%j${d}].)"
             '\n$(prompt_wrap virtualenv_info)'
-            '%(!.#.$) '"${reset}"
+            "${d}%(!.#.$) ${reset}"
         )
         echo $getPrompt_return
     elif [ $1 = r ]; then
