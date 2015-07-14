@@ -76,13 +76,13 @@ function git_stash_count() {
 }
 
 # Indicate if there are any untracked files present
-function +vi-git-untracked() {
+function git-untracked() {
 
     # Check if there's at least 1 untracked file
     untracked=${$(git ls-files --exclude-standard --others | head -n 1)}
 
     if [[ -n ${untracked} ]] ; then
-        echo "${hook_com[unstaged]}${yellow}?${gray}"
+        echo "${hook_com[unstaged]}$FG[202]?"
     fi
 }
 
@@ -99,7 +99,7 @@ function getPrompt() (
     white="%{$fg[white]%}"
     gray="%{$fg_bold[black]%}"
     brgreen="%{$fg_bold[green]%}"
-    red="%{$fg[red]%}"
+    red="%{$fg_bold[red]%}"
     yellow="%{$fg[yellow]%}"
 
     d="$FG[025]"
@@ -111,10 +111,12 @@ function getPrompt() (
     if [ $1 = l ]; then
         getPrompt_return=(
             "\n${d}[${name}${d}@${host}${d}]"
-            "[${green}"'$(collapse_pwd)'"${d}]"
-            '$(git_prompt_info)'
+            "[${green}%~${d}]"
+            '$(git_prompt_info)$(git-untracked)'
+            "%(?..${d}[${red}!%?${reset}${d}])"
+            "%(1j.${d}[$FG[226]%%%j${d}].)"
             '\n$(prompt_wrap virtualenv_info)'
-            '$(prompt_char) '"${reset}"
+            '%(!.#.$) '"${reset}"
         )
         echo $getPrompt_return
     elif [ $1 = r ]; then

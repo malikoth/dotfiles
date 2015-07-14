@@ -51,6 +51,7 @@ eval "$(boot2docker shellinit)" > /dev/null
 # . /usr/local/bin/activate.sh
 
 ### Welcome ###
+since
 toilet -t -f smslant -d $(figlet -I2) Hello Kyle
 echo
 fortune
