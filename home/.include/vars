@@ -2,7 +2,7 @@
 
 # Global vars
 # TODO: Make PATH specific to which shell or box I'm on
-export PATH="~/bin:/usr/local/sbin:/usr/local/bin:~/dev/misc/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin"
+export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:$HOME/dev/misc/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin"
 export EDITOR='vim'
 export GREP_OPTIONS='--color=auto'
 export CLICOLOR='1'

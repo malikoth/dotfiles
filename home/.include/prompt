@@ -1,20 +1,7 @@
-# TODO: Fix prompt_char showing red when last command failed
-# TODO: Fix all stupid colors
+#!/usr/bin/env bash
 # TODO: Utilize new functions
 
 ### Prompt
-
-## Shell functions
-
-# Show number of background jobs
-function show_jobs {
-    echo "[$(jobs | wc -l)]"
-}
-
-# Show cwd, substituting tilde for home directory
-function collapse_pwd {
-    echo $(pwd | sed -e "s,^$HOME,~,")
-}
 
 ## Python functions
 
@@ -26,16 +13,6 @@ function virtualenv_info(){
 }
 
 ## VCS / Git functions
-
-# Pick an appropriate prompt character
-function prompt_char {
-    # This doesn't work the way I want it to
-    # [[ \$? -eq 0 ]] && : || echo -n "${fg[red]}"
-
-    git branch >/dev/null 2>/dev/null && echo '±' && return
-    hg root >/dev/null 2>/dev/null && echo '☿' && return
-    echo '○'
-}
 
 # Show current git branch
 function current_branch() {
@@ -52,17 +29,17 @@ function git_sha() {
 function remote_tracking_branch() (
 
     # Are we on a remote-tracking branch?
-    remote=${$(git rev-parse --verify $(current_branch)@{upstream} --symbolic-full-name --abbrev-ref 2>/dev/null)}
+    remote=$(git rev-parse --verify $(current_branch)@{upstream} --symbolic-full-name --abbrev-ref 2>/dev/null)
 
     if [[ -n ${remote} ]] ; then
         ahead=$(git rev-list $(current_branch)@{upstream}..HEAD 2>/dev/null | wc -l)
-        (( $ahead )) && gitstatus+="${green}+${ahead}${gray}"
+        (( $ahead )) && gitstatus+=($FG[010]+${ahead}$FG[025])
 
         behind=$(git rev-list HEAD..$(current_branch)@{upstream} 2>/dev/null | wc -l)
-        (( $behind )) && gitstatus+="${red}-${behind}${gray}"
+        (( $behind )) && gitstatus+=($FG[009]-${behind})
 
-        prompt_return_val=(${remote})
-        (( $gitstatus )) && prompt_return_val+="${(j:/:)gitstatus}"
+        prompt_return_val=$FG[202]${remote}
+        [[ -n $gitstatus ]] && prompt_return_val+="$FG[025](${(j:/:)gitstatus}$FG[025])"
         echo $prompt_return_val
     fi
 )
@@ -71,7 +48,7 @@ function remote_tracking_branch() (
 function git_stash_count() {
     if [[ -s $(git rev-parse --show-toplevel)/.git/refs/stash ]] ; then
         stashes=$(git stash list 2>/dev/null | wc -l)
-        echo "${stashes} stashed"
+        echo "$FG[025]|$FG[202]$stashes"
     fi
 }
 
@@ -79,11 +56,21 @@ function git_stash_count() {
 function git-untracked() {
 
     # Check if there's at least 1 untracked file
-    untracked=${$(git ls-files --exclude-standard --others | head -n 1)}
+    untracked=${$(git ls-files --exclude-standard --others 2>/dev/null | head -n 1)}
 
     if [[ -n ${untracked} ]] ; then
         echo "${hook_com[unstaged]}$FG[202]?"
     fi
+}
+
+function parse_git_dirty {
+  [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "$FG[202]*"
+}
+
+function git_status {
+    if git rev-parse --git-dir > /dev/null 2>&1; then
+        echo $(remote_tracking_branch)$(parse_git_dirty)$(git-untracked)$(git_stash_count)
+    fi;
 }
 
 function prompt_wrap() (
@@ -110,13 +97,13 @@ function getPrompt() (
 
     if [ $1 = l ]; then
         getPrompt_return=(
-            "\n${d}[${name}${d}@${host}${d}]"
-            "[${green}%~${d}]"
-            '$(git_prompt_info)$(git-untracked)'"${reset}"
+#            "\n${d}[${name}${d}@${host}${d}]"
+            "\n${d}[${green}%~${d}]"
+            '$(prompt_wrap git_status)'
+            '$(prompt_wrap virtualenv_info)'
             "%(?..${d}[${red}!%?${reset}${d}])"
             "%(1j.${d}[$FG[226]%%%j${d}].)"
-            '\n$(prompt_wrap virtualenv_info)'
-            "${d}%(!.#.$) ${reset}"
+            "\n${d}%(!.#.$) ${reset}"
         )
         echo $getPrompt_return
     elif [ $1 = r ]; then
