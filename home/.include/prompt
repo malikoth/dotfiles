@@ -25,6 +25,10 @@ function git_sha() {
     echo $(git rev-parse --short HEAD)
 }
 
+function git_branch() {
+    echo $FG[202]$(git rev-parse --abbrev-ref HEAD)
+}
+
 # Show remote ref name and number of commits ahead-of or behind
 function remote_tracking_branch() (
 
@@ -38,7 +42,7 @@ function remote_tracking_branch() (
         behind=$(git rev-list HEAD..$(current_branch)@{upstream} 2>/dev/null | wc -l)
         (( $behind )) && gitstatus+=($FG[009]-${behind})
 
-        prompt_return_val=$FG[202]${remote}
+        prompt_return_val=$FG[025]:$FG[202]${remote}
         [[ -n $gitstatus ]] && prompt_return_val+="$FG[025](${(j:/:)gitstatus}$FG[025])"
         echo $prompt_return_val
     fi
@@ -69,7 +73,7 @@ function parse_git_dirty {
 
 function git_status {
     if git rev-parse --git-dir > /dev/null 2>&1; then
-        echo $(remote_tracking_branch)$(parse_git_dirty)$(git-untracked)$(git_stash_count)
+        echo $(git_branch)$(remote_tracking_branch)$(parse_git_dirty)$(git-untracked)$(git_stash_count)
     fi;
 }
 
