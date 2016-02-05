@@ -1,9 +1,10 @@
+#!/usr/bin/env sh
 if [ ! -d home ]; then
     echo "No home folder to install"
     exit
 fi
 
-# Setup vars
+# Setup vars.sh
 CURR_SHELL=$(ps ch -o command $$ | grep -iv command)
 
 (
