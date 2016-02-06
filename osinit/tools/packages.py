@@ -66,6 +66,8 @@ class Packages:
             self.output('Installing git...')
             self.install('git')
 
+        self.output()
+
     def install(self, package):
         sudo = self.manager != 'brew'
         git = package.endswith('.git')
@@ -76,15 +78,17 @@ class Packages:
             output = self.run('git clone {}'.format(package), stream=True)
         else:
             output = self.run('{} {} install -y {}'.format('sudo' if sudo else '', self.manager, package), stream=True)
-        self.output('Installed {}...'.format(package))
-        self.output()
 
-        return output
+        if isinstance(output, int) and output != 0:
+            self.output('Failed installing {}'.format(package))
+        else:
+            self.output('Success installing {}'.format(package))
+        self.output()
 
     def output(self, *args, **kwargs):
         if self.args.verbose:
             if args:
-                print('-->', *args, **kwargs)
+                print(*args, **kwargs)
             else:
                 print(**kwargs)
 
@@ -96,7 +100,7 @@ class Packages:
             for line in iter(process.stdout.readline, ''):
                 output.append(line)
                 if stream:
-                    self.output(line, end='')
+                    self.output('-->', line, end='')
             return ''.join(output)
         except CalledProcessError as cpe:
             return cpe.returncode
