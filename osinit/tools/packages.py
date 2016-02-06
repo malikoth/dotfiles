@@ -67,9 +67,9 @@ class Packages:
         self.output('Installing {}...'.format(package))
         if git:
             os.chdir('/opt')
-            output = self.run('git clone {}'.format(package))
+            output = self.run('git clone {}'.format(package), stream=True)
         else:
-            output = self.run('{} {} install -y {}'.format('sudo' if sudo else '', self.manager, package))
+            output = self.run('{} {} install -y {}'.format('sudo' if sudo else '', self.manager, package), stream=True)
         self.output('Installed {}...'.format(package))
         self.output()
 
@@ -82,8 +82,8 @@ class Packages:
             else:
                 print(**kwargs)
 
-    def run(self, command):
-        self.output(command)
+    def run(self, command, stream=False):
+        self.output('Executing command:', command)
         output = []
         try:
             process = Popen(command.split(), stdout=PIPE)
