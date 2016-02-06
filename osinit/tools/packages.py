@@ -70,6 +70,7 @@ class Packages:
             output = self.run('cd /opt && git clone {}'.format(package))
         else:
             output = self.run('{} {} install -y {}'.format('sudo' if sudo else '', self.manager, package))
+        self.output(output)
         self.output('Installed {}...'.format(package))
         self.output()
 
