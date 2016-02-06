@@ -1,5 +1,7 @@
 #! /usr/bin/env python
 
+from __future__ import print_function
+
 import argparse
 import json
 from subprocess import check_output, CalledProcessError
@@ -75,7 +77,7 @@ class Packages:
 
     def output(self, *text):
         if self.args.verbose:
-            print('-->', ' '.join(text))
+            print('-->', *text)
 
     def run(self, command):
         self.output(command)
