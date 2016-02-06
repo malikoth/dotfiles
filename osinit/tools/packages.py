@@ -67,9 +67,9 @@ class Packages:
         git = package.endswith('.git')
 
         if git:
-            run('cd /opt && git clone {}'.format(package))
+            return run('cd /opt && git clone {}'.format(package))
         else:
-            run('{} {} install -y {}'.format('sudo' if sudo else '', self.manager, package))
+            return run('{} {} install -y {}'.format('sudo' if sudo else '', self.manager, package))
 
     def main(self):
         for project, package in self.packages.iteritems():
@@ -79,7 +79,7 @@ class Packages:
                 package = package.get(self.manager, '')
 
             if package:
-                self.install(package)
+                print(self.install(package))
 
             print('Installed {}...'.format(project))
             print('')
