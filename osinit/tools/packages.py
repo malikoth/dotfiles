@@ -25,7 +25,7 @@ class Packages:
     def __init__(self):
         self.args = self.parse_args()
         self.system = run('uname -s')
-        self.packages = json.load(open(PACKAGE_FILE))
+        self.packages = json.load(open(self.args.package_file if self.args.package_file else PACKAGE_FILE))
         self.manager = self.find_package_manager()
 
         if not self.args.skip_update:
