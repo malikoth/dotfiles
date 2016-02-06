@@ -100,7 +100,7 @@ class Packages:
                 package = package.get(self.manager, '')
 
             if package:
-                print(self.install(package))
+                self.install(package)
 
 
 if __name__ == '__main__':
