@@ -41,18 +41,24 @@ class Packages:
                 continue
 
             self.output('Found package manager:', manager)
+            self.output()
+
             return manager
 
     def update_all(self):
         self.output('Updating and upgrading packages...')
         if self.manager == 'apt-get':
-            self.run('sudo apt-get update')
-            self.run('sudo apt-get -y upgrade')
+            self.run('sudo apt-get update', stream=True)
+            self.run('sudo apt-get -y upgrade', stream=True)
         elif self.manager == 'brew':
-            self.run('brew update')
-            self.run('brew upgrade --all')
-            self.run('brew cleanup')
+            self.run('brew update', stream=True)
+            self.run('brew upgrade --all', stream=True)
+            self.run('brew cleanup', stream=True)
+
         # TODO: Rest of the package managers, as needed
+
+        self.output('Update / upgrade process complete')
+        self.output()
 
     def ensure_git(self):
         self.output('Ensuring git is installed...')
