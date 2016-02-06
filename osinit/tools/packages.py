@@ -7,7 +7,7 @@ from subprocess import check_output, CalledProcessError
 LINUX = "Linux"
 MAC = "Darwin"
 PACKAGE_MANAGERS = ('apt-get', 'brew', 'emerge', 'pacman', 'yum', 'zypp')
-PACKAGE_FILE = 'packages-short.json'
+PACKAGE_FILE = 'packages.json'
 
 
 def run(command):
@@ -28,7 +28,7 @@ class Packages:
         self.packages = json.load(open(PACKAGE_FILE))
         self.manager = self.find_package_manager()
 
-        if not self.args['skip_update']:
+        if not self.args.skip_update:
             self.update_all()
         self.ensure_git()
         self.main()
