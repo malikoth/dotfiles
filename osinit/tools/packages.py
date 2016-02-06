@@ -4,6 +4,7 @@ from __future__ import print_function
 
 import argparse
 import json
+import os
 from subprocess import check_output, CalledProcessError
 
 LINUX = 'Linux'
@@ -67,7 +68,8 @@ class Packages:
 
         self.output('Installing {}...'.format(package))
         if git:
-            output = self.run('cd /opt && git clone {}'.format(package))
+            os.chdir('/opt')
+            output = self.run('git clone {}'.format(package))
         else:
             output = self.run('{} {} install -y {}'.format('sudo' if sudo else '', self.manager, package))
         self.output(output)
