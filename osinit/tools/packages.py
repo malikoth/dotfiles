@@ -5,7 +5,7 @@ from __future__ import print_function
 import argparse
 import json
 import os
-from subprocess import check_output, CalledProcessError, PIPE
+from subprocess import Popen, CalledProcessError, PIPE
 
 PACKAGE_MANAGERS = ('apt-get', 'brew', 'emerge', 'pacman', 'yum', 'zypp')
 PACKAGE_FILE = 'packages.json'
@@ -85,9 +85,13 @@ class Packages:
 
     def run(self, command):
         self.output(command)
+        output = []
         try:
-            output = check_output(command.split(), stdout=PIPE).strip()
-            return output
+            process = Popen(command.split(), stdout=PIPE)
+            for line in iter(process.stdout.readline, ''):
+                output.append(line)
+                self.output(line)
+            return '\n'.join(output)
         except CalledProcessError as cpe:
             return cpe.returncode
 
