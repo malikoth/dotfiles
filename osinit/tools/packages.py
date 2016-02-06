@@ -4,8 +4,8 @@ import argparse
 import json
 from subprocess import check_output, CalledProcessError
 
-LINUX = "Linux"
-MAC = "Darwin"
+LINUX = 'Linux'
+MAC = 'Darwin'
 PACKAGE_MANAGERS = ('apt-get', 'brew', 'emerge', 'pacman', 'yum', 'zypp')
 PACKAGE_FILE = 'packages.json'
 
@@ -82,7 +82,7 @@ class Packages:
                 self.install(package)
 
             print('Installed {}...'.format(project))
-            print()
+            print('')
 
 
 if __name__ == '__main__':
