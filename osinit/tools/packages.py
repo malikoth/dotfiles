@@ -71,7 +71,7 @@ class Packages:
         else:
             output = self.run('{} {} install -y {}'.format('sudo' if sudo else '', self.manager, package))
         self.output('Installed {}...'.format(package))
-        self.output('')
+        self.output()
 
         return output
 
