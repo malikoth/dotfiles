@@ -1,13 +1,12 @@
 #! /usr/bin/env python
 
+import argparse
 import json
 from subprocess import check_output, CalledProcessError
 
 LINUX = "Linux"
 MAC = "Darwin"
-
 PACKAGE_MANAGERS = ('apt-get', 'brew', 'emerge', 'pacman', 'yum', 'zypp')
-
 PACKAGE_FILE = 'packages-short.json'
 
 
@@ -19,13 +18,28 @@ def run(command):
 
 
 class Packages:
+    """
+    Install listed packages per OS
+    """
+
     def __init__(self):
+        self.args = self.parse_args()
         self.system = run('uname -s')
         self.packages = json.load(open(PACKAGE_FILE))
         self.manager = self.find_package_manager()
-        self.update_all()
+
+        if not self.args['skip_update']:
+            self.update_all()
         self.ensure_git()
         self.main()
+
+    def parse_args(self):
+        parser = argparse.ArgumentParser(
+            description=self.__doc__,
+            formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+        parser.add_argument('-s', '--skip-update', action='store_true', help='Skip the package update / upgrade process')
+        parser.add_argument('-p', '--package-file', required=False, help='JSON file containing list of packages to install')
+        return parser.parse_args()
 
     def find_package_manager(self):
         for manager in PACKAGE_MANAGERS:
