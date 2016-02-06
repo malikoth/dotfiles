@@ -75,7 +75,7 @@ class Packages:
 
     def output(self, *text):
         if self.args.verbose:
-            print('-->', *text)
+            print('-->', ' '.join(text))
 
     def run(self, command):
         self.output(command)
