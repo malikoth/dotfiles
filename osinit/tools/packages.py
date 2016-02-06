@@ -14,10 +14,7 @@ def run(command):
     try:
         return check_output(command.split()).strip()
     except CalledProcessError as cpe:
-        if cpe.returncode == 127:
-            return False
-        else:
-            raise
+        return cpe.returncode
 
 
 class Packages:
@@ -62,7 +59,7 @@ class Packages:
         # TODO: Rest of the package managers, as needed
 
     def ensure_git(self):
-        if run('git') is False:
+        if run('git') == 127:
             self.install('git')
 
     def install(self, package):
