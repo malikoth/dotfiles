@@ -76,12 +76,12 @@ class Packages:
 
         return output
 
-    def output(self, *text):
+    def output(self, *args, **kwargs):
         if self.args.verbose:
-            if text:
-                print('-->', *text)
+            if args:
+                print('-->', *args, **kwargs)
             else:
-                print()
+                print(**kwargs)
 
     def run(self, command):
         self.output(command)
@@ -90,8 +90,8 @@ class Packages:
             process = Popen(command.split(), stdout=PIPE)
             for line in iter(process.stdout.readline, ''):
                 output.append(line)
-                self.output(line)
-            return '\n'.join(output)
+                self.output(line, end='')
+            return ''.join(output)
         except CalledProcessError as cpe:
             return cpe.returncode
 
