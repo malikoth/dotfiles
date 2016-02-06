@@ -1,55 +1,75 @@
 #! /usr/bin/env python
 
-from subprocess import check_output
+import json
+from subprocess import check_output, CalledProcessError
 
 LINUX = "Linux"
 MAC = "Darwin"
 
-PACKAGES = {
-    'Silver Searcher': ('silversearcher-ag', 'ag'),
-    'ditaa': 'ditaa',
-    'dtrx': 'dtrx',
-    'git': 'git',
-    'graphviz': 'graphviz',
-    'htop': 'htop',
-    'httpie': 'httpie',
-    'iftop': 'iftop',
-    'invoke': 'invoke',
-    'inxi': 'inxi',
-    'irssi': 'irssi',
-    'm4': 'm4',
-    'ncdu': 'ncdu',
-    'pwgen': 'pwgen',
-    'ranger': 'ranger',
-    'tree': 'tree',
-    'w3m': 'w3m',
-    'wavemon': 'wavemon',
-    'xclip': ('xclip', None),
-    'z': 'z'
-}
+PACKAGE_MANAGERS = ('apt-get', 'brew', 'emerge', 'pacman', 'yum', 'zypp')
 
-
-def get_packages(system):
-    return 'xclip'
-    return ' '.join(filter(None, (v if not isinstance(v, tuple) else v[0 if system == LINUX else 1] for k, v in PACKAGES)))
+PACKAGE_FILE = 'packages-short.json'
 
 
 def run(command):
-    return check_output(command.split())
+    try:
+        return check_output(command.split()).strip()
+    except CalledProcessError:
+        return False
 
 
-def main():
-    system = run("uname -s")
+class Packages:
+    def __init__(self):
+        self.system = run('uname -s')
+        self.packages = json.load(open(PACKAGE_FILE))
+        self.manager = self.find_package_manager()
+        self.update_all()
+        self.ensure_git()
+        self.main()
 
-    if system == "Darwin":
-        pass
+    def find_package_manager(self):
+        for manager in PACKAGE_MANAGERS:
+            if run(manager) is False:
+                continue
 
-    elif system == "Linux":
-        run('sudo apt-get update')
-        run('sudo apt-get upgrade')
+            return manager
 
-        run('sudo apt-get install -y {}'.format(get_packages(system)))
+    def update_all(self):
+        if self.manager == 'apt-get':
+            run('sudo apt-get update')
+            run('sudo apt-get -y upgrade')
+        elif self.manager == 'brew':
+            run('brew update')
+            run('brew upgrade --all')
+            run('brew cleanup')
+        # TODO: Rest of the package managers, as needed
+
+    def ensure_git(self):
+        if run('git') is False:
+            self.install('git')
+
+    def install(self, package):
+        sudo = self.manager != 'brew'
+        git = package.endswith('.git')
+
+        if git:
+            run('cd /opt && git clone {}'.format(package))
+        else:
+            run('{} {} install -y {}'.format('sudo' if sudo else '', self.manager, package))
+
+    def main(self):
+        for project, package in self.packages.iteritems():
+            print('Installing {}...'.format(project))
+
+            if isinstance(package, dict):
+                package = package.get(self.manager, '')
+
+            if package:
+                self.install(package)
+
+            print('Installed {}...'.format(project))
+            print()
 
 
 if __name__ == '__main__':
-    main()
+    Packages()
