@@ -5,10 +5,8 @@ from __future__ import print_function
 import argparse
 import json
 import os
-from subprocess import check_output, CalledProcessError
+from subprocess import check_output, CalledProcessError, PIPE
 
-LINUX = 'Linux'
-MAC = 'Darwin'
 PACKAGE_MANAGERS = ('apt-get', 'brew', 'emerge', 'pacman', 'yum', 'zypp')
 PACKAGE_FILE = 'packages.json'
 
@@ -20,7 +18,6 @@ class Packages:
 
     def __init__(self):
         self.args = self.parse_args()
-        self.system = self.run('uname -s')
         self.packages = json.load(open(self.args.package_file if self.args.package_file else PACKAGE_FILE))
         self.manager = self.find_package_manager()
 
@@ -47,6 +44,7 @@ class Packages:
             return manager
 
     def update_all(self):
+        self.output('Updating and upgrading packages...')
         if self.manager == 'apt-get':
             self.run('sudo apt-get update')
             self.run('sudo apt-get -y upgrade')
@@ -88,7 +86,8 @@ class Packages:
     def run(self, command):
         self.output(command)
         try:
-            return check_output(command.split()).strip()
+            output = check_output(command.split(), stdout=PIPE).strip()
+            return output
         except CalledProcessError as cpe:
             return cpe.returncode
 
