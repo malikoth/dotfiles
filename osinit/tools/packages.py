@@ -89,7 +89,8 @@ class Packages:
             process = Popen(command.split(), stdout=PIPE)
             for line in iter(process.stdout.readline, ''):
                 output.append(line)
-                self.output(line, end='')
+                if stream:
+                    self.output(line, end='')
             return ''.join(output)
         except CalledProcessError as cpe:
             return cpe.returncode
