@@ -77,7 +77,10 @@ class Packages:
 
     def output(self, *text):
         if self.args.verbose:
-            print('-->', *text)
+            if text:
+                print('-->', *text)
+            else:
+                print()
 
     def run(self, command):
         self.output(command)
