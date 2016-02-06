@@ -13,8 +13,11 @@ PACKAGE_FILE = 'packages.json'
 def run(command):
     try:
         return check_output(command.split()).strip()
-    except CalledProcessError:
-        return False
+    except CalledProcessError as cpe:
+        if cpe.returncode == 127:
+            return False
+        else:
+            raise
 
 
 class Packages:
