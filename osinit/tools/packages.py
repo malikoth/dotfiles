@@ -83,13 +83,15 @@ class Packages:
     def install(self, package, manager=None):
         manager = manager or self.managers[0]
         sudo = manager != 'brew'
+        confirm_flag = '-y' if manager == 'apt-get' else ''
 
         self.output('Installing {}...'.format(package))
         if manager == 'git':
             os.chdir('/opt')
             output = self.run('git clone {}'.format(package), stream=True)
         else:
-            output = self.run('{} {} install -y {}'.format('sudo' if sudo else '', manager, package), stream=True)
+            output = self.run('{} {} install {} {}'.format('sudo' if sudo else '',
+                                                           manager, confirm_flag, package), stream=True)
 
         if isinstance(output, int) and output != 0:
             self.output('{}Failed installing {}{}'.format(BRIGHT_RED, package, RESET))
