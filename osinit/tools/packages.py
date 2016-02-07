@@ -101,9 +101,15 @@ class Packages:
                 output.append(line)
                 if stream:
                     self.output('-->', line, end='')
-            return ''.join(output)
-        except CalledProcessError as cpe:
-            return cpe.returncode
+
+            if not process.returncode:
+                return ''.join(output)
+            else:
+                return process.returncode
+
+        except OSError as ose:
+            self.output("Error:", ose.message())
+            return 1
 
     def main(self):
         for project, package in self.packages.iteritems():
