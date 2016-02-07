@@ -45,7 +45,7 @@ class Packages:
         parser.add_argument('-p', '--package-file', required=False, help='JSON file containing list of packages to install')
         return parser.parse_args()
 
-    def find_package_manager(self):
+    def find_package_managers(self):
         managers = []
         for manager in PACKAGE_MANAGERS:
             if self.run(manager) == 127:
