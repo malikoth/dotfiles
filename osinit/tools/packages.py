@@ -3,12 +3,17 @@
 from __future__ import print_function
 
 import argparse
+import fileinput
 import json
 import os
 from subprocess import Popen, CalledProcessError, PIPE
 
 PACKAGE_MANAGERS = ('apt-get', 'brew', 'emerge', 'pacman', 'yum', 'zypp')
 PACKAGE_FILE = 'packages.json'
+
+
+# TODO: Add colored output
+# TODO: Handle stderr pipes
 
 
 class Packages:
@@ -96,8 +101,9 @@ class Packages:
         self.output('Executing command:', command)
         output = []
         try:
-            process = Popen(command.split(), stdout=PIPE)
-            for line in iter(process.stdout.readline, ''):
+            process = Popen(command.split(), stdout=PIPE, stderr=PIPE)
+            # for line in iter(process.stdout.readline, ''):
+            for line in fileinput.input([process.stdout, process.stderr]):
                 output.append(line)
                 if stream:
                     self.output('-->', line, end='')

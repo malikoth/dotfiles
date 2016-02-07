@@ -1,7 +1,7 @@
 {
   "Silver Searcher": {
     "apt-get": "silversearcher-ag",
-    "brew": "ag"
+    "brew": "the_silver_searcher"
   },
   "ditaa": "ditaa",
   "dtrx": "dtrx",

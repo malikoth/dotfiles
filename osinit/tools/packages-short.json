@@ -1,9 +1,0 @@
-{
-  "Silver Searcher": {
-    "brew": "ag"
-  },
-  "xclip": {
-    "apt-get": "xclip"
-  },
-  "z": "https://github.com/rupa/z.git"
-}
