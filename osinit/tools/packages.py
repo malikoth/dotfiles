@@ -80,7 +80,8 @@ class Packages:
 
         self.output()
 
-    def install(self, package, manager):
+    def install(self, package, manager=None):
+        manager = manager or self.managers[0]
         sudo = manager != 'brew'
 
         self.output('Installing {}...'.format(package))
@@ -136,8 +137,11 @@ class Packages:
                         package = package[manager]
                         break
 
-            if package:
-                self.install(package, manager)
+                if package:
+                    self.install(package, manager)
+
+            else:
+                self.install(package)
 
 
 if __name__ == '__main__':
