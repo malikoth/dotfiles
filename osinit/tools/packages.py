@@ -100,7 +100,7 @@ class Packages:
         self.output()
 
     def output(self, *args, **kwargs):
-        if self.args.verbose or kwargs.pop('force', False):
+        if kwargs.pop('force', False) or self.args.verbose:
             if args:
                 print(*args, **kwargs)
             else:
