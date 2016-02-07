@@ -33,7 +33,7 @@ class Packages:
 
         if not self.args.skip_update:
             self.update_all()
-        self.ensure_git()
+        self.ensure_managers()
         self.main()
 
     def parse_args(self):
@@ -72,11 +72,21 @@ class Packages:
         self.output('Update / upgrade process complete')
         self.output()
 
-    def ensure_git(self):
+    def ensure_managers(self):
         self.output('Ensuring git is installed...')
         if self.run('git') == 127:
             self.output('Installing git...')
             self.install('git')
+
+        self.output('Ensuring pip is installed...')
+        if self.run('pip') == 127:
+            self.output('Installing pip...')
+            self.install('python-pip')
+
+        self.output('Ensuring pip3 is installed...')
+        if self.run('pip3') == 127:
+            self.output('Installing pip3...')
+            self.install('python3-pip')
 
         self.output()
 
