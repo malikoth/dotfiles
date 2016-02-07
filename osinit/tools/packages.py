@@ -85,7 +85,7 @@ class Packages:
         sudo = manager != 'brew'
         confirm_flag = '-y' if manager == 'apt-get' else ''
 
-        self.output('Installing {}...'.format(package))
+        self.output('Installing {}...'.format(package), force=True)
         if manager == 'git':
             os.chdir('/opt')
             output = self.run('git clone {}'.format(package), stream=True)
@@ -94,13 +94,13 @@ class Packages:
                                                            manager, confirm_flag, package), stream=True)
 
         if isinstance(output, int) and output != 0:
-            self.output('{}Failed installing {}{}'.format(BRIGHT_RED, package, RESET))
+            self.output('{}Failed installing {}{}'.format(BRIGHT_RED, package, RESET), force=True)
         else:
-            self.output('{}Success installing {}{}'.format(BRIGHT_GREEN, package, RESET))
+            self.output('{}Success installing {}{}'.format(BRIGHT_GREEN, package, RESET), force=True)
         self.output()
 
     def output(self, *args, **kwargs):
-        if self.args.verbose:
+        if self.args.verbose or kwargs.pop('force', False):
             if args:
                 print(*args, **kwargs)
             else:
