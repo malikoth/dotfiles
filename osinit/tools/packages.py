@@ -14,6 +14,7 @@ RED = '\x1b[31m'
 GREEN = '\x1b[32m'
 BRIGHT_RED = '\x1b[31;1m'
 BRIGHT_GREEN = '\x1b[32;1m'
+GRAY = '\x1b[30;1m'
 RESET = '\x1b[0m'
 
 
@@ -51,7 +52,7 @@ class Packages:
             if self.run(manager) == 127:
                 continue
 
-            self.output('Found package manager:', manager)
+            self.output(BRIGHT_GREEN + 'Found package manager:', manager, RESET)
             managers.append(manager)
 
         self.output()
@@ -117,7 +118,7 @@ class Packages:
                 print(**kwargs)
 
     def run(self, command, stream=False):
-        self.output('Executing command:', command)
+        self.output(GRAY + 'Executing command:', command, RESET)
         output = []
         try:
             process = Popen(command.split(), stdout=PIPE, stderr=PIPE)
@@ -138,7 +139,7 @@ class Packages:
                 return process.returncode
 
         except OSError as ose:
-            self.output("Error:", ose)
+            self.output(RED + "Error:", ose, RESET)
             if ose.errno == 2:
                 return 127
             return 1
