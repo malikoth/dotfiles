@@ -18,10 +18,6 @@ GRAY = '\x1b[30;1m'
 RESET = '\x1b[0m'
 
 
-# TODO: Add colored output
-# TODO: Handle stderr pipes
-
-
 class Packages:
     """
     Install listed packages per OS
