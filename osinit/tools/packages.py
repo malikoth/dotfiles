@@ -125,7 +125,7 @@ class Packages:
                 return process.returncode
 
         except OSError as ose:
-            self.output("Error:", ose.message())
+            self.output("Error:", ose.message)
             return 1
 
     def main(self):
