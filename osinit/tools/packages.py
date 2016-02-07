@@ -126,7 +126,9 @@ class Packages:
                 return process.returncode
 
         except OSError as ose:
-            self.output("Error:", ose.message)
+            self.output("Error:", ose)
+            if ose.errno == 2:
+                return 127
             return 1
 
     def main(self):
