@@ -7,8 +7,8 @@ import json
 import os
 from subprocess import Popen, PIPE
 
-PACKAGE_MANAGERS = ('apt-get', 'brew', 'emerge', 'pacman', 'yum', 'zypp')
-PACKAGE_FILE = 'data/packages.json'
+PACKAGE_MANAGERS = ('apt-get', 'brew', 'emerge', 'pacman', 'yum', 'zypp', 'pip')
+PACKAGE_FILE = 'packages.json'
 
 RED = '\x1b[31m'
 GREEN = '\x1b[32m'
@@ -29,7 +29,7 @@ class Packages:
     def __init__(self):
         self.args = self.parse_args()
         self.packages = json.load(open(self.args.package_file if self.args.package_file else PACKAGE_FILE))
-        self.manager = self.find_package_manager()
+        self.managers = self.find_package_managers()
 
         if not self.args.skip_update:
             self.update_all()
@@ -46,21 +46,23 @@ class Packages:
         return parser.parse_args()
 
     def find_package_manager(self):
+        managers = []
         for manager in PACKAGE_MANAGERS:
             if self.run(manager) == 127:
                 continue
 
             self.output('Found package manager:', manager)
-            self.output()
+            managers.append(manager)
 
-            return manager
+        self.output()
+        return managers
 
     def update_all(self):
         self.output('Updating and upgrading packages...')
-        if self.manager == 'apt-get':
+        if 'apt-get' in self.managers:
             self.run('sudo apt-get update', stream=True)
             self.run('sudo apt-get -y upgrade', stream=True)
-        elif self.manager == 'brew':
+        elif 'brew' in self.managers:
             self.run('brew update', stream=True)
             self.run('brew upgrade --all', stream=True)
             self.run('brew cleanup', stream=True)
@@ -78,16 +80,15 @@ class Packages:
 
         self.output()
 
-    def install(self, package):
-        sudo = self.manager != 'brew'
-        git = package.endswith('.git')
+    def install(self, package, manager):
+        sudo = manager != 'brew'
 
         self.output('Installing {}...'.format(package))
-        if git:
+        if manager == 'git':
             os.chdir('/opt')
             output = self.run('git clone {}'.format(package), stream=True)
         else:
-            output = self.run('{} {} install -y {}'.format('sudo' if sudo else '', self.manager, package), stream=True)
+            output = self.run('{} {} install -y {}'.format('sudo' if sudo else '', manager, package), stream=True)
 
         if isinstance(output, int) and output != 0:
             self.output('{}Failed installing {}{}'.format(BRIGHT_RED, package, RESET))
@@ -130,10 +131,13 @@ class Packages:
     def main(self):
         for project, package in self.packages.iteritems():
             if isinstance(package, dict):
-                package = package.get(self.manager, '')
+                for manager in self.managers:
+                    if manager in package:
+                        package = package[manager]
+                        break
 
             if package:
-                self.install(package)
+                self.install(package, manager)
 
 
 if __name__ == '__main__':
