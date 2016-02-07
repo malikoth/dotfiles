@@ -3,7 +3,6 @@
 from __future__ import print_function
 
 import argparse
-import fileinput
 import json
 import os
 from subprocess import Popen, CalledProcessError, PIPE
@@ -102,8 +101,7 @@ class Packages:
         output = []
         try:
             process = Popen(command.split(), stdout=PIPE, stderr=PIPE)
-            # for line in iter(process.stdout.readline, ''):
-            for line in fileinput.input([process.stdout, process.stderr]):
+            for line in iter(process.stdout.readline, ''):
                 output.append(line)
                 if stream:
                     self.output('-->', line, end='')
