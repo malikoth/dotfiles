@@ -25,6 +25,7 @@
   "tree": "tree",
   "w3m": "w3m",
   "wavemon": "wavemon",
+  "vim": "vim",
   "xclip": {
     "apt-get": "xclip"
   },
