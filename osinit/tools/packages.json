@@ -11,7 +11,7 @@
   "httpie": "httpie",
   "iftop": "iftop",
   "invoke": {
-    "pip": "invoke"
+    "pip3": "invoke"
   },
   "inxi": "inxi",
   "irssi": "irssi",

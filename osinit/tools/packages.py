@@ -7,7 +7,7 @@ import json
 import os
 from subprocess import Popen, PIPE
 
-PACKAGE_MANAGERS = ('apt-get', 'brew', 'emerge', 'pacman', 'yum', 'zypp', 'pip')
+PACKAGE_MANAGERS = ('apt-get', 'brew', 'emerge', 'pacman', 'yum', 'zypp', 'pip', 'pip3', 'git')
 PACKAGE_FILE = 'packages.json'
 
 RED = '\x1b[31m'
