@@ -132,18 +132,18 @@ class Packages:
             return 1
 
     def main(self):
-        for project, package in self.packages.iteritems():
-            if isinstance(package, dict):
+        for project, installers in self.packages.iteritems():
+            if isinstance(installers, dict):
                 for manager in self.managers:
-                    if manager in package:
-                        package = package[manager]
+                    if manager in installers:
+                        package = installers[manager]
                         break
 
                 if package:
                     self.install(package, manager)
 
             else:
-                self.install(package)
+                self.install(installers)
 
 
 if __name__ == '__main__':
