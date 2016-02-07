@@ -5,10 +5,16 @@ from __future__ import print_function
 import argparse
 import json
 import os
-from subprocess import Popen, CalledProcessError, PIPE
+from subprocess import Popen, PIPE
 
 PACKAGE_MANAGERS = ('apt-get', 'brew', 'emerge', 'pacman', 'yum', 'zypp')
-PACKAGE_FILE = 'packages.json'
+PACKAGE_FILE = 'data/packages.json'
+
+RED = '\x1b[31m'
+GREEN = '\x1b[32m'
+BRIGHT_RED = '\x1b[31;1m'
+BRIGHT_GREEN = '\x1b[32;1m'
+RESET = '\x1b[0m'
 
 
 # TODO: Add colored output
@@ -84,9 +90,9 @@ class Packages:
             output = self.run('{} {} install -y {}'.format('sudo' if sudo else '', self.manager, package), stream=True)
 
         if isinstance(output, int) and output != 0:
-            self.output('Failed installing {}'.format(package))
+            self.output('{}Failed installing {}{}'.format(BRIGHT_RED, package, RESET))
         else:
-            self.output('Success installing {}'.format(package))
+            self.output('{}Success installing {}{}'.format(BRIGHT_GREEN, package, RESET))
         self.output()
 
     def output(self, *args, **kwargs):
@@ -104,7 +110,12 @@ class Packages:
             for line in iter(process.stdout.readline, ''):
                 output.append(line)
                 if stream:
-                    self.output('-->', line, end='')
+                    self.output(GREEN + '   ', line, end=RESET)
+
+            for line in iter(process.stderr.readline, ''):
+                output.append(line)
+                if stream:
+                    self.output(RED + '   ', line, end=RESET)
 
             process.wait()
             if not process.returncode:
