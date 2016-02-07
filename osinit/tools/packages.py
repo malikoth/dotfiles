@@ -102,6 +102,7 @@ class Packages:
                 if stream:
                     self.output('-->', line, end='')
 
+            process.wait()
             if not process.returncode:
                 return ''.join(output)
             else:
