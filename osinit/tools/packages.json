@@ -31,5 +31,6 @@
   "z": {
     "git": "https://github.com/rupa/z.git",
     "brew": "z"
-  }
+  },
+  "zsh": "zsh"
 }
