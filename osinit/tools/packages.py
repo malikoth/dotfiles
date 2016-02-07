@@ -26,11 +26,12 @@ class Packages:
     def __init__(self):
         self.args = self.parse_args()
         self.packages = json.load(open(self.args.package_file if self.args.package_file else PACKAGE_FILE))
-        self.managers = self.find_package_managers()
 
         if not self.args.skip_update:
             self.update_all()
+
         self.ensure_managers()
+        self.managers = self.find_package_managers()
         self.main()
 
     def parse_args(self):
