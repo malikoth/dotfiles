@@ -7,9 +7,9 @@ alias ohmyzsh='$EDITOR ~/.oh-my-zsh'
 alias sa='alias | grep -i'
 
 # File / System
-alias la='ls -AlhGH --color=always'
-alias lg='ls -AlhGH --color=always --group-directories-first'
-alias lt='ls -AlhGHrt --color=always'
+alias la='ls -AlhH --color=always'
+alias lg='ls -AlhH --color=always --group-directories-first'
+alias lt='ls -AlhHrt --color=always'
 alias hl='history | less'
 alias tree='tree -shC --du | less'
 alias ht='history | tail'

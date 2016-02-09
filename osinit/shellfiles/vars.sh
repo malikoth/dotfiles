@@ -19,6 +19,6 @@ case $( uname -s ) in
         export DT20_PROVISION_FILES_DIR='~/dev/dt20-devbox/files'
         export DT20_DEVELOP_DIR='~/dev'
         export BOX_DIR=~/dev/boxes
-        export UBUNTU_1404_SERVER_ISO_PATH=~/Downloads/ubuntu-14.04.2-server-amd64.iso
-        export UBUNTU_1404_SERVER_ISO_CHKSUM=3bfa6eac84d527380d0cc52db9092cde127f161e
+        export UBUNTU_1404_SERVER_ISO_PATH=~/Downloads/ISOs/ubuntu-14.04.3-server-amd64.iso
+        export UBUNTU_1404_SERVER_ISO_CHKSUM=0501c446929f713eb162ae2088d8dc8b6426224a
 esac
