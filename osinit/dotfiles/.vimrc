@@ -120,10 +120,16 @@ set laststatus=2
 set statusline=%m\ B%n\ %<%f\ %y%h%r%w%=L%l\ /\ %L\ C%c%V\ %P
 
 " Autocommands
-aug OpenHelpInNewTab
-    au!
-    au BufWinEnter * if &filetype == "help" && histget("cmd") !~ "^vert" | wincmd T
-aug end
+au! OpenHelpInNewTab BufWinEnter * if &filetype == "help" && histget("cmd") !~ "^vert" | wincmd T | endif
+
+" Abbreviations
+" Why doesn't this work?
+iabbrev xdate <C-r>=strftime("%y-%m-%d %H:%M:%S")<cr>
+
+" Python
+noremap <leader>e :w<cr>:!/usr/bin/env python3 % <cr>
+noremap <leader><S-e> :w<cr>:!/usr/bin/env python % <cr>
+au FileType python set nosmartindent
 
 " Miscellaneous
 set dictionary=/usr/share/dict/words
