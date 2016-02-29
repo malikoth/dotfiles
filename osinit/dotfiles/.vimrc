@@ -1,7 +1,34 @@
+" Vim Plug automatic installation (https://github.com/junegunn/vim-plug/wiki/faq#automatic-installation)
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+" Plugins
+call plug#begin('~/.vim/plugged')
+    " Color schemes
+    Plug 'vim-scripts/wombat256.vim'
+
+    " Core plugins
+    Plug 'vim-airline/vim-airline'
+    Plug 'scrooloose/nerdtree'
+    Plug 'sjl/gundo.vim'
+    Plug 'gcmt/taboo.vim'
+
+    " Git
+    Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
+
+    " Language specific
+    Plug 'jmcantrell/vim-virtualenv', {'for': 'python'}
+    Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+call plug#end()
+
 " Theme and personal overrides
 syntax enable
 set t_Co=256
-color wombat256mod
+silent! color wombat256mod
 hi link NonText NONE
 hi Normal ctermbg=233
 hi SpecialKey ctermbg=233 ctermfg=18
@@ -36,15 +63,18 @@ map ˚ <A-k>
 map ∆ <A-j>
 
 " Leader shortcuts
-nnoremap <leader><space> :noh<CR>
 nnoremap <silent> <leader>ce :tabe $MYVIMRC<CR>
 nnoremap <silent> <leader>cs :w<cr> :so $MYVIMRC<CR>
+
+nnoremap <leader><space> :noh<CR>
 nnoremap <leader>v :vnew<cr>
 nnoremap <leader>t :tabe<cr>
+
 noremap <leader>se :set expandtab!<CR>
 noremap <leader>sn :set number!<CR>
 noremap <leader>sw :set wrap!<cr>
 noremap <leader>sl :set list!<cr>
+
 noremap <leader>. <esc>:q<cr>
 noremap <leader>/ <esc>:wa<cr>
 noremap <leader>' <esc>:qa<cr>
@@ -91,14 +121,6 @@ set splitbelow
 set splitright
 set hidden
 
-" Backups and undo
-set backup
-set writebackup
-set swapfile
-set backupdir=~/.vim/backup
-set directory=~/.vim/backup
-set undodir=~/.vim/undodir
-set undofile
 
 " Tabs and indentation
 set expandtab
@@ -120,17 +142,50 @@ set laststatus=2
 set statusline=%m\ B%n\ %<%f\ %y%h%r%w%=L%l\ /\ %L\ C%c%V\ %P
 
 " Autocommands
-au! OpenHelpInNewTab BufWinEnter * if &filetype == "help" && histget("cmd") !~ "^vert" | wincmd T | endif
+aug OpenHelpInNewTab
+    au!
+    au BufWinEnter * if &filetype == "help" && histget("cmd") !~ "^vert" | wincmd T
+aug end
 
-" Abbreviations
-" Why doesn't this work?
-iabbrev xdate <C-r>=strftime("%y-%m-%d %H:%M:%S")<cr>
-
-" Python
-noremap <leader>e :w<cr>:!/usr/bin/env python3 % <cr>
-noremap <leader><S-e> :w<cr>:!/usr/bin/env python % <cr>
-au FileType python set nosmartindent
+" Backups and undo
+set backup
+set writebackup
+set swapfile
+set undofile
 
 " Miscellaneous
 set dictionary=/usr/share/dict/words
 set viminfo='100,<1000,s10,h
+
+" Initialize dires for backups and undo
+function! InitDirs()
+    if has('win32') || has('win32unix') "windows/cygwin
+        let l:separator = '_'
+    else
+        let l:separator = '.'
+    endif
+
+    let l:parent = $HOME . '/' . l:separator . 'vim/'
+    let l:dirs = [
+        \ ['backupdir', l:parent . 'backup'],
+        \ ['directory', l:parent . 'tmp'],
+        \ ['undodir', l:parent . 'undo']]
+
+    if exists('*mkdir')
+        for l:dir in [['', l:parent]] + l:dirs
+            if !isdirectory(l:dir[1])
+                call mkdir(l:dir[1])
+            endif
+        endfor
+    endif
+
+    for l:dir in l:dirs
+        if isdirectory(l:dir[1])
+            execute 'set ' . l:dir[0] . '=' . escape(l:dir[1], ' ') . '//,.'
+        else
+            echo 'Warning: Unable to create directory:' l:dir[1]
+            execute 'set ' . l:dir[0] . '=.'
+        endif
+    endfor
+endfunction
+call InitDirs()
