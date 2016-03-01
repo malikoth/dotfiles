@@ -3,7 +3,7 @@ set encoding=utf-8
 
 " Vim Plug automatic installation (https://github.com/junegunn/vim-plug/wiki/faq#automatic-installation)
 if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    silent !curl -fLos ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
@@ -14,14 +14,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-scripts/wombat256.vim'
 
     " Core plugins
-    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline'  " TODO: Still not happy with setup for this
     Plug 'scrooloose/nerdtree'
     Plug 'sjl/gundo.vim'
-    Plug 'gcmt/taboo.vim'
-    Plug 'vim-ctrlspace/vim-ctrlspace'
+    Plug 'gcmt/taboo.vim'  " TODO: Set config
+    Plug 'vim-ctrlspace/vim-ctrlspace'  " TODO: Set config
 
     " Git
-    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-fugitive'  " TODO: Learn shortcuts
     Plug 'airblade/vim-gitgutter'
 
     " Language specific
@@ -39,6 +39,7 @@ let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.linenr = 'L'
 let g:airline_symbols.column = 'C'
 let g:airline#extensions#default#section_truncate_width = {'z': 59}
+"let g:airline#extensions#tabline#enabled = 1
 function! AirlineInit()
     let g:airline_section_z = airline#section#create([
         \ 'windowswap', '%P ',
@@ -47,6 +48,16 @@ function! AirlineInit()
 endfunction
 autocmd User AirlineAfterInit call AirlineInit()
 
+" NERDTree
+nnoremap <Bslash> :NERDTreeToggle<cr>
+
+" vim-gitgutter
+set updatetime=250
+
+" gundo
+let g:gundo_width = 60
+let g:gundo_preview_height = 20
+let g:gundo_close_on_revert = 1
 
 " Theme and personal overrides
 syntax enable
@@ -86,12 +97,10 @@ map ˚ <A-k>
 map ∆ <A-j>
 
 " Leader shortcuts
-nnoremap <silent> <leader>ce :tabe $MYVIMRC<CR>
-nnoremap <silent> <leader>cs :w<cr> :so $MYVIMRC<CR>
-
 nnoremap <leader><space> :noh<CR>
 nnoremap <leader>v :vnew<cr>
 nnoremap <leader>t :tabe<cr>
+nnoremap <leader>g :GundoToggle<cr>
 
 noremap <leader>se :set expandtab!<CR>
 noremap <leader>sn :set number!<CR>
@@ -101,6 +110,21 @@ noremap <leader>sl :set list!<cr>
 noremap <leader>. <esc>:q<cr>
 noremap <leader>/ <esc>:wa<cr>
 noremap <leader>' <esc>:qa<cr>
+
+let myvimrc = $MYVIMRC
+if myvimrc != ''
+    nnoremap <silent> <leader>ce :tabe $MYVIMRC<CR>
+    nnoremap <silent> <leader>cs :w<cr> :so $MYVIMRC<CR>
+endif
+
+function! ToggleVirtualEdit()
+    if &virtualedit == ''
+        set virtualedit=all
+    else
+        set virtualedit=
+    endif
+endfunction
+nnoremap <leader>sv :call ToggleVirtualEdit()<cr>
 
 " Miscellaneous shortcuts
 set pastetoggle=<F2>
@@ -171,10 +195,8 @@ set foldlevel=2
 set laststatus=2
 
 " Autocommands
-aug OpenHelpInNewTab
-    au!
-    au BufWinEnter * if &filetype == "help" && histget("cmd") !~ "^vert" | wincmd T
-aug end
+au BufWinEnter * if &filetype == "help" && histget("cmd") !~ "^vert" | wincmd T
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " Backups and undo
 set backup
