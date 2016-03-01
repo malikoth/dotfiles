@@ -1,3 +1,6 @@
+scriptencoding utf-8
+set encoding=utf-8
+
 " Vim Plug automatic installation (https://github.com/junegunn/vim-plug/wiki/faq#automatic-installation)
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -129,6 +132,9 @@ set backspace=2
 set whichwrap+=<,>,h,l
 set tw=0
 set mouse=a
+set novisualbell
+set noerrorbells
+set t_vb=
 
 " Searching and highlighting
 set ignorecase
@@ -141,7 +147,6 @@ set gdefault
 set splitbelow
 set splitright
 set hidden
-
 
 " Tabs and indentation
 set expandtab
