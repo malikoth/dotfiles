@@ -184,7 +184,7 @@ set undofile
 
 " Miscellaneous
 set dictionary=/usr/share/dict/words
-set viminfo='100,<1000,s10,h
+set viminfo='100,h,n~/.vim/viminfo
 
 " Initialize dires for backups and undo
 function! InitDirs()
