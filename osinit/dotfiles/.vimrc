@@ -15,6 +15,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdtree'
     Plug 'sjl/gundo.vim'
     Plug 'gcmt/taboo.vim'
+    Plug 'vim-ctrlspace/vim-ctrlspace'
 
     " Git
     Plug 'tpope/vim-fugitive'
@@ -24,6 +25,25 @@ call plug#begin('~/.vim/plugged')
     Plug 'jmcantrell/vim-virtualenv', {'for': 'python'}
     Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 call plug#end()
+
+" Airline config
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_right_sep = ''
+let g:airline_left_sep = ''
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.linenr = 'L'
+let g:airline_symbols.column = 'C'
+let g:airline#extensions#default#section_truncate_width = {'z': 59}
+function! AirlineInit()
+    let g:airline_section_z = airline#section#create([
+        \ 'windowswap', '%P ',
+        \ '%{g:airline_symbols.linenr}%#__accent_bold#%4l / %-4L%#__restore__#',
+        \ '%{g:airline_symbols.column}%#__accent_bold#%3c | %-3v '])
+endfunction
+autocmd User AirlineAfterInit call AirlineInit()
+
 
 " Theme and personal overrides
 syntax enable
@@ -107,6 +127,7 @@ set mat=2
 " Behavior
 set backspace=2
 set whichwrap+=<,>,h,l
+set tw=0
 set mouse=a
 
 " Searching and highlighting
@@ -133,13 +154,16 @@ set copyindent
 
 " Code folding
 set foldmethod=indent
+" TODO: I don't really get folding yet.  Figure it out, and refine settings
 "set foldnestmax=2
 set nofoldenable
 set foldlevel=2
 
 " Statusline
+
+" TODO: Use the default statusline if vim-airline is not installed
+" set statusline=%m\ B%n\ %<%f\ %y%h%r%w%=L%l\ /\ %L\ C%c%V\ %P
 set laststatus=2
-set statusline=%m\ B%n\ %<%f\ %y%h%r%w%=L%l\ /\ %L\ C%c%V\ %P
 
 " Autocommands
 aug OpenHelpInNewTab
