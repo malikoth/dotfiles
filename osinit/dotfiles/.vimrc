@@ -81,9 +81,12 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-" For iTerm2
+" iTerm2
 map ˙ <A-h>
 map ¬ <A-l>
+" Terminal on Linux Mint
+map h <A-h>
+map l <A-l>
 
 " Moving lines
 nnoremap <A-k> :m .-2<CR>==
@@ -92,9 +95,12 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 inoremap <A-j> <Esc>:m .+1<CR>==gi
 vnoremap <A-k> :m '<-2<CR>gv=gv
 vnoremap <A-j> :m '>+1<CR>gv=gv
-" For iTerm2
+" iTerm2
 map ˚ <A-k>
 map ∆ <A-j>
+" Terminal on Linux Mint
+map k <A-k>
+map j <A-j>
 
 " Leader shortcuts
 nnoremap <leader><space> :noh<CR>
@@ -189,7 +195,6 @@ set nofoldenable
 set foldlevel=2
 
 " Statusline
-
 " TODO: Use the default statusline if vim-airline is not installed
 " set statusline=%m\ B%n\ %<%f\ %y%h%r%w%=L%l\ /\ %L\ C%c%V\ %P
 set laststatus=2
