@@ -3,7 +3,7 @@ set encoding=utf-8
 
 " Vim Plug automatic installation (https://github.com/junegunn/vim-plug/wiki/faq#automatic-installation)
 if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLos ~/.vim/autoload/plug.vim --create-dirs
+    silent !curl -fsLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
@@ -156,8 +156,8 @@ set backspace=2
 set whichwrap+=<,>,h,l
 set tw=0
 set mouse=a
-set novisualbell
 set noerrorbells
+set visualbell
 set t_vb=
 
 " Searching and highlighting
