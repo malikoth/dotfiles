@@ -17,7 +17,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'scrooloose/nerdtree'
     Plug 'sjl/gundo.vim'
-    Plug 'vim-ctrlspace/vim-ctrlspace'  " TODO: Set config
+    Plug 'vim-ctrlspace/vim-ctrlspace'
 
     " Git
     Plug 'tpope/vim-fugitive'  " TODO: Learn shortcuts
