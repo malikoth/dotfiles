@@ -36,19 +36,10 @@ let g:airline_right_sep = ''
 let g:airline_left_sep = ''
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.linenr = 'L'
-let g:airline_symbols.column = 'C'
-let g:airline#extensions#default#section_truncate_width = {'z': 59}
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#buffer_nr_show = 1
-"function! AirlineInit()
-"    let g:airline_section_z = airline#section#create([
-"        \ 'windowswap', '%P ',
-"        \ '%{g:airline_symbols.linenr}%#__accent_bold#%4l / %-4L%#__restore__#',
-"        \ '%{g:airline_symbols.column}%#__accent_bold#%3c | %-3v '])
-"endfunction
-"autocmd User AirlineAfterInit call AirlineInit()
 
 " NERDTree
 nnoremap <Bslash> :NERDTreeToggle<cr>
@@ -80,9 +71,9 @@ let mapleader=","
 nnoremap ,, ,
 inoremap jk <esc>
 
-" Tabs and Windows
-nnoremap <A-h> gT
-nnoremap <A-l> gt
+" Buffers, Tabs, and Windows
+nnoremap <A-h> :bp<cr>
+nnoremap <A-l> :bn<cr>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -119,7 +110,7 @@ noremap <leader>sn :set number!<CR>
 noremap <leader>sw :set wrap!<cr>
 noremap <leader>sl :set list!<cr>
 
-noremap <leader>. <esc>:q<cr>
+noremap <leader>. <esc>:bd<cr>
 noremap <leader>/ <esc>:wa<cr>
 noremap <leader>' <esc>:qa<cr>
 
@@ -206,7 +197,7 @@ set foldlevel=2
 set laststatus=2
 
 " Autocommands
-" au BufWinEnter * if &filetype == "help" && histget("cmd") !~ "^vert" | wincmd T
+au BufWinEnter * if &filetype == "help" && histget("cmd") !~ "^vert" | wincmd T
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " Backups and undo
