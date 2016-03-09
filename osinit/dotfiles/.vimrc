@@ -61,6 +61,7 @@ hi CursorLine ctermbg=234
 let mapleader=","
 nnoremap ,, ,
 inoremap jk <esc>
+nnoremap <space> <C-f>
 
 " Buffers, Tabs, and Windows
 nnoremap <A-h> :bp<cr>
