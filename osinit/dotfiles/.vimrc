@@ -18,7 +18,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'scrooloose/nerdtree'
     Plug 'sjl/gundo.vim'
-    Plug 'vim-ctrlspace/vim-ctrlspace'
     Plug 'easymotion/vim-easymotion'
 
     " Git
