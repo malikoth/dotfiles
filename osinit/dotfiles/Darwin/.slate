@@ -47,12 +47,12 @@ bind down:${hyper} focus down
 
 # App Bindings
 bind 7:${hyper} focus 'PyCharm'
-bind 8:${hyper} focus 'iTerm'
+bind 8:${hyper} focus 'iTerm2'
 bind 9:${hyper} focus 'Microsoft Outlook'
 bind 0:${hyper} focus 'Firefox'
 
 # Miscellaneous
 bind esc:cmd hint ASDFQWERTZXCV
-bind /:${hyper} hint HJKLYUIOPNM 
+bind /:${hyper} hint HJKLYUIOPNM
 bind space:${hyper} grid padding:2 0:12,6
 bind backslash:${hyper} relaunch
