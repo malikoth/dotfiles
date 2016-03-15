@@ -15,9 +15,11 @@ call plug#begin('~/.vim/plugged')
 
     " Core plugins
     Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
     Plug 'scrooloose/nerdtree'
     Plug 'sjl/gundo.vim'
     Plug 'vim-ctrlspace/vim-ctrlspace'
+    Plug 'easymotion/vim-easymotion'
 
     " Git
     Plug 'tpope/vim-fugitive'  " TODO: Learn shortcuts
@@ -31,6 +33,7 @@ call plug#end()
 " Airline config
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = 'wombat'
 
 " NERDTree
 nnoremap <Bslash> :NERDTreeToggle<cr>
@@ -94,8 +97,8 @@ map j <A-j>
 " Leader shortcuts
 nnoremap <leader><space> :noh<CR>
 nnoremap <leader>v :vnew<cr>
-"nnoremap <leader>t :tabe<cr>
 nnoremap <leader>g :GundoToggle<cr>
+nnoremap <leader>j :%!python -m json.tool<cr>
 
 noremap <leader>se :set expandtab!<CR>
 noremap <leader>sn :set number!<CR>
