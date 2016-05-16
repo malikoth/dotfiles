@@ -1,7 +1,6 @@
 # Config
-alias ${CURR_SHELL}rc='$EDITOR'" ~/.${CURR_SHELL}rc"
+# alias ${CURR_SHELL}rc='$EDITOR'" ~/.${CURR_SHELL}rc"
 alias rl="source ~/.${CURR_SHELL}rc"
-alias ohmyzsh='$EDITOR ~/.oh-my-zsh'
 
 # Alias Management
 alias sa='alias | grep -i'
@@ -15,9 +14,6 @@ alias tree='tree -shC --du | less'
 alias ht='history | tail'
 
 # Git
-alias glk="git log --no-merges --date=short --pretty=format:'%Cblue%h%Creset %C(yellow)(%cd)%Creset %Cgreen[%an]%Creset -%Cred%d%Creset %s'"
-alias glks="glk --numstat"
-alias glkfp="glk --first-parent"
 alias gcam='git commit -am'
 alias gsh='git show'
 alias gcf='git diff --name-only --diff-filter=U | cat'

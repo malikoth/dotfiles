@@ -19,6 +19,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdtree'
     Plug 'sjl/gundo.vim'
     Plug 'easymotion/vim-easymotion'
+    Plug 'ConradIrwin/vim-bracketed-paste'
 
     " Git
     Plug 'tpope/vim-fugitive'  " TODO: Learn shortcuts
@@ -149,6 +150,7 @@ set scrolloff=10
 set mat=2
 
 " Behavior
+set clipboard=unnamed
 set backspace=2
 set whichwrap+=<,>,h,l
 set tw=0
@@ -185,11 +187,6 @@ set foldmethod=indent
 set nofoldenable
 set foldlevel=2
 
-" Statusline
-" TODO: Use the default statusline if vim-airline is not installed
-" set statusline=%m\ B%n\ %<%f\ %y%h%r%w%=L%l\ /\ %L\ C%c%V\ %P
-set laststatus=2
-
 " Autocommands
 au BufWinEnter * if &filetype == "help" && histget("cmd") !~ "^vert" | wincmd T
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -204,7 +201,7 @@ set undofile
 set dictionary=/usr/share/dict/words
 set viminfo='100,h,n~/.vim/viminfo
 
-" Initialize dires for backups and undo
+" Initialize dirs for backups and undo
 function! InitDirs()
     if has('win32') || has('win32unix') "windows/cygwin
         let l:separator = '_'
