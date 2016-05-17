@@ -1,16 +1,8 @@
 alwaystoend
-autocd
-autopushd
-cdablevars
 completeinword
 cshjunkiehistory
 extendedglob
-extendedhistory
 noflowcontrol
-histexpiredupsfirst
-histignoredups
-histignorespace
-incappendhistory
 interactive
 interactivecomments
 kshglob
@@ -18,8 +10,6 @@ longlistjobs
 monitor
 nullglob
 promptsubst
-pushdignoredups
 pushdminus
-sharehistory
 shinstdin
 zle
