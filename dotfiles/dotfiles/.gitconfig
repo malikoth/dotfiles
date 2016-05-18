@@ -1,12 +1,12 @@
 [user]
-name = Kyle Rich
+    name = Kyle Rich
 	email = yutakafrog@gmail.com
 
 [push]
-default = matching
+    default = matching
 
 [core]
-editor = vim
-excludesfile = ~/.gitignore
+    editor = vim
+    excludesfile = ~/.gitignore
 
-# TODO: Add credential.helper = osxkeychain or cache, depending on OS
+# TODO: Add credential.helper = osxkeychain, wincred, or cache, depending on OS
