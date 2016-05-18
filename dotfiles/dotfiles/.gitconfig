@@ -10,3 +10,5 @@
     excludesfile = ~/.gitignore
 
 # TODO: Add credential.helper = osxkeychain, wincred, or cache, depending on OS
+[credential]
+	helper = osxkeychain
