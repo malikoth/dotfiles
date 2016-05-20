@@ -10,7 +10,7 @@ alias tree='tree -shC --du | less'
 alias gcam='git commit -am'
 alias gsh='git show'
 alias gcf='git diff --name-only --diff-filter=U | cat'
-alias gbv='git branch -v'
+alias gbv='git branch -vv'
 alias gt='git tag'
 
 # Docker
@@ -40,5 +40,6 @@ alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
 alias -g G='| grep'
 alias -g P='| pat'
 alias -g L='| less'
+alias -g J='| python3 -m json.tool'
 
 # Uncategorized
