@@ -1,24 +1,24 @@
-function aa {
-    echo "alias $1='$2'" >> $INCLUDE_DIR/alias
+aa() {
+    echo "alias $1='$2'" >> $SHELLFILES_DIR/alias
 }
 
-function ee {
-    $EDITOR $INCLUDE_DIR/$1.sh
+ee() {
+    $EDITOR $SHELLFILES_DIR/$1.sh
 }
 
-function freeport {
+freeport() {
     lsof -it tcp:$1 | xargs kill -9
 }
 
-function mcd {
+mcd() {
     mkdir -p "$1" && cd "$1";
 }
 
-function cde {
+cde() {
     cd "$(dirname $(which $1))"
 }
 
-function pyclean {
+pyclean() {
     find ${*:-'.'} -type f -name "*.py[co]" -delete
     find ${*:-'.'} -type d -name "__pycache__" -delete
 }

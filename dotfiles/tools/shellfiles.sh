@@ -1,15 +1,13 @@
 # Run personal setup scripts
-
 #echo $(dirname $(readlink -f "$0"))
-INCLUDE_DIR=~/.dotfiles/dotfiles/shellfiles
-CURR_SHELL=$(ps ch -o command $$ | grep -iv command)
+SHELLFILES_DIR=~/.dotfiles/dotfiles/shellfiles
 
 # Source scripts
-for file in $INCLUDE_DIR/*; do
+for file in $SHELLFILES_DIR/*; do
     source $file
 done
 
 # Platform dependant
-for file in $INCLUDE_DIR/$(uname -s)/*; do
+for file in $SHELLFILES_DIR/$(uname -s)/*; do
     source $file
 done

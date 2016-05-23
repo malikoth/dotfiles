@@ -2,16 +2,15 @@
 alias la='ls -AlhH --color=always'
 alias lg='la --group-directories-first'
 alias lt='la -rt'
-alias hl='history | less'
-alias ht='history | tail'
-alias tree='tree -shC --du | less'
+alias hl='history P'
+alias ht='history T'
+alias tree='tree -shC --du P'
+alias z='fasd_cd'
 
 # Git
 alias gcam='git commit -am'
-alias gsh='git show'
 alias gcf='git diff --name-only --diff-filter=U | cat'
 alias gbv='git branch -vv'
-alias gt='git tag'
 
 # Docker
 alias di="docker images"
@@ -27,7 +26,7 @@ alias dci='docker rmi $(docker images -f dangling=true -q)'
 # Miscellaneous
 alias -- -='cd -'
 alias rl="source ${ZDOTDIR}/.zshrc"  # reload
-alias sa='alias | grep -i'
+alias sa='alias G -i'
 alias ff='for font in `figlist | head -$(echo $(figlist | grep -n "Figlet control files" | cut -d : -f 1) - 1 | bc) | tail -n +4`; do echo $font; figlet -f $font Hello Kyle; done'
 alias pat='pygmentize -g'
 alias ws='python3 -m http.server'
@@ -38,8 +37,14 @@ alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
 
 # Zsh -g aliases
 alias -g G='| grep'
-alias -g P='| pat'
+alias -g P='| pygmentize -g'
 alias -g L='| less'
 alias -g J='| python3 -m json.tool'
+alias -g P='| ${PAGER:-less}'
+alias -g T='| tail'
+alias -g Tf='| tail -f'
+
+# Zsh suffix aliases
+alias -s git='git clone'
 
 # Uncategorized
