@@ -1,9 +1,9 @@
 FROM ubuntu
 MAINTAINER Kyle Rich <yutakafrog@gmail.com>
 
-RUN apt update && apt upgrade -y
-
 ENV ZDOTDIR /root/.config/zsh
+
+RUN apt update && apt upgrade -y
 
 # Docker
 RUN apt install -y apt-transport-https ca-certificates
