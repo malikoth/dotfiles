@@ -6,6 +6,7 @@ alias hl='history P'
 alias ht='history T'
 alias tree='tree -shC --du P'
 alias z='fasd_cd'
+alias zz='fasd_cd -i $(fc -nl -1 | awk '"'"'{print $NF}'"'"')'
 
 # Git
 alias gcam='git commit -am'
