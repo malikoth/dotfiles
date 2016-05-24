@@ -18,8 +18,8 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN pip install httpie invoke Pygments
 
 # Other
-RUN git clone git://github.com/rkitover/vimpager /opt/vimpager && cd /opt/vimpager && make install
-RUN git clone git://github.com/clvv/fasd /opt/fasd && cd /opt/fasd && make install
+RUN git clone https://github.com/rkitover/vimpager.git /opt/vimpager && cd /opt/vimpager && make install
+RUN git clone https://github.com/clvv/fasd.git /opt/fasd && cd /opt/fasd && make install
 
 # Kyle's dotfiles
 RUN git clone http://git.klr.blue/kyle/dotfiles.git /root/.dotfiles
@@ -30,8 +30,6 @@ RUN vim +PlugInstall +qall
 # Zsh and Prezto
 RUN git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 RUN /bin/zsh /root/.dotfiles/dotfiles/tools/prezto.zsh || true
-# RUN ln -sf /root/.dotfiles/dotfiles/dotfiles/.config/zsh/.zshrc /root/.config/zsh/.zshrc
-# RUN ln -sf /root/.dotfiles/dotfiles/dotfiles/.config/zsh/.zpreztorc /root/.config/zsh/.zpreztorc
 
 # Other again
 RUN rm /root/.bashrc && rm /root/.profile
