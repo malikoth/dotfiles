@@ -1,17 +1,19 @@
 # File / System
-alias la='ls -AlhH --color=always'
-alias lg='la --group-directories-first'
-alias lt='la -rt'
+alias ls='ls --color=always'
+alias la='ls -AlhH'
+alias lt='la -tr'
+alias l.='la -d .*'
 alias hl='history P'
-alias ht='history T'
 alias tree='tree -shC --du P'
 alias z='fasd_cd'
 alias zz='fasd_cd -i $(fc -nl -1 | awk '"'"'{print $NF}'"'"')'
 
 # Git
 alias gcam='git commit -am'
-alias gcf='git diff --name-only --diff-filter=U | cat'
+alias gCl='git diff --name-only --diff-filter=U | cat'
 alias gbv='git branch -vv'
+alias gii='git update-index --assume-unchanged'
+alias giI='git update-index --no-assume-unchanged'
 
 # Docker
 alias di="docker images"

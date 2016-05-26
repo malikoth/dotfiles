@@ -3,7 +3,7 @@
 	email = yutakafrog@gmail.com
 
 [push]
-    default = matching
+	default = tracking
 
 [core]
     editor = vim
