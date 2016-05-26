@@ -23,9 +23,9 @@ RUN pip install httpie invoke Pygments
 # Other
 RUN git clone https://github.com/clvv/fasd.git /opt/fasd && cd /opt/fasd && make install
 RUN git clone https://github.com/jonas/tig.git /opt/tig && cd /opt/tig && make configure && ./configure && make && make install
-# RUN rm /root/.bashrc && rm /root/.profile
+RUN rm /root/.bashrc && rm /root/.profile
 
-# Kyle's dotfiles
+# My dotfiles
 RUN git clone http://git.klr.blue/kyle/dotfiles.git /root/.dotfiles
 RUN ln -sf /root/.dotfiles/dotfiles/.config /root/.config
 RUN ln -sf /root/.dotfiles/dotfiles/.vim /root/.vim
