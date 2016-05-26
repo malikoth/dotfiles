@@ -27,7 +27,7 @@ RUN vim +PlugInstall +qall &>/dev/null
 
 # Zsh and Prezto
 RUN git clone --recursive https://github.com/sorin-ionescu/prezto.git /root/.config/zsh/.zprezto
-RUN /bin/zsh /root/.dotfiles/dotfiles/tools/prezto.zsh || true
+RUN /bin/zsh /root/.dotfiles/tools/prezto.zsh || true
 
 WORKDIR /root
 ENTRYPOINT ["/bin/zsh"]
