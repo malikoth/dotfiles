@@ -1,5 +1,4 @@
 # File / System
-alias ls='ls --color=always'
 alias la='ls -AlhH'
 alias lt='la -tr'
 alias l.='la -d .*'
