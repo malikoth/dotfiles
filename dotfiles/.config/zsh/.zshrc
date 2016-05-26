@@ -11,6 +11,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-if [[ -s "$HOME/.dotfiles/dotfiles/tools/shellfiles.sh" ]]; then
-  source "$HOME/.dotfiles/dotfiles/tools/shellfiles.sh"
+if [[ -s "$HOME/.dotfiles/tools/shellfiles.sh" ]]; then
+  source "$HOME/.dotfiles/tools/shellfiles.sh"
 fi
