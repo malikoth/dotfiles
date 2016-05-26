@@ -11,7 +11,7 @@
 
 # TODO: Add credential.helper = osxkeychain, wincred, or cache, depending on OS
 [credential]
-	helper = osxkeychain
+	helper = cache
 
 [tig]
 	line-graphics = utf-8

@@ -12,14 +12,18 @@ RUN echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" > /etc/apt/
 RUN apt update && apt install -y docker-engine
 
 # My packages
-RUN apt install -y build-essential curl figlet git htop inxi irssi m4 man ncdu pwgen python3 silversearcher-ag tig tree vim w3m wget zsh
+RUN apt install -y build-essential autoconf libncurses5-dev libncursesw5-dev
+RUN apt install -y curl figlet git htop inxi irssi m4 man ncdu pwgen python3 silversearcher-ag tree vim w3m wget zsh
+
+# Python
 RUN curl -L https://bootstrap.pypa.io/get-pip.py | python3
 RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN pip install httpie invoke Pygments
 
 # Other
 RUN git clone https://github.com/clvv/fasd.git /opt/fasd && cd /opt/fasd && make install
-RUN rm /root/.bashrc && rm /root/.profile
+RUN git clone https://github.com/jonas/tig.git /opt/tig && cd /opt/tig && make configure && ./configure && make && make install
+# RUN rm /root/.bashrc && rm /root/.profile
 
 # Kyle's dotfiles
 RUN git clone http://git.klr.blue/kyle/dotfiles.git /root/.dotfiles
