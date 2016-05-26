@@ -25,7 +25,8 @@ RUN rm /root/.bashrc && rm /root/.profile
 RUN git clone http://git.klr.blue/kyle/dotfiles.git /root/.dotfiles
 RUN ln -sf /root/.dotfiles/dotfiles/.config /root/.config
 RUN ln -sf /root/.dotfiles/dotfiles/.vim /root/.vim
-RUN vim +PlugInstall +qall &>/dev/null
+RUN git config --global credential.helper cache
+RUN vim +PlugInstall +qall
 
 # Zsh and Prezto
 RUN git clone --recursive https://github.com/sorin-ionescu/prezto.git /root/.config/zsh/.zprezto
