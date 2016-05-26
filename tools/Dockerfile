@@ -1,8 +1,6 @@
 FROM ubuntu
 MAINTAINER Kyle Rich <yutakafrog@gmail.com>
 
-ENV ZDOTDIR /root/.config/zsh
-
 RUN apt update && apt upgrade -y
 
 # Docker
@@ -18,21 +16,18 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN pip install httpie invoke Pygments
 
 # Other
-RUN git clone https://github.com/rkitover/vimpager.git /opt/vimpager && cd /opt/vimpager && make install
 RUN git clone https://github.com/clvv/fasd.git /opt/fasd && cd /opt/fasd && make install
+RUN rm /root/.bashrc && rm /root/.profile
 
 # Kyle's dotfiles
 RUN git clone http://git.klr.blue/kyle/dotfiles.git /root/.dotfiles
-RUN ln -sf /root/.dotfiles/dotfiles/dotfiles/.config /root/.config
-RUN ln -sf /root/.dotfiles/dotfiles/dotfiles/.vim /root/.vim
-RUN vim +PlugInstall +qall
+RUN ln -sf /root/.dotfiles/dotfiles/.config /root/.config
+RUN ln -sf /root/.dotfiles/dotfiles/.vim /root/.vim
+RUN vim +PlugInstall +qall &>/dev/null
 
 # Zsh and Prezto
-RUN git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+RUN git clone --recursive https://github.com/sorin-ionescu/prezto.git /root/.config/zsh/.zprezto
 RUN /bin/zsh /root/.dotfiles/dotfiles/tools/prezto.zsh || true
 
-# Other again
-RUN rm /root/.bashrc && rm /root/.profile
-
-WORKDIR /root/dev
+WORKDIR /root
 ENTRYPOINT ["/bin/zsh"]
