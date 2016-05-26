@@ -1,6 +1,8 @@
 FROM ubuntu
 MAINTAINER Kyle Rich <yutakafrog@gmail.com>
 
+ENV ZDOTDIR /root/.config/zsh
+
 RUN apt update && apt upgrade -y
 
 # Docker

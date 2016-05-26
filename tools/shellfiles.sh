@@ -1,6 +1,6 @@
 # Run personal setup scripts
 #echo $(dirname $(readlink -f "$0"))
-SHELLFILES_DIR=~/.dotfiles/dotfiles/shellfiles
+SHELLFILES_DIR=~/.dotfiles/shellfiles
 
 # Source scripts
 for file in $SHELLFILES_DIR/*; do
