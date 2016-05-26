@@ -12,7 +12,7 @@ RUN echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" > /etc/apt/
 RUN apt update && apt install -y docker-engine
 
 # My packages
-RUN apt install -y build-essential curl figlet git htop inxi irssi m4 man ncdu pwgen python3 silversearcher-ag tree vim w3m wget zsh
+RUN apt install -y build-essential curl figlet git htop inxi irssi m4 man ncdu pwgen python3 silversearcher-ag tig tree vim w3m wget zsh
 RUN curl -L https://bootstrap.pypa.io/get-pip.py | python3
 RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN pip install httpie invoke Pygments
