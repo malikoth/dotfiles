@@ -69,8 +69,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " iTerm2
-map ˙ <A-h>
-map ¬ <A-l>
+map h <A-h>
+map l <A-l>
 
 " Moving lines
 nnoremap <A-k> :m-2<CR>==
@@ -80,8 +80,8 @@ inoremap <A-j> <Esc>:m+<CR>==gi
 vnoremap <A-k> :m '<-2<CR>gv=gv
 vnoremap <A-j> :m '>+<CR>gv=gv
 " iTerm2
-map ˚ <A-k>
-map ∆ <A-j>
+map k <A-k>
+map j <A-j>
 
 " Leader shortcuts
 nnoremap <leader><space> :noh<CR>
@@ -152,7 +152,7 @@ set cursorline
 set cursorcolumn
 set laststatus=2
 set nolist
-set listchars=tab:▸\ ,trail:⋅,extends:#
+set listchars=tab:▸\ ,trail:⋅,extends:# ",eol:¬
 set showmode
 set scrolloff=10
 set mat=2
