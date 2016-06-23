@@ -8,3 +8,4 @@ export CLICOLOR='1'
 export LSCOLORS='GxFxCxDxBxegedabagaced'
 export LESS='-g -i -M -R -S -z-4'
 export PROJECT_HOME=$HOME/dev
+export HTTPIE_CONFIG_DIR=$HOME/.config/httpie
