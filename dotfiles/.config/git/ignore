@@ -13,3 +13,7 @@ node_modules/
 *.egg-info
 .cache/
 .hypothesis/
+
+# Ignore
+qa.dockit.sh
+dev.dockit.sh
