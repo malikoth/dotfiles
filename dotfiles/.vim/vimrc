@@ -139,6 +139,8 @@ vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 nnoremap ; :
 vnoremap ; :
+nnoremap x "_x
+vnoremap p "_dP
 
 " These are not doing what I think they should be doing...
 " nnoremap <S-CR> A<CR>
@@ -166,6 +168,7 @@ set mouse=a
 set noerrorbells
 set visualbell
 set t_vb=
+set autochdir
 
 " Searching and highlighting
 set ignorecase
@@ -173,6 +176,7 @@ set smartcase
 set hlsearch
 set incsearch
 set gdefault
+set infercase
 
 " Windows, buffers, and tabs
 set splitbelow
@@ -186,7 +190,6 @@ set softtabstop=4
 set shiftwidth=4
 set smartindent
 set autoindent
-" set copyindent
 
 " Code folding
 set foldmethod=indent
@@ -196,8 +199,15 @@ set nofoldenable
 set foldlevel=2
 
 " Autocommands
-au BufWinEnter * if &filetype == "help" && histget("cmd") !~ "^vert" | wincmd T
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+filetype plugin indent on
+autocmd FileType html, css, javascript setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType markdown setlocal wrap linebreak nolist
+autocmd BufWinEnter * if &filetype == "help" && histget("cmd") !~ "^vert" | wincmd T
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+augroup reload_vimrc
+    autocmd!
+    autocmd bufwritepost .vimrc source $MYVIMRC
+augroup END
 
 " Backups and undo
 set backup
