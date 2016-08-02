@@ -89,12 +89,18 @@ nnoremap <leader>v :vnew<cr>
 nnoremap <leader>g :GundoToggle<cr>
 nnoremap <leader>j :%!python -m json.tool<cr>
 
+" Toggle options
 noremap <leader>se :set expandtab!<CR>
 noremap <leader>sn :set number!<CR>
 noremap <leader>sw :set wrap!<cr>
 noremap <leader>sl :set list!<cr>
 
+" Beginning and end of line movement
+inoremap <leader>h <esc>I
+inoremap <leader>l <esc>A
+
 noremap <leader>. <esc>:bnext \| bdelete #<cr>
+noremap <leader>> <esc>:q<cr>
 noremap <leader>/ <esc>:wa<cr>
 noremap <leader>' <esc>:qa<cr>
 
