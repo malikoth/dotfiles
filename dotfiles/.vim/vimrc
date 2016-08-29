@@ -18,6 +18,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdtree'
     Plug 'sjl/gundo.vim'
     Plug 'easymotion/vim-easymotion'
+    Plug 'justinmk/vim-sneak'
+    " TODO: Remap ; and , to something different for Sneak
     Plug 'ConradIrwin/vim-bracketed-paste'
 
     " Git
@@ -27,6 +29,7 @@ call plug#begin('~/.vim/plugged')
     " Language specific
     Plug 'jmcantrell/vim-virtualenv', {'for': 'python'}
     Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+    Plug 'zah/nim.vim', {'for': 'nim'}
 call plug#end()
 
 " Airline config
