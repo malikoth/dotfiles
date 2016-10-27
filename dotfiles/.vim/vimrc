@@ -42,6 +42,9 @@ nnoremap <Bslash> :NERDTreeToggle<cr>
 
 " vim-gitgutter
 set updatetime=250
+nmap <leader>gs <Plug>GitGutterStageHunk
+nmap <leader>gu <Plug>GitGutterUndoHunk
+nmap <leader>gp <Plug>GitGutterPreviewHunk
 
 " gundo
 let g:gundo_width = 60

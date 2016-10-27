@@ -34,9 +34,10 @@ alias pat='pygmentize -g'
 alias ws='python3 -m http.server'
 alias grep='grep -i --color=auto'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
-alias bubu='brew update && brew upgrade --all && brew cleanup'
+alias bubu='brew update && brew upgrade && brew cleanup'
 alias apt-up='apt update && sudo apt upgrade -y'
 alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
+alias path='echo $PATH | tr ":" "\n"'
 
 # Zsh -g aliases
 alias -g G='| grep'
