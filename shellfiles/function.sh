@@ -23,3 +23,6 @@ pyclean() {
     find ${*:-'.'} -type d -name "__pycache__" -delete
 }
 
+gstat() {
+    git status --porcelain | awk "\$1 == \"$1\" { print \$2 }"
+}
