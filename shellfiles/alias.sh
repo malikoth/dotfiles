@@ -22,11 +22,12 @@ alias dh="docker history"
 alias din="docker inspect"
 alias dr="docker run -it --rm"
 alias dre="docker run -it --rm --entrypoint /bin/bash"
-alias dc='docker rm $(docker ps -a | grep Exited | awk '"'"'{ print $1 }'"'"')'
-alias dci='docker rmi $(docker images -f dangling=true -q)'
+alias dc='docker rm $(docker ps -qaf status=exited)'
+alias dci='docker rmi $(docker images -qf dangling=true)'
 
 # Miscellaneous
 alias -- -='cd -'
+alias i='invoke'
 alias rl="source ${ZDOTDIR}/.zshrc"  # reload
 alias sa='alias G -i'
 alias ff='for font in `figlist | head -$(echo $(figlist | grep -n "Figlet control files" | cut -d : -f 1) - 1 | bc) | tail -n +4`; do echo $font; figlet -f $font Hello Kyle; done'

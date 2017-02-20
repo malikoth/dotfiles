@@ -181,6 +181,7 @@ set noerrorbells
 set visualbell
 set t_vb=
 set autochdir
+set nrformats=bin,octal,hex,alpha
 
 " Searching and highlighting
 set ignorecase
