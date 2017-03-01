@@ -38,8 +38,8 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'homebrew' \
   'osx' \
-  'prompt'
-#  'syntax-highlighting' \
+  'prompt' \
+  'syntax-highlighting' \
 
 #
 # Editor
