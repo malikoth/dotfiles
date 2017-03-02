@@ -34,7 +34,6 @@ function prompt_klear_pwd {
     _prompt_klear_pwd="$MATCH"
     unset MATCH
   else
-#    _prompt_sorin_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
     _prompt_klear_pwd="${pwd}"
   fi
 }

@@ -46,6 +46,7 @@ alias -g P='| pygmentize -g'
 alias -g L='| less'
 alias -g J='| python3 -m json.tool'
 alias -g P='| ${PAGER:-less}'
+alias -g S='| sort'
 alias -g T='| tail'
 alias -g Tf='| tail -f'
 
