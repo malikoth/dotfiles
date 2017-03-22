@@ -19,7 +19,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'sjl/gundo.vim'
     Plug 'easymotion/vim-easymotion'
     Plug 'justinmk/vim-sneak'
-    " TODO: Remap ; and , to something different for Sneak
     Plug 'ConradIrwin/vim-bracketed-paste'
 
     " Git
@@ -50,6 +49,9 @@ nmap <leader>gp <Plug>GitGutterPreviewHunk
 let g:gundo_width = 60
 let g:gundo_preview_height = 20
 let g:gundo_close_on_revert = 1
+
+" sneak
+let g:sneak#s_next = 1
 
 " Theme and personal overrides
 syntax enable
@@ -145,8 +147,6 @@ cnoremap w!! w !sudo tee % >/dev/null
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
-nnoremap <Tab> >>
-nnoremap <S-Tab> <<
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 nnoremap ; :
