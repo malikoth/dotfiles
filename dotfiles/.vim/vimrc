@@ -154,10 +154,6 @@ vnoremap ; :
 nnoremap x "_x
 vnoremap p "_dP
 
-" These are not doing what I think they should be doing...
-" nnoremap <S-CR> A<CR>
-" inoremap <C-CR> <ESC>A<CR>
-
 " Appearance
 set number
 set nowrap
