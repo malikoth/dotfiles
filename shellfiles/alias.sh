@@ -9,27 +9,15 @@ alias zz='fasd_cd -i $(fc -nl -1 | awk '"'"'{print $NF}'"'"')'
 
 # Git
 alias gcam='git commit -am'
-alias gCl='git diff --name-only --diff-filter=U | cat'
+alias gCl='git --no-pager diff --name-only --diff-filter=U'
 alias gbv='git branch -vv'
 alias gii='git update-index --assume-unchanged'
 alias giI='git update-index --no-assume-unchanged'
-
-# Docker
-alias di="docker images"
-alias dp="docker ps"
-alias dpa="docker ps -a"
-alias dh="docker history"
-alias din="docker inspect"
-alias dr="docker run -it --rm"
-alias dre="docker run -it --rm --entrypoint /bin/bash"
-alias dc='docker rm $(docker ps -qaf status=exited)'
-alias dci='docker rmi $(docker images -qf dangling=true)'
 
 # Miscellaneous
 alias -- -='cd -'
 alias i='invoke'
 alias rl="source ${ZDOTDIR}/.zshrc"  # reload
-alias sa='alias G -i'
 alias ff='for font in `figlist | head -$(echo $(figlist | grep -n "Figlet control files" | cut -d : -f 1) - 1 | bc) | tail -n +4`; do echo $font; figlet -f $font Hello Kyle; done'
 alias pat='pygmentize -g'
 alias ws='python3 -m http.server'
