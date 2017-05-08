@@ -7,13 +7,6 @@ alias tree='tree -shC --du P'
 alias z='fasd_cd'
 alias zz='fasd_cd -i $(fc -nl -1 | awk '"'"'{print $NF}'"'"')'
 
-# Git
-alias gcam='git commit -am'
-alias gCl='git --no-pager diff --name-only --diff-filter=U'
-alias gbv='git branch -vv'
-alias gii='git update-index --assume-unchanged'
-alias giI='git update-index --no-assume-unchanged'
-
 # Miscellaneous
 alias -- -='cd -'
 alias i='invoke'
@@ -23,7 +16,8 @@ alias pat='pygmentize -g'
 alias ws='python3 -m http.server'
 alias grep='grep -i --color=auto'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
-alias bubu='brew update && brew upgrade && brew cleanup'
+alias brew-up='brew update && brew upgrade && brew cleanup'
+alias cask-up='brew cask outdated | cut -d " " -f 1 | xargs brew cask install --force'
 alias apt-up='apt update && sudo apt upgrade -y'
 alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
 alias path='echo $PATH | tr ":" "\n"'
