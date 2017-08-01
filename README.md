@@ -1,11 +1,13 @@
 # Malikoth's Dotfiles
 
 ## Prerequisites
-* brew (Darwin)
+* brew + cask (Darwin)
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew tap caskroom/cask
 ```
+
 * zsh
 * git
 
