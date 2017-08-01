@@ -2,6 +2,7 @@
 
 ## Prerequisites
 * brew (Darwin)
+
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
@@ -9,15 +10,18 @@
 * git
 
 ## Installation
+
 ```bash
 git clone https://github.com/malikoth/dotfiles.git ~/.dotfiles
 ```
 * Clone this repo
 * Clone ZPrezto
+
 ```bash
 git clone https://github.com/sorin-ionescu/prezto.git ~/.config/zsh/prezto
 ```
 * Install Prezto runcoms
+
 ```bash
 ~/.dotfiles/prezto.zsh
 ```
