@@ -49,7 +49,7 @@ bind down:${hyper} focus down
 bind 7:${hyper} focus 'PyCharm'
 bind 8:${hyper} focus 'iTerm2'
 bind 9:${hyper} focus 'Microsoft Outlook'
-bind 0:${hyper} focus 'Firefox'
+bind 0:${hyper} focus 'Google Chrome'
 
 # Miscellaneous
 bind esc:cmd hint ASDFQWERTZXCV

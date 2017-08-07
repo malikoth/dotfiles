@@ -17,5 +17,4 @@ atlassian*
 *.db
 *.egg-info
 *.py?
-*.sqlite3
-*.sqlite
+*.sqlite*
