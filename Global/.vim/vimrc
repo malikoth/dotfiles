@@ -153,6 +153,7 @@ nnoremap ; :
 vnoremap ; :
 nnoremap x "_x
 vnoremap p "_dP
+nnoremap Q @ "Easier to hit shift+q than shift+2...
 
 " Appearance
 set number
