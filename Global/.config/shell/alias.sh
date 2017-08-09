@@ -17,6 +17,7 @@ alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
 alias -- -='cd -'
 alias i='invoke'
 alias rl="source ${ZDOTDIR}/.zshrc"  # reload shell config
+alias ra='ranger'
 alias ff='for font in `figlist | head -$(echo $(figlist | grep -n "Figlet control files" | cut -d : -f 1) - 1 | bc) | tail -n +4`; do echo $font; figlet -f $font Hello Kyle; done'
 alias pat='pygmentize -g'
 alias ws='python3 -m http.server'
