@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 DOTFILES=${HOME}/.dotfiles
-ZDOTDIR=${HOME}/.config/zsh/
+ZDOTDIR=${HOME}/.config/zsh
 
 ln -si ${DOTFILES}/.config/ ${HOME}/.config
 ln -si ${DOTFILES}/.ssh/ ${HOME}/.ssh
