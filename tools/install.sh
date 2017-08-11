@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-DOTFILES=${HOME}/.dotfiles
+DOTFILES=${HOME}/.dotfiles/Global
 ZDOTDIR=${HOME}/.config/zsh
 
 ln -si ${DOTFILES}/.config/ ${HOME}/.config
