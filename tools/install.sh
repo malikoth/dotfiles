@@ -9,4 +9,4 @@ ln -si ${DOTFILES}/.vim/ ${HOME}/.vim
 ln -si ${DOTFILES}/.zshenv ${HOME}/.zshenv
 
 git clone --recursive https://github.com/sorin-ionescu/prezto.git ${ZDOTDIR}/.zprezto
-zsh ${DOTFILES}/../tools/prezto.zsh
+zsh ${DOTFILES}/../tools/prezto.zsh || true
