@@ -1,0 +1,5 @@
+httpie
+invoke
+Pygments
+bashplotlib
+faker
