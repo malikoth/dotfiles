@@ -23,7 +23,7 @@ alias pat='pygmentize -g'
 alias ws='python3 -m http.server'
 alias grep='grep -i --color=auto'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
-alias path='echo $PATH | tr ":" "\n"'
+alias path='echo $PATH | tr ":" "\n" | nl'
 alias gwdnp='git --no-pager diff'
 
 # Zsh -g aliases
