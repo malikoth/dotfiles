@@ -24,5 +24,5 @@ for file in ${SYSTEM}/{*,.[!.]*} ${GLOBAL}/{*,.[!.]*}; do
     create_link ${file} ${HOME}
 done
 
-#git clone --recursive https://github.com/sorin-ionescu/prezto.git ${ZDOTDIR}/.zprezto
-#zsh ${DOTFILES}/bin/prezto.zsh || true
+git clone --recursive https://github.com/sorin-ionescu/prezto.git ${ZDOTDIR}/.zprezto
+zsh ${DOTFILES}/bin/prezto.zsh || true
