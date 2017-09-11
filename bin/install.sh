@@ -1,22 +1,28 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 DOTFILES=${HOME}/.dotfiles
 GLOBAL=${DOTFILES}/Global
 SYSTEM=${DOTFILES}/$(uname -s)
 ZDOTDIR=${HOME}/.config/zsh
 
-for file in ${GLOBAL}/*; do
-    if [[ -d $file ]]; then
-        echo ${file:h}
-    else
-        /bin/true
+create_link () {
+    if [ ! -e ${1} ]; then
+        return
     fi
+
+    if [ -d ${1} ]; then
+        mkdir -p ${2}/${1##*/}
+        for file2 in ${1}/{*,.[!.]*}; do
+            create_link ${file2} ${2}/${1##*/}
+        done
+    elif [ -f ${1} ]; then
+        ln -sfT ${1} ${2}/${1##*/}
+    fi
+}
+
+for file in ${SYSTEM}/{*,.[!.]*} ${GLOBAL}/{*,.[!.]*}; do
+    create_link ${file} ${HOME}
 done
 
-#ln -s ${GLOBAL}/.config/ ${HOME}/.config
-#ln -s ${GLOBAL}/.ssh/ ${HOME}/.ssh
-#ln -s ${GLOBAL}/.vim/ ${HOME}/.vim
-#ln -s ${GLOBAL}/.zshenv ${HOME}/.zshenv
-#
 #git clone --recursive https://github.com/sorin-ionescu/prezto.git ${ZDOTDIR}/.zprezto
 #zsh ${DOTFILES}/bin/prezto.zsh || true

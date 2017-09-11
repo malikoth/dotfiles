@@ -1,3 +1,4 @@
+cloc
 curl
 figlet
 git

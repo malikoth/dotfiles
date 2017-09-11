@@ -5,7 +5,6 @@ SHELLFILES_DIR=~/.config/shell
 # Source scripts
 for file in ${SHELLFILES_DIR}/*; do
     source $file
-
 done
 
 # Platform dependant

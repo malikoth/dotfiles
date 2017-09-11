@@ -6,6 +6,8 @@ alias hl='history P'
 alias tree='tree -shC --du P'
 alias z='fasd_cd'
 alias zz='fasd_cd -i $(fc -nl -1 | awk '"'"'{print $NF}'"'"')'
+alias gu='cd "$(git rev-parse --show-toplevel)"'
+
 
 # System Management
 alias brew-up='brew update && brew upgrade && brew cleanup'
@@ -25,6 +27,7 @@ alias grep='grep -i --color=auto'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias path='echo $PATH | tr ":" "\n" | nl'
 alias gwdnp='git --no-pager diff'
+alias rlc='eval $(dircolors ~/.config/dircolors.txt)'
 
 # Zsh -g aliases
 alias -g G='| grep'
