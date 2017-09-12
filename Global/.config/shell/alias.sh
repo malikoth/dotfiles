@@ -8,7 +8,6 @@ alias z='fasd_cd'
 alias zz='fasd_cd -i $(fc -nl -1 | awk '"'"'{print $NF}'"'"')'
 alias gu='cd "$(git rev-parse --show-toplevel)"'
 
-
 # System Management
 alias brew-up='brew update && brew upgrade && brew cleanup'
 alias cask-up='brew cask outdated | cut -d " " -f 1 | xargs brew cask install --force'
@@ -26,8 +25,10 @@ alias ws='python3 -m http.server'
 alias grep='grep -i --color=auto'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias path='echo $PATH | tr ":" "\n" | nl'
+alias gcom='git checkout master'
 alias gwdnp='git --no-pager diff'
 alias rlc='eval $(dircolors ~/.config/dircolors.txt)'
+alias plz='sudo $(fc -ln -1)'
 
 # Zsh -g aliases
 alias -g G='| grep'
