@@ -8,3 +8,7 @@ services:
     image: malikoth/devenv
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - C:\:/c
+      - D:\:/d
+      - E:\:/e
+      - F:\:/f
