@@ -1,6 +1,10 @@
 FROM ubuntu:zesty
 MAINTAINER Kyle Rich <yutakafrog@gmail.com>
 
+ENV TERM=xterm
+ENV SHELL=/usr/bin/zsh
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get upgrade -y
 
 COPY . /root/.dotfiles
