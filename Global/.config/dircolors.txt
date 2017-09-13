@@ -43,7 +43,7 @@ TERM xterm*
 #FILE 00 # regular file: use no color at all
 RESET 0 # reset to "normal" color
 DIR 38;5;33 # directory
-LINK 38;5;161 # symbolic link. (If you set this to 'target' instead of a
+LINK 01;38;5;207 # symbolic link. (If you set this to 'target' instead of a
  # numerical value, the color is as for the file pointed to.)
 MULTIHARDLINK 00 # regular file with more than one link
 FIFO 40;33 # pipe
@@ -60,7 +60,7 @@ STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)
 OTHER_WRITABLE 34;42 # dir that is other-writable (o+w) and not sticky
 STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
 # This is for files with execute permission:
-EXEC 01;32;48;5;18
+EXEC 01;32
 # List any file extensions like '.gz' or '.tar' that you would like ls
 # to colorize below. Put the extension, a space, and the color init string.
 # (and any comments you want to add after a '#')
@@ -74,6 +74,7 @@ EXEC 01;32;48;5;18
 # executable bit actually set.
 #.sh 01;32
 #.csh 01;32
+
  # archives or compressed (bright red)
 .tar 01;31
 .tgz 01;31
@@ -122,6 +123,7 @@ EXEC 01;32;48;5;18
 .swm 01;31
 .dwm 01;31
 .esd 01;31
+
 # image formats
 .jpg 01;35
 .jpeg 01;35
@@ -142,6 +144,8 @@ EXEC 01;32;48;5;18
 .svgz 01;35
 .mng 01;35
 .pcx 01;35
+
+# video formats
 .mov 01;35
 .mpg 01;35
 .mpeg 01;35
@@ -170,9 +174,11 @@ EXEC 01;32;48;5;18
 .yuv 01;35
 .cgm 01;35
 .emf 01;35
+
 # https://wiki.xiph.org/MIME_Types_and_File_Extensions
 .ogv 01;35
 .ogx 01;35
+
 # audio formats
 .aac 00;36
 .au 00;36
@@ -192,7 +198,13 @@ EXEC 01;32;48;5;18
 .spx 00;36
 .xspf 00;36
 
-# code
-.py 38;5;43 # Python
-.txt 38;5;229
-*rc 38;5;204
+# text formats
+.py 01;38;5;43 # Python
+.txt 38;5;229  # Plain text
+.ini 38;5;197  # Config
+*rc 38;5;197  # Config
+.md 33  # Markdown
+.yml 38;5;208  # YAML
+.yaml 38;5;208  # YAML
+.json 38;5;208  # JSON
+.xml 38;5;208  # XML
