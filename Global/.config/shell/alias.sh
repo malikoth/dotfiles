@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # File / System
 alias la='ls -AlhH'
 alias lt='la -tr'
@@ -18,6 +20,8 @@ alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
 alias -- -='cd -'
 alias i='invoke'
 alias rl="source ${ZDOTDIR}/.zshrc"  # reload shell config
+alias rlc='eval $(dircolors ~/.config/dircolors.txt)'
+alias rli='~/.dotfiles/bin/install.sh'
 alias ra='ranger'
 alias ff='for font in `figlist | head -$(echo $(figlist | grep -n "Figlet control files" | cut -d : -f 1) - 1 | bc) | tail -n +4`; do echo $font; figlet -f $font Hello Kyle; done'
 alias pat='pygmentize -g'
@@ -27,7 +31,6 @@ alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias path='echo $PATH | tr ":" "\n" | nl'
 alias gcom='git checkout master'
 alias gwdnp='git --no-pager diff'
-alias rlc='eval $(dircolors ~/.config/dircolors.txt)'
 alias plz='sudo $(fc -ln -1)'
 
 # Zsh -g aliases

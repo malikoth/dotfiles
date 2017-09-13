@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 aa() {
     echo "alias $1='$2'" >> $SHELLFILES_DIR/alias
 }

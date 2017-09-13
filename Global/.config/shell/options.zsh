@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Globbing
 setopt NO_DOT_GLOB
 setopt NULL_GLOB
