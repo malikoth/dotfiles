@@ -199,7 +199,7 @@ EXEC 01;32
 .xspf 00;36
 
 # text formats
-.py 01;38;5;43 # Python
+.py 38;5;49 # Python
 .txt 38;5;229  # Plain text
 .ini 38;5;197  # Config
 *rc 38;5;197  # Config

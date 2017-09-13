@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
 # File / System
-alias la='ls -AlhH'
-alias lt='la -tr'
+alias la='LC_ALL=C ls -AlhH'
+alias lt='la -rt'
 alias l.='la -d .*'
 alias hl='history P'
 alias tree='tree -shC --du P'
