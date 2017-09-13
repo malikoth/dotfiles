@@ -1,0 +1,90 @@
+#!/usr/bin/env python3
+
+"""Counts time intervals between two dates"""
+
+import argparse
+import datetime
+from functools import lru_cache
+from os import path
+import sys
+from urllib.request import urlopen as get
+
+
+
+FORMATS = ['%Y-%m-%d', '%Y-%m-%d %H', '%Y-%m-%d %H:%M', '%Y-%m-%d %H:%M:%S']
+FORMATS.extend(list(fmt.replace(' ', 'T') for fmt in FORMATS))
+
+
+class Since:
+    def __init__(self):
+        config_file = path.expanduser('~/.config/since.txt')
+
+        with open(config_file) as f:
+            url = f.read().strip()
+
+        with get(url) as resp:
+            self.previous = self.try_parse(resp.read().decode().strip())
+
+        start, end = self.args.start, self.args.end
+        self.interval = [
+            end.year - start.year,
+            end.month - start.month,
+            end.day - start.day,
+            end.hour - start.hour,
+            end.minute - start.minute,
+            end.second - start.second]
+
+        days_last_month = (datetime.date(end.year, end.month, 1) - datetime.timedelta(1)).day
+
+        for i in range(5, -1, -1):
+            if self.interval[i] < 0:
+                self.interval[i - 1] -= 1
+                self.interval[i] += [0, 12, days_last_month, 24, 60, 60][i]
+
+        print(self)
+
+    def __str__(self):
+        return '{}-{}-{} {}:{:02}:{:02}'.format(*self.interval)
+
+    @property
+    @lru_cache(1)
+    def args(self):
+        parser = argparse.ArgumentParser(
+            description=__doc__,
+            formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+        parser.add_argument('start', nargs='?', default=self.previous)
+        parser.add_argument('end', nargs='?', default=datetime.datetime.now())
+
+        args = parser.parse_args()
+        for k, v in vars(args).items():
+            setattr(args, k, self.try_parse(v))
+
+        return args
+
+    @staticmethod
+    def try_parse(moment):
+        if isinstance(moment, datetime.date):
+            return moment
+
+        date = None
+        # print('Read starting moment:', moment)
+        for fmt in FORMATS:
+            try:
+                # print('Trying format:', fmt)
+                date = datetime.datetime.strptime(moment, fmt)
+            except ValueError:
+                pass
+            else:
+                break
+
+        if not date:
+            print('Invalid date format.  Use ISO-8601')
+            print('Valid formats:')
+            print('\n'.join('  ' + fmt for fmt in FORMATS))
+            sys.exit(1)
+
+        return date
+
+
+if __name__ == '__main__':
+    Since()

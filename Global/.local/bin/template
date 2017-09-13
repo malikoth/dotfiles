@@ -1,0 +1,127 @@
+#!/usr/bin/env python3
+
+import argparse
+from os.path import expanduser
+import json
+from functools import lru_cache
+import tempfile
+import textwrap
+
+import requests
+from pygments import highlight
+from pygments.lexers import guess_lexer, guess_lexer_for_filename
+from pygments.formatters import TerminalTrueColorFormatter
+from pygments.styles import get_all_styles
+
+
+class CLI:
+    """Grab a code snippet from GitLab"""
+
+    # TODO: Use pyxdg to load this file from various XDG compatible locations
+    config_file = expanduser('~/.config/template.json')
+    default_config = {
+        'url': '',
+        'private_token': '',
+        'style': 'default'
+    }
+
+    def __init__(self):
+        self.parser = None
+
+        try:
+            if self.args.style.lower() == 'l':
+                print('\n'.join(sorted(get_all_styles())))
+            else:
+                self.run()
+        except KeyboardInterrupt:
+            pass
+
+    @property
+    @lru_cache(1)
+    def args(self):
+        parser = argparse.ArgumentParser(
+            description=textwrap.dedent(self.__class__.__doc__),
+            formatter_class=type('', (argparse.ArgumentDefaultsHelpFormatter, argparse.RawTextHelpFormatter), {}))
+        self.parser = parser
+
+        parser.add_argument('search', nargs='?', help='Search for snippets matching string')
+        parser.add_argument('-n', '--name', help='File name of snippet to grab')
+        parser.add_argument('-i', '--id', type=int, help='ID of snippet to grab')
+        parser.add_argument('-t', '--title', help='Title of snippet to grab')
+        parser.add_argument('-o', '--output', nargs='?', const=True, default=False, help='File to output snippet to')
+        parser.add_argument('-s', '--style', default='', help='Pygments style for colorizing output')
+
+        return parser.parse_args()
+
+    @property
+    @lru_cache(1)
+    def config(self):
+        try:
+            with open(self.config_file) as f:
+                config = {**self.default_config, **json.load(f)}
+        except json.JSONDecodeError:
+            self.parser.exit(1, 'Invalid JSON syntax in config file\n')
+        except FileNotFoundError:
+            self.parser.exit(1, f'Must create config file at {self.config_file}\n')
+
+        if not config['url']:
+            self.parser.exit(1, 'Config file must contain valid url')
+        if not config['url'].startswith('http'):
+            config['url'] = 'http://' + config['url']
+
+        if not config['private_token']:
+            self.parser.exit(1, 'Config file must contain valid private_token')
+
+        return argparse.Namespace(**config)
+
+    def run(self):
+        url = f'{self.config.url}/api/v4/snippets'
+        headers = {'PRIVATE-TOKEN': self.config.private_token}
+
+        id = None
+        file_name = self.args.output
+        if self.args.id is not None:
+            id = self.args.id
+            if file_name is True:
+                snippet = requests.get(url + f'/{id}', headers=headers).json()
+                file_name = snippet['file_name']
+        else:
+            snippets = requests.get(url, headers=headers).json()
+            results = [s for s in snippets if
+                       self.args.search.lower() in s['title'].lower() or
+                       self.args.search.lower() in s['file_name'].lower()] if self.args.search else snippets
+
+            if not results:
+                self.parser.exit(1, 'No matching results found')
+            elif len(results) == 1:
+                id = results[0]['id']
+            else:
+                for i, s in enumerate(results):
+                    print(f'{i:{len(str(len(results)))}} - {s["title"]}, {s["file_name"]}')
+                choice = int(input('Select snippet: '))
+                print()
+                id = results[choice]['id']
+                file_name = results[choice]['file_name']
+
+        snippet = requests.get(url + f'/{id}/raw/', headers=headers)
+        code = snippet.content.decode()
+        if not self.args.output:
+            if file_name:
+                lexer = guess_lexer_for_filename(file_name, code)
+            else:
+                lexer = guess_lexer(code)
+
+            print(highlight(code, lexer, TerminalTrueColorFormatter(style=self.args.style or self.config.style)))
+
+        else:
+            if not file_name:
+                f = tempfile.NamedTemporaryFile(delete=False)
+            else:
+                f = open(file_name, 'wb')
+
+            f.write(snippet.content)
+            f.close()
+
+
+if __name__ == '__main__':
+    CLI()

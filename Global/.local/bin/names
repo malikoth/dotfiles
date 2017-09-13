@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+
+import argparse
+import random
+from functools import lru_cache, partial
+import json
+import os
+
+
+def filter_names(letter, name):
+    return name.lower().startswith(letter)
+
+
+class Names:
+    """Generates random names"""
+
+    def __init__(self):
+        data_file = os.path.normpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../data/names.json'))
+        self.data = json.load(open(data_file))
+
+        for i in range(self.args.count):
+            print(self.generate_name())
+
+    @property
+    @lru_cache(1)
+    def args(self):
+        parser = argparse.ArgumentParser(
+            description=self.__class__.__doc__,
+            formatter_class=type('', (argparse.ArgumentDefaultsHelpFormatter, argparse.RawTextHelpFormatter,), {}))
+        parser.add_argument('-c', '--count', default=1, type=int, help='specify how many names to display', metavar='CC')
+        parser.add_argument('-s', '--sex', default='b', choices=['m', 'f', 'b'], help='show male / female / both names')
+        parser.add_argument('-l', '--letter', default='', help='generate only names that start with the given letter')
+        parser.add_argument('args', nargs=argparse.REMAINDER, help=argparse.SUPPRESS)
+        return parser.parse_args()
+
+    def generate_name(self):
+        firsts = self.data['first_names']['m'] + self.data['first_names']['f'] if self.args.sex == 'b' else self.data['first_names'][self.args.sex]
+        firsts = list(filter(partial(filter_names, self.args.letter.lower()), firsts))
+        lasts = list(filter(partial(filter_names, self.args.letter.lower()), self.data['last_names']))
+        return '{} {}'.format(random.choice(firsts), random.choice(lasts))
+
+
+if __name__ == '__main__':
+    Names()

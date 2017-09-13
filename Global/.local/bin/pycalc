@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+
+"""
+Python Calculator - Comprehensive command line interface to python expressions.
+
+Batteries included!  Imports os, sys, math.*, random.*, Decimal, and pprint as pp.
+
+Also includes additional modules based on the following switches.
+"""
+
+import sys
+import os
+import importlib
+import argparse
+from functools import lru_cache
+
+from math import *
+from random import *
+from decimal import Decimal
+from pprint import pprint as pp
+
+
+class PyCalc:
+    def __init__(self):
+        commands = self.args.commands
+        del vars(self.args)['commands']
+        for k, v in vars(self.args).items():
+            if v:
+                globals().update(vars(importlib.import_module(k)))
+
+        namespace = {}
+        for cmd in commands:
+            try:
+                result = eval(cmd, globals(), namespace)
+                if result:
+                    print(result)
+            except Exception:
+                pass
+            else:
+                continue
+
+            exec(cmd, globals(), namespace)
+
+    @property
+    @lru_cache(1)
+    def args(self):
+        parser = argparse.ArgumentParser(
+            description=__doc__,
+            formatter_class=argparse.RawDescriptionHelpFormatter
+        )
+        parser.add_argument('-c', '--collections', action='store_true')
+        parser.add_argument('-C', '--csv', action='store_true')
+        parser.add_argument('-d', '--datetime', action='store_true')
+        parser.add_argument('-r', '--re', action='store_true')
+        parser.add_argument('-h', '--shutil', action='store_true')
+        parser.add_argument('-s', '--statistics', action='store_true')
+        parser.add_argument('-z', '--zlib', action='store_true')
+        parser.add_argument('commands', nargs=argparse.REMAINDER, help=argparse.SUPPRESS)
+
+        args = parser.parse_args()
+
+        if not args.commands:
+            parser.print_help()
+            sys.exit(0)
+        else:
+            return args
+
+
+if __name__ == '__main__':
+    PyCalc()
