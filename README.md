@@ -2,38 +2,22 @@
 
 ## Prerequisites
 * brew + cask (Darwin)
+* zsh
+* git
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew tap caskroom/cask
+brew install zsh git
 ```
-
-* zsh
-* git
 
 ## Installation
 
-```bash
-git clone https://github.com/malikoth/dotfiles.git ~/.dotfiles
-```
 * Clone this repo
-* Clone ZPrezto
+* Run installation script
+* Install packages from `config` folder (manual step for now.  #TODO: Make this part of `install.sh`)
 
 ```bash
-git clone https://github.com/sorin-ionescu/prezto.git ~/.config/zsh/prezto
+git clone http://git.klr.blue/kyle/dotfiles.git ~/.dotfiles
+~/.dotfiles/bin/install.sh
 ```
-* Install Prezto runcoms
-
-```bash
-~/.dotfiles/prezto.zsh
-```
-* Perform symlinks
-
-### Darwin Specific
-* Install cask
-* Install all brews
-* Install all taps
-* Install all casks
-
-### Linux specific
-* Install packages
