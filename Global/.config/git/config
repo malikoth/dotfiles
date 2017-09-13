@@ -1,9 +1,9 @@
 [user]
     name = Kyle Rich
-	email = yutakafrog@gmail.com
+    email = yutakafrog@gmail.com
 
 [push]
-	default = tracking
+    default = tracking
 
 [core]
     editor = vim
@@ -11,10 +11,10 @@
 
 # TODO: Add credential.helper = osxkeychain, wincred, or cache, depending on OS
 [credential]
-	helper = cache
+    helper = cache
 
 [tig]
-	line-graphics = utf-8
-	main-view-id = yes
-	main-view-line-number = yes
-	main-view-line-number-interval = 1
+    line-graphics = utf-8
+    main-view-id = yes
+    main-view-line-number = yes
+    main-view-line-number-interval = 1
