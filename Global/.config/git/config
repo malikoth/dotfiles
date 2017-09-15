@@ -6,6 +6,7 @@
     default = tracking
 
 [core]
+    autocrlf = input
     editor = vim
     excludesfile = ~/.config/git/ignore
 
