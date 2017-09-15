@@ -15,6 +15,3 @@ if [[ -s "$HOME/.dotfiles/bin/shell.sh" ]]; then
   source "$HOME/.dotfiles/bin/shell.sh"
 fi
 
-if [[ -s "$HOME/.localrc" ]]; then
-  source "$HOME/.localrc"
-fi
