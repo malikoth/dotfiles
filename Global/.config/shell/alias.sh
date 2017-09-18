@@ -13,8 +13,12 @@ alias gu='cd "$(git rev-parse --show-toplevel)"'
 # System Management
 alias brew-up='brew update && brew upgrade && brew cleanup'
 alias cask-up='brew cask outdated | cut -d " " -f 1 | xargs brew cask install --force'
-alias apt-up='apt update && sudo apt upgrade -y'
+alias apt-up='sudo apt update && sudo apt upgrade -y'
 alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
+
+# Git
+alias gcom='git checkout master'
+alias gwdnp='git --no-pager diff'
 
 # Miscellaneous
 alias -- -='cd -'
@@ -29,8 +33,6 @@ alias ws='python3 -m http.server'
 alias grep='grep -i --color=auto'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias path='echo $PATH | tr ":" "\n" | nl'
-alias gcom='git checkout master'
-alias gwdnp='git --no-pager diff'
 alias plz='sudo $(fc -ln -1)'
 
 # Zsh -g aliases
