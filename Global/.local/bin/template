@@ -74,7 +74,7 @@ class CLI:
         parser.add_argument('-t', '--title', help='Title of snippet to grab')
         parser.add_argument('-o', '--output', nargs='?', const=True, default=False, help='File to output snippet to')
         parser.add_argument('-s', '--style', default='',
-                            help='Pygments style(s) () for colorizing output '
+                            help='Pygments style(s) for colorizing output '
                                  '(comma-separated if multiple, accepts special values "list" or "all")')
 
         return parser.parse_args()
