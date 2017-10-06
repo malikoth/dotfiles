@@ -1,17 +1,44 @@
 #!/usr/bin/env python3
 
 import argparse
-from os.path import expanduser
-import json
 from functools import lru_cache
+import json
+from os.path import expanduser
+import sys
 import tempfile
-import textwrap
+from textwrap import dedent as dd, indent
 
 import requests
 from pygments import highlight
 from pygments.lexers import guess_lexer, guess_lexer_for_filename
 from pygments.formatters import TerminalTrueColorFormatter
 from pygments.styles import get_all_styles
+
+
+def exception_handler(f):
+    def _inner(*args, **kwargs):
+        try:
+            f(*args, **kwargs)
+
+        except KeyboardInterrupt:
+            pass
+
+        except requests.HTTPError as e:
+            msg = """
+                Error communicating with server: {}
+
+                Request URL: {}
+                Response status code: {}
+                Response body preview:
+                {}
+                """
+
+            sys.exit(dd(msg).format(e, e.request.url, e.response.status_code, indent(e.response.text[:500], ' ' * 4)))
+
+        except requests.RequestException as e:
+            sys.exit(f'Error communicating with server: {e}')
+
+    return _inner
 
 
 class CLI:
@@ -22,25 +49,22 @@ class CLI:
     default_config = {
         'url': '',
         'private_token': '',
-        'style': 'default'
+        'style': 'monokai'  # The good-looking styles are paraiso-dark, fruity, rainbow_dash, and monokai.  Just FYI
     }
 
     def __init__(self):
         self.parser = None
 
-        try:
-            if self.args.style.lower() == 'l':
-                print('\n'.join(sorted(get_all_styles())))
-            else:
-                self.run()
-        except KeyboardInterrupt:
-            pass
+        if self.args.style.lower() == 'list':
+            print('\n'.join(sorted(get_all_styles())))
+        else:
+            self.run()
 
     @property
     @lru_cache(1)
     def args(self):
         parser = argparse.ArgumentParser(
-            description=textwrap.dedent(self.__class__.__doc__),
+            description=dd(self.__class__.__doc__),
             formatter_class=type('', (argparse.ArgumentDefaultsHelpFormatter, argparse.RawTextHelpFormatter), {}))
         self.parser = parser
 
@@ -49,7 +73,9 @@ class CLI:
         parser.add_argument('-i', '--id', type=int, help='ID of snippet to grab')
         parser.add_argument('-t', '--title', help='Title of snippet to grab')
         parser.add_argument('-o', '--output', nargs='?', const=True, default=False, help='File to output snippet to')
-        parser.add_argument('-s', '--style', default='', help='Pygments style for colorizing output')
+        parser.add_argument('-s', '--style', default='',
+                            help='Pygments style(s) () for colorizing output '
+                                 '(comma-separated if multiple, accepts special values "list" or "all")')
 
         return parser.parse_args()
 
@@ -60,13 +86,13 @@ class CLI:
             with open(self.config_file) as f:
                 config = {**self.default_config, **json.load(f)}
         except json.JSONDecodeError:
-            self.parser.exit(1, 'Invalid JSON syntax in config file\n')
+            self.parser.exit(1, 'Invalid JSON syntax in config file')
         except FileNotFoundError:
-            self.parser.exit(1, f'Must create config file at {self.config_file}\n')
+            self.parser.exit(1, f'Must create config file at {self.config_file}')
 
         if not config['url']:
             self.parser.exit(1, 'Config file must contain valid url')
-        if not config['url'].startswith('http'):
+        if '://' not in config['url']:
             config['url'] = 'http://' + config['url']
 
         if not config['private_token']:
@@ -74,53 +100,97 @@ class CLI:
 
         return argparse.Namespace(**config)
 
-    def run(self):
-        url = f'{self.config.url}/api/v4/snippets'
-        headers = {'PRIVATE-TOKEN': self.config.private_token}
+    @property
+    def styles(self):
+        if self.args.style == 'all':
+            styles = list(get_all_styles())
+        elif ',' in self.args.style:
+            styles = self.args.style.split(',')
+        else:
+            styles = [self.args.style or self.config.style]
 
-        id = None
+        return styles
+
+    @property
+    @lru_cache(1)
+    def session(self):
+        session = requests.Session()
+        session.headers = {'PRIVATE-TOKEN': self.config.private_token}
+        session.hooks = {'response': lambda resp, *args, **kwargs: resp.raise_for_status()}
+        return session
+
+    @exception_handler
+    def run(self):
+        base_url = f'{self.config.url}/api/v4/snippets'
+
+        snippet_id = None
         file_name = self.args.output
         if self.args.id is not None:
-            id = self.args.id
-            if file_name is True:
-                snippet = requests.get(url + f'/{id}', headers=headers).json()
-                file_name = snippet['file_name']
+            snippet_id = self.args.id
+
+            if isinstance(file_name, bool):
+                file_name = self.session.get(f'{base_url}/{snippet_id}').json()['file_name']
         else:
-            snippets = requests.get(url, headers=headers).json()
-            results = [s for s in snippets if
-                       self.args.search.lower() in s['title'].lower() or
-                       self.args.search.lower() in s['file_name'].lower()] if self.args.search else snippets
+            results = self.session.get(base_url).json()
+            if results and self.args.search:
+                search = self.args.search.lower()
+                results = [s for s in results if search in s['title'].lower() or search in s['file_name'].lower()]
 
             if not results:
                 self.parser.exit(1, 'No matching results found')
             elif len(results) == 1:
-                id = results[0]['id']
+                snippet_id = results[0]['id']
+                file_name = results[0]['file_name']
             else:
-                for i, s in enumerate(results):
-                    print(f'{i:{len(str(len(results)))}} - {s["title"]}, {s["file_name"]}')
-                choice = int(input('Select snippet: '))
-                print()
-                id = results[choice]['id']
+                choice = self.get_choice(results)
+                snippet_id = results[choice]['id']
                 file_name = results[choice]['file_name']
 
-        snippet = requests.get(url + f'/{id}/raw/', headers=headers)
-        code = snippet.content.decode()
-        if not self.args.output:
-            if file_name:
-                lexer = guess_lexer_for_filename(file_name, code)
-            else:
-                lexer = guess_lexer(code)
-
-            print(highlight(code, lexer, TerminalTrueColorFormatter(style=self.args.style or self.config.style)))
-
+        code = self.session.get(f'{base_url}/{snippet_id}/raw/').text
+        if self.args.output:
+            self.write_code(file_name, code)
         else:
-            if not file_name:
-                f = tempfile.NamedTemporaryFile(delete=False)
-            else:
-                f = open(file_name, 'wb')
+            self.print_code(file_name, code)
 
-            f.write(snippet.content)
-            f.close()
+    def get_choice(self, results):
+        number_width = len(str(len(results)))
+        id_width = max(len(str(s['id'])) for s in results)
+
+        for i, s in enumerate(results):
+            print(f'{i:{number_width}} - (#{s["id"]:0{id_width}}) {s["title"]}, {s["file_name"]}')
+        choice = input('Select snippet: ')
+        print()
+
+        if choice.startswith('#'):
+            snippet_id = int(choice[1:])
+            for i, s in enumerate(results):
+                if s['id'] == snippet_id:
+                    return i
+
+            sys.exit('Snippet not found')
+
+        return int(choice)
+
+    def print_code(self, file_name, code):
+        if file_name:
+            lexer = guess_lexer_for_filename(file_name, code)
+        else:
+            lexer = guess_lexer(code)
+
+        for style in self.styles:
+            if len(self.styles) > 1:
+                print(f'Style: {style}')
+
+            print(highlight(code, lexer, TerminalTrueColorFormatter(style=style)))
+
+    def write_code(self, file_name, code):
+        if file_name:
+            f = open(file_name, 'w')
+        else:
+            f = tempfile.NamedTemporaryFile(delete=False)
+
+        f.write(code)
+        f.close()
 
 
 if __name__ == '__main__':

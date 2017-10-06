@@ -16,7 +16,7 @@ create_link () {
             create_link ${file2} ${2}/${1##*/}
         done
     elif [ -f ${1} ]; then
-        ln -sfT ${1} ${2}/${1##*/}
+        ln -sT ${1} ${2}/${1##*/}
     fi
 }
 
