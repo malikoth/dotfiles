@@ -9,7 +9,7 @@ ee() {
 }
 
 freeport() {
-    lsof -it tcp:$1 | xargs kill -9
+    lsof -ti tcp:$1 | xargs kill -9
 }
 
 mcd() {
