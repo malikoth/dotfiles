@@ -20,6 +20,7 @@ alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
 alias gcom='git checkout master'
 alias gwdnp='git --no-pager diff'
 alias gbc='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'  # git branch clean
+alias gcb='git checkout -b'
 
 # Miscellaneous
 alias -- -='cd -'
