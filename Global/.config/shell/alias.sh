@@ -24,6 +24,7 @@ alias gcb='git checkout -b'
 
 # Miscellaneous
 alias -- -='cd -'
+alias dkhs='docker search'
 alias i='invoke'
 alias rl="source ${ZDOTDIR}/.zshrc"  # reload shell config
 alias rlc='eval $(dircolors ~/.config/dircolors.txt)'
