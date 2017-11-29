@@ -15,7 +15,7 @@ fi
 
 # Debian-like
 if command -v apt >/dev/null 2>&1; then
-    apt update && apt install -y $(sed -e '/\s*#.*/d' /root/.local/packages/apt.txt)
+    sudo apt update && sudo apt install -y $(sed -e '/\s*#.*/d' /root/.local/packages/apt.txt)
 fi
 
 
@@ -45,9 +45,9 @@ fi
 git clone --recursive https://github.com/sorin-ionescu/prezto.git ${HOME}/.config/zsh/.zprezto
 zsh ${HOME}/.yadm/bin/prezto.zsh || true
 chsh -s $(which zsh)
-rm ~/.bashrc && rm ~/.profile
+rm ~/.bashrc && rm ~/.profile && ~/.bash_profile
 
 
 # Install YADM
-git clone https://github.com/TheLocehiliosan/yadm.git /opt/yadm
-ln -s /opt/yadm/yadm /usr/local/bin/yadm
+git clone https://github.com/TheLocehiliosan/yadm.git ~/.local/opt/yadm
+ln -s ~/.local/opt/yadm/yadm ~/.local/bin/yadm
