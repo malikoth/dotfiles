@@ -21,5 +21,5 @@ apt-get update && apt-get install -y curl git
 * Bootstrap this repo via YADM
 
 ```bash
-curl -fsSL 'https://tinyurl.com/yadm-bootstrap' | bash -s -- http://git.klr.blue/kyle/dotfiles.git
+RUN curl -fsSL 'https://github.com/TheLocehiliosan/yadm/raw/master/yadm' | bash -s -- clone --bootstrap http://git.klr.blue/kyle/dotfiles.git
 ```
