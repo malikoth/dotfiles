@@ -3,11 +3,6 @@
 SHELLFILES_DIR=~/.config/shell
 
 # Source scripts
-for file in ${SHELLFILES_DIR}/*; do
-    source $file
-done
-
-# Platform dependant
-for file in ${SHELLFILES_DIR}-$(uname -s)/*; do
+for file in ${SHELLFILES_DIR}/*.*sh; do
     source $file
 done

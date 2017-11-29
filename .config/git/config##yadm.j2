@@ -12,7 +12,7 @@
 
 # TODO: Add credential.helper = osxkeychain, wincred, or cache, depending on OS
 [credential]
-    helper = cache
+    helper = {{ {'Linux': 'cache', 'Darwin': 'osxkeychain'}[YADM_OS] }}
 
 [tig]
     line-graphics = utf-8

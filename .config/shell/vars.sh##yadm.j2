@@ -12,3 +12,9 @@ export PROJECT_HOME=$HOME/dev
 export HTTPIE_CONFIG_DIR=$HOME/.config/httpie
 
 eval "$(dircolors ~/.config/dircolors.txt)"
+
+{% if YADM_OS == 'Darwin' -%}
+COREUTILS_PATH=$(brew --prefix)/opt/coreutils
+export PATH="$COREUTILS_PATH/libexec/gnubin:$PATH"
+export MANPATH="$COREUTILS_PATH/libexec/gnuman:$(man -w)"
+{% endif -%}

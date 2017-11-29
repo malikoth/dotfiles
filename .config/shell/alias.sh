@@ -11,8 +11,10 @@ alias zz='fasd_cd -i $(fc -nl -1 | awk '"'"'{print $NF}'"'"')'
 alias gu='cd "$(git rev-parse --show-toplevel)"'
 
 # System Management
-alias brew-up='brew update && brew upgrade && brew cleanup'
-alias cask-up='brew cask outdated | cut -d " " -f 1 | xargs brew cask install --force'
+alias brew-up='brew bundle --file=~/.local/packages/Brewfile'
+alias bbu='brew bundle dump --force --file=~/.local/packages/Brewfile'
+alias bbc='brew bundle cleanup'
+alias bbcf='brew bundle cleanup --force'
 alias apt-up='sudo apt update && sudo apt upgrade -y'
 alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
 
