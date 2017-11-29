@@ -1,0 +1,33 @@
+#! /usr/bin/env sh
+
+# MacOS
+if [ "${OS}" = "Darwin" ]; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+if [ -x brew ]; then
+    brew bundle --file=~/.local/packages/Brewfile
+fi
+
+# Debian-like
+if [ -x apt ]; then
+    apt-get install -y $(sed -e '/\s*#.*/d' /root/.local/packages/apt.txt)
+fi
+
+# Alpine
+if [ -x apk ]; then
+    # TODO: Add Alpine packages
+fi
+
+# Anything with Python
+if [ -x pip ]; then
+    pip install -r ~/.local/packages/pip.txt
+fi
+
+# Setup ZSH / Prezto
+git clone --recursive https://github.com/sorin-ionescu/prezto.git ${HOME}/.config/zsh/.zprezto
+zsh ${HOME}/.yadm/bin/prezto.zsh || true
+
+# Install YADM
+git clone https://github.com/TheLocehiliosan/yadm.git /opt/yadm
+ln -s /opt/yadm/yadm /usr/local/bin/yadm

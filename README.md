@@ -25,5 +25,5 @@ apt-get update && apt-get install -y curl git zsh
 * Install packages from `config` folder (manual step for now.  #TODO: Make this part of `install.sh`)
 
 ```bash
-curl -fsSL 'https://tinyurl.com/yadm-bootstrap' | bash
+curl -fsSL 'https://tinyurl.com/yadm-bootstrap' | bash -s -- http://git.klr.blue/kyle/dotfiles.git
 ```
