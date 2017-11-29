@@ -3,8 +3,8 @@ version: '2'
 services:
   devenv:
     build:
-      context: ..
-      dockerfile: bin/Dockerfile
+      context: .
+      dockerfile: Dockerfile
     image: malikoth/devenv
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

@@ -38,13 +38,15 @@ fi
 # Initialize Vim plugins
 if command -v vim >/dev/null 2>&1; then
   echo "Bootstrapping Vim"
-  vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+  vim +PlugInstall +qall
 fi
 
 
 # Setup ZSH / Prezto
 git clone --recursive https://github.com/sorin-ionescu/prezto.git ${HOME}/.config/zsh/.zprezto
 zsh ${HOME}/.yadm/bin/prezto.zsh || true
+chsh -s $(which zsh)
+rm ~/.bashrc && rm ~/.profile
 
 
 # Install YADM
