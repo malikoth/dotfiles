@@ -1,4 +1,4 @@
-FROM ubuntu:zesty
+FROM ubuntu:artful
 MAINTAINER Kyle Rich <yutakafrog@gmail.com>
 
 ENV TERM=xterm

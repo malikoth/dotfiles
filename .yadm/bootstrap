@@ -1,33 +1,51 @@
 #! /usr/bin/env sh
 
+# This script assumes the pre-installation of curl, git, sed, and zsh
+
+
 # MacOS
-if [ "${OS}" = "Darwin" ]; then
+if [ "$(uname -s)" = "Darwin" ]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-if [ -x $(command -v brew) ]; then
+if command -v brew >/dev/null 2>&1; then
     brew bundle --file=~/.local/packages/Brewfile
 fi
 
+
 # Debian-like
-if [ -x $(command -v apt) ]; then
+if command -v apt >/dev/null 2>&1; then
     apt update && apt install -y $(sed -e '/\s*#.*/d' /root/.local/packages/apt.txt)
 fi
 
+
 # Alpine
-if [ -x $(command -v apk) ]; then
+if command -v apk >/dev/null 2>&1; then
     # TODO: Add Alpine packages
     apk update
 fi
 
+
 # Anything with Python
-if [ -x $(command -v pip) ]; then
+if command -v python3.6 >/dev/null 2>&1; then
+    ln -s /usr/bin/python3.6 /usr/bin/python3
+    ln -s /usr/bin/python3 /usr/bin/python
+    curl -fsSL https://bootstrap.pypa.io/get-pip.py | python
     pip install -r ~/.local/packages/pip.txt
 fi
+
+
+# Initialize Vim plugins
+if command -v vim >/dev/null 2>&1; then
+  echo "Bootstrapping Vim"
+  vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+fi
+
 
 # Setup ZSH / Prezto
 git clone --recursive https://github.com/sorin-ionescu/prezto.git ${HOME}/.config/zsh/.zprezto
 zsh ${HOME}/.yadm/bin/prezto.zsh || true
+
 
 # Install YADM
 git clone https://github.com/TheLocehiliosan/yadm.git /opt/yadm
