@@ -17,6 +17,7 @@ fi
 # Alpine
 if [ -x apk ]; then
     # TODO: Add Alpine packages
+    apk update
 fi
 
 # Anything with Python
