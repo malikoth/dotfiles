@@ -208,4 +208,4 @@ EXEC 01;32
 .yaml 38;5;208  # YAML
 .json 38;5;208  # JSON
 .xml 38;5;208  # XML
-*.*sh 38;5;92  # *sh
+*sh 38;5;92  # *sh
