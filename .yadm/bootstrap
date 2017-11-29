@@ -1,6 +1,6 @@
 #! /usr/bin/env sh
 
-# This script assumes the pre-installation of curl, git, sed, and zsh
+# This script assumes the pre-installation of curl and sed
 
 
 # MacOS
@@ -37,8 +37,7 @@ fi
 
 # Initialize Vim plugins
 if command -v vim >/dev/null 2>&1; then
-  echo "Bootstrapping Vim"
-  vim +PlugInstall +qall
+  vim +PlugUpdate +PlugClean! +qall
 fi
 
 

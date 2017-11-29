@@ -9,7 +9,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y curl git sed
 # Docker
 RUN curl -fsSL get.docker.com | sh
 
-RUN curl -fsSL 'https://tinyurl.com/yadm-bootstrap' | bash -s -- --bootstrap http://git.klr.blue/kyle/dotfiles.git
+RUN curl -fsSL 'https://tinyurl.com/yadm-bootstrap' | bash -s -- http://git.klr.blue/kyle/dotfiles.git
+RUN ~/.yadm/bootstrap
 
 WORKDIR /root
 CMD ["/usr/bin/zsh"]
