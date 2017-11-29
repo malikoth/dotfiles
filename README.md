@@ -2,13 +2,20 @@
 
 ## Prerequisites
 * brew + cask (Darwin)
-* zsh
+* curl
 * git
+* zsh
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew tap caskroom/cask
-brew install zsh git
+brew install git zsh
+```
+
+or in Debian:
+
+```bash
+apt-get update && apt-get install -y curl git zsh
 ```
 
 ## Installation
@@ -18,6 +25,5 @@ brew install zsh git
 * Install packages from `config` folder (manual step for now.  #TODO: Make this part of `install.sh`)
 
 ```bash
-git clone http://git.klr.blue/kyle/dotfiles.git ~/.dotfiles
-~/.dotfiles/bin/install.sh
+curl -fsSL 'https://tinyurl.com/yadm-bootstrap' | bash
 ```

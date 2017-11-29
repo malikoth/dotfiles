@@ -1,5 +1,9 @@
+bashplotlib
+envtpl
+faker
 httpie
 invoke
 Pygments
-bashplotlib
-faker
+requests
+virtualenv
+virtualenvwrapper

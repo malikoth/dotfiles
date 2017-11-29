@@ -1,3 +1,10 @@
+# libraries
+build-essential
+autoconf
+libncurses5-dev
+libncursesw5-dev
+
+# my packages
 cloc
 curl
 figlet

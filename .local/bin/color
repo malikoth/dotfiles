@@ -103,6 +103,7 @@ def print_codes():
         print()
     print(''.join('{} {:3} '.format(Color(7 if i < 244 else 0, i), i) for i in range(232, 256)) + Color(0, clear=True))
 
+
 if __name__ == '__main__':
     # c = Color()
     # assert c.guess(6) == '6'
