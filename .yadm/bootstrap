@@ -9,7 +9,7 @@ if [ "$(uname -s)" = "Darwin" ]; then
 fi
 
 if command -v brew >/dev/null 2>&1; then
-    brew bundle --file=~/.local/packages/Brewfile
+    brew bundle --file=${HOME}/.local/packages/Brewfile
 fi
 
 
@@ -27,11 +27,15 @@ fi
 
 
 # Anything with Python
-if command -v python3.6 >/dev/null 2>&1; then
-    ln -s /usr/bin/python3.6 /usr/bin/python3
-    ln -s /usr/bin/python3 /usr/bin/python
+if command -v python >/dev/null 2>&1; then
+    if command -v python3.6 >/dev/null 2>&1; then
+        ln -s /usr/bin/python3.6 /usr/bin/python3
+    elif command -v python3 >/dev/null 2>&1; then
+        ln -s /usr/bin/python3 /usr/bin/python
+    fi
+
     curl -fsSL https://bootstrap.pypa.io/get-pip.py | python
-    pip install -r ~/.local/packages/pip.txt
+    pip install -r ${HOME}/.local/packages/pip.txt
 fi
 
 
@@ -45,9 +49,11 @@ fi
 git clone --recursive https://github.com/sorin-ionescu/prezto.git ${HOME}/.config/zsh/.zprezto
 zsh ${HOME}/.yadm/bin/prezto.zsh || true
 chsh -s $(which zsh)
-rm ~/.bashrc && rm ~/.profile && ~/.bash_profile
+
+# Maybe I shouldn't be doing this one...
+# rm -f ${HOME}/.bashrc && rm -f ${HOME}/.profile && -f ${HOME}/.bash_profile
 
 
 # Install YADM
-git clone https://github.com/TheLocehiliosan/yadm.git ~/.local/opt/yadm
-ln -s ~/.local/opt/yadm/yadm ~/.local/bin/yadm
+git clone https://github.com/TheLocehiliosan/yadm.git ${HOME}/.local/opt/yadm
+ln -s ${HOME}/.local/opt/yadm/yadm ${HOME}/.local/bin/yadm
