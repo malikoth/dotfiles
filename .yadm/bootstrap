@@ -26,12 +26,12 @@ fi
 
 
 # Anything with Python
-if command -v python >/dev/null 2>&1; then
-    if command -v python3.6 >/dev/null 2>&1; then
-        ln -s /usr/bin/python3.6 /usr/bin/python3
-    elif command -v python3 >/dev/null 2>&1; then
-        ln -s /usr/bin/python3 /usr/bin/python
-    fi
+if command -v python3.6 >/dev/null 2>&1; then
+    ln -s /usr/bin/python3.6 /usr/bin/python3
+fi
+
+if command -v python3 >/dev/null 2>&1; then
+    ln -s /usr/bin/python3 /usr/bin/python
 fi
 
 if command -v python >/dev/null 2>&1; then
