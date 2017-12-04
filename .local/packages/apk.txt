@@ -1,3 +1,6 @@
+# libraries
+coreutils
+
 # my packages
 python3
 zsh

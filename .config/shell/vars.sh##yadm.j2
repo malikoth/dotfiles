@@ -1,16 +1,16 @@
 #!/usr/bin/env sh
 
-# TODO: Make PATH specific to which shell or box I'm on
 export PATH="$HOME/.local/bin:${PATH}"
 
-export CLICOLOR='1'
-export EDITOR='vim'
+export CLICOLOR=1
+export EDITOR=vim
 export GPG_TTY=$(tty)
-export GREP_COLOR='01;34'
+export GREP_COLOR=01;34
 export GREP_COLORS="mt=$GREP_COLOR"
 export HTTPIE_CONFIG_DIR=$HOME/.config/httpie
 export LESS='-g -i -M -R -S -z-4'
 export PROJECT_HOME=$HOME/dev
+export SHELL=zsh
 export VISUAL=$EDITOR
 
 eval "$(dircolors ~/.config/dircolors.txt)"
