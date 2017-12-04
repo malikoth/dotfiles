@@ -1,20 +1,25 @@
 # Malikoth's Dotfiles
 
 ## Prerequisites
+* bash
 * curl
 * git
 
-### Install prereqs on OSX:
+### OSX
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew install curl git
+brew install bash curl git
 ```
 
-### Install prereqs on Debian:
-
+### Debian
 ```bash
-apt-get update && apt-get install -y curl git
+apt-get update && apt-get install -y bash curl git
 ```
+
+### Alpine
+```bash
+apk add --no-cache bash curl git
+``` 
 
 ## Installation
 

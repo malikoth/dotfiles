@@ -21,8 +21,7 @@ fi
 
 # Alpine
 if command -v apk >/dev/null 2>&1; then
-    # TODO: Add Alpine packages
-    apk update
+    apk add --no-cache $(sed -e '/\s*#.*/d' ${HOME}/.local/packages/apk.txt)
 fi
 
 
@@ -34,8 +33,8 @@ if command -v python >/dev/null 2>&1; then
         ln -s /usr/bin/python3 /usr/bin/python
     fi
 
-    curl -fsSL https://bootstrap.pypa.io/get-pip.py | python
-    pip install -r ${HOME}/.local/packages/pip.txt
+    curl -fsSL https://bootstrap.pypa.io/get-pip.py | sudo python
+    sudo pip install -r ${HOME}/.local/packages/pip.txt
 fi
 
 
