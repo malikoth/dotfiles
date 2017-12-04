@@ -1,2 +1,3 @@
 # my packages
+python3
 zsh
