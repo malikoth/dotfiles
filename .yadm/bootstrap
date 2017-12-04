@@ -35,8 +35,9 @@ if command -v python3 >/dev/null 2>&1; then
 fi
 
 if command -v python >/dev/null 2>&1; then
-    curl -fsSL https://bootstrap.pypa.io/get-pip.py | sudo python
-    sudo pip install -r ${HOME}/.local/packages/pip.txt
+    curl -fsSL https://bootstrap.pypa.io/get-pip.py | python
+    python -m pip install --upgrade --force-reinstall pip
+    pip install -r ${HOME}/.local/packages/pip.txt
 fi
 
 
