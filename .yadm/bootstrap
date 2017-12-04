@@ -60,4 +60,4 @@ chsh -s $(which zsh)
 git clone https://github.com/TheLocehiliosan/yadm.git ${HOME}/.local/opt/yadm
 ln -s ${HOME}/.local/opt/yadm/yadm ${HOME}/.local/bin/yadm
 
-yadm alt
+${HOME}/.local/bin/yadm alt

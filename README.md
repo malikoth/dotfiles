@@ -26,5 +26,5 @@ apk add --no-cache bash curl git
 * Bootstrap this repo via YADM
 
 ```bash
-curl -fsSL 'https://github.com/TheLocehiliosan/yadm/raw/master/yadm' | bash -s -- clone --bootstrap http://git.klr.blue/kyle/dotfiles.git
+curl -fsSL http://git.klr.blue/kyle/dotfiles/raw/master/.yadm/bin/install.sh | sh
 ```
