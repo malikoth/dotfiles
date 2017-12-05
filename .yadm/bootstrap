@@ -23,7 +23,7 @@ install_ripgrep() {
     mandb
 }
 
-if [ "$EUID" -ne 0 ]; then
+if [ "$(id -u)" != "0" ]; then
     SUDO=sudo
 fi
 
