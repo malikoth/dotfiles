@@ -37,6 +37,7 @@ alias ff='for font in `figlist | head -$(echo $(figlist | grep -n "Figlet contro
 alias pat='pygmentize -O style=monokai -f 16m -g'
 alias ws='python3 -m http.server'
 alias grep='grep -i --color=auto'
+alias rg="command -v rg --ignore-file ${HOME}/.config/ripgrep/ignore"
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias path='echo $PATH | tr ":" "\n" | nl'
 alias plz='sudo $(fc -ln -1)'

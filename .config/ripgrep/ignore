@@ -1,0 +1,9 @@
+*.js
+*.js.min
+*.min.map
+*.xml
+*.css
+*.json
+*.po
+*_reply
+emails/
