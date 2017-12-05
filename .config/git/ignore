@@ -14,8 +14,9 @@ obj/
 
 atlassian*
 
-.coverage
 .DS_Store
+.coverage
+.ignore
 
 *.db
 *.egg-info
