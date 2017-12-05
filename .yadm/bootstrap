@@ -18,6 +18,8 @@ install_ripgrep() {
     mkdir -p ${RIPGREP_OPT}
     curl -fsSL https://github.com/BurntSushi/ripgrep/releases/download/0.7.1/${RIPGREP}.tar.gz | tar xzC ${RIPGREP_OPT} --strip-components=1 ${RIPGREP}
     ln -s ${RIPGREP_OPT}/rg ${HOME}/.local/bin/rg
+    mkdir -p ${HOME}/.local/share/man
+    ln -s ${RIPGREP_OPT}/rg.1 ${HOME}/.local/share/man/rg.1
 }
 
 # Debian-like
