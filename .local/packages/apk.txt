@@ -3,4 +3,5 @@ coreutils
 
 # my packages
 python3
+vim
 zsh
