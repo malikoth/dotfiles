@@ -217,7 +217,7 @@ autocmd BufWinEnter * if &filetype == "help" && histget("cmd") !~ "^vert" | winc
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 augroup reload_vimrc
     autocmd!
-    autocmd bufwritepost .vimrc source $MYVIMRC
+    autocmd bufwritepost vimrc source $MYVIMRC
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 augroup END

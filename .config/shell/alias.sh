@@ -12,10 +12,12 @@ alias gu='cd "$(git rev-parse --show-toplevel)"'
 
 # System Management
 alias apt-up='sudo apt update && sudo apt upgrade -y'
-alias brew-up='brew bundle --file=~/.local/packages/Brewfile'
-alias bbu='brew bundle dump --force --file=~/.local/packages/Brewfile'
+alias bbu='brew bundle --file=~/.local/packages/Brewfile'
 alias bbc='brew bundle cleanup'
-alias bbcf='brew bundle cleanup --force'
+alias bbd='brew bundle dump --force --file=~/.local/packages/Brewfile'
+alias bbC='brew bundle cleanup --force'
+alias brew-up='brew update && brew upgrade && brew cleanup'
+alias cask-up='brew cask outdated | cut -d " " -f 1 | xargs brew cask install --force'
 alias dk-up='docker images | grep -v REPOSITORY | awk '"'"'{print $1}'"'"' | xargs -L1 docker pull'
 alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
 
