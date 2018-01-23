@@ -59,7 +59,7 @@ fi
 
 # Initialize Vim plugins
 if command -v vim >/dev/null 2>&1; then
-  vim +PlugUpdate +PlugClean! +qall
+  vim +PlugUpdate +PlugClean! +qall >/dev/null 2>&1
 fi
 
 
