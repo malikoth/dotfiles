@@ -14,12 +14,11 @@ graphviz
 htop
 inxi
 irssi
-lorem
 m4
 man
 ncdu
 pwgen
-python3.6
+python3
 ranger
 silversearcher-ag
 tig

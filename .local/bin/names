@@ -15,7 +15,7 @@ class Names:
     """Generates random names"""
 
     def __init__(self):
-        data_file = os.path.normpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../data/names.json'))
+        data_file = os.path.normpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../share/names.json'))
         self.data = json.load(open(data_file))
 
         for i in range(self.args.count):

@@ -1,4 +1,4 @@
-FROM ubuntu:artful
+FROM ubuntu:bionic
 MAINTAINER Kyle Rich <yutakafrog@gmail.com>
 
 ENV TERM=xterm
@@ -9,7 +9,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y curl git sed
 # Docker
 RUN curl -fsSL get.docker.com | sh
 
-RUN curl -fsSL 'https://github.com/TheLocehiliosan/yadm/raw/master/yadm' | bash -s -- clone --bootstrap http://git.klr.blue/kyle/dotfiles.git
+RUN curl -fsSL yadm.klr.blue | sh
 
 WORKDIR /root
 CMD ["/usr/bin/zsh"]

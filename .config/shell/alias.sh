@@ -12,14 +12,15 @@ alias gu='cd "$(git rev-parse --show-toplevel)"'
 
 # System Management
 alias apt-up='sudo apt update && sudo apt upgrade -y'
-alias bbu='brew bundle --file=~/.local/packages/Brewfile'
+alias bbu='brew bundle --file=~/.config/packages/Brewfile'
 alias bbc='brew bundle cleanup'
-alias bbd='brew bundle dump --force --file=~/.local/packages/Brewfile'
+alias bbd='brew bundle dump --force --file=~/.config/packages/Brewfile'
 alias bbC='brew bundle cleanup --force'
 alias brew-up='brew update && brew upgrade && brew cleanup'
 alias cask-up='brew cask outdated | cut -d " " -f 1 | xargs brew cask install --force'
 alias dk-up='docker images | grep -v REPOSITORY | awk '"'"'{print $1}'"'"' | xargs -L1 docker pull'
 alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
+alias yau="yadm add -u ${HOME}"
 
 # Git
 alias gcom='git checkout master'
@@ -43,6 +44,7 @@ alias rg="rg --ignore-file ${HOME}/.config/ripgrep/ignore"
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias path='echo $PATH | tr ":" "\n" | nl'
 alias plz='sudo $(fc -ln -1)'
+alias v='vagrant'
 
 # Zsh -g aliases
 alias -g G='| grep'
