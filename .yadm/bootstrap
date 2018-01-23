@@ -20,7 +20,7 @@ install_ripgrep() {
     ln -s ${RIPGREP_OPT}/rg ${HOME}/.local/bin/rg
     mkdir -p ${HOME}/.local/share/man/man1
     ln -s ${RIPGREP_OPT}/rg.1 ${HOME}/.local/share/man/man1/rg.1
-    mandb
+    mandb >/dev/null 2>&1
 }
 
 if [ "$(id -u)" != "0" ] && command -v sudo; then
@@ -66,7 +66,7 @@ fi
 # Setup ZSH / Prezto
 git clone --recursive https://github.com/sorin-ionescu/prezto.git ${HOME}/.config/zsh/.zprezto
 zsh ${HOME}/.yadm/bin/prezto.zsh || true
-chsh -s $(which zsh)
+chsh -s $(which zsh) >/dev/null 2>&1
 
 # Maybe I shouldn't be doing this one...
 # rm -f ${HOME}/.bashrc && rm -f ${HOME}/.profile && -f ${HOME}/.bash_profile
