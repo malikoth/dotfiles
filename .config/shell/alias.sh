@@ -24,6 +24,7 @@ alias yau="yadm add -u ${HOME}"
 
 # Git
 alias gcom='git checkout master'
+alias gnp='git --no-pager'
 alias gwdnp='git --no-pager diff'
 alias gbc='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'  # git branch clean
 alias gcb='git checkout -b'
