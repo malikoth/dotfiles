@@ -13,7 +13,7 @@ if command -v brew >/dev/null 2>&1; then
 fi
 
 install_ripgrep() {
-    RIPGREP=ripgrep-0.7.1-x86_64-unknown-linux-musl
+    RIPGREP=ripgrep-0.8.1-x86_64-unknown-linux-musl
     RIPGREP_OPT=${HOME}/.local/opt/ripgrep
     mkdir -p ${RIPGREP_OPT}
     curl -fsSL https://github.com/BurntSushi/ripgrep/releases/download/0.7.1/${RIPGREP}.tar.gz | tar xzC ${RIPGREP_OPT} --strip-components=1 ${RIPGREP}
