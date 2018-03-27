@@ -1,6 +1,7 @@
 HV="${HOME}/dev/hv"
+alias   m="${HV}/manage.py"
 alias run="${HV}/manage.py runserver 0.0.0.0:8000"
-alias cw ="${HV}/bin/celery-worker"
+alias  cw="${HV}/bin/celery-worker"
 alias sde="${HV}/bin/setup-development-environment"
 
 cd ${HV}
