@@ -12,14 +12,18 @@ if command -v brew >/dev/null 2>&1; then
     brew bundle --file=${HOME}/.config/packages/Brewfile
 fi
 
+
 install_ripgrep() {
-    RIPGREP=ripgrep-0.8.1-x86_64-unknown-linux-musl
+    RIPGREP_VERSION=0.8.1
+    RIPGREP=ripgrep-${RIPGREP_VERSION}-x86_64-unknown-linux-musl
     RIPGREP_OPT=${HOME}/.local/opt/ripgrep
+
+    rm -rf ${RIPGREP_OPT}
     mkdir -p ${RIPGREP_OPT}
-    curl -fsSL https://github.com/BurntSushi/ripgrep/releases/download/0.7.1/${RIPGREP}.tar.gz | tar xzC ${RIPGREP_OPT} --strip-components=1 ${RIPGREP}
-    ln -s ${RIPGREP_OPT}/rg ${HOME}/.local/bin/rg
+    curl -fsSL https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/${RIPGREP}.tar.gz | tar xzC ${RIPGREP_OPT} --strip-components=1 ${RIPGREP}
+    ln -sf ${RIPGREP_OPT}/rg ${HOME}/.local/bin/rg
     mkdir -p ${HOME}/.local/share/man/man1
-    ln -s ${RIPGREP_OPT}/rg.1 ${HOME}/.local/share/man/man1/rg.1
+    ln -sf ${RIPGREP_OPT}/rg.1 ${HOME}/.local/share/man/man1/rg.1
     mandb >/dev/null 2>&1
 }
 
