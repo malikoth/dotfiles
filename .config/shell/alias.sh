@@ -19,6 +19,7 @@ alias bbC='brew bundle cleanup --force'
 alias brew-up='brew update && brew upgrade && brew cleanup'
 alias cask-up='brew cask outdated | cut -d " " -f 1 | xargs brew cask install --force'
 alias dk-up='docker images | awk '"'"'(NR > 1) && ($2 !~ /none/) {print $1 ":" $2}'"'"' | xargs -L1 docker pull'
+alias dkc-up='docker-compose pull && docker-compose up -d'
 alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
 alias yau="yadm add -u ${HOME}"
 
