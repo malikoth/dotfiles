@@ -140,11 +140,13 @@ class CLI:
                 self.parser.exit(1, 'No matching results found')
             elif len(results) == 1:
                 snippet_id = results[0]['id']
-                file_name = results[0]['file_name']
+                if isinstance(file_name, bool):
+                    file_name = results[0]['file_name']
             else:
                 choice = self.get_choice(results)
                 snippet_id = results[choice]['id']
-                file_name = results[choice]['file_name']
+                if isinstance(file_name, bool):
+                    file_name = results[choice]['file_name']
 
         code = self.session.get(f'{base_url}/{snippet_id}/raw/').text
         if self.args.output:
