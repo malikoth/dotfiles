@@ -4,7 +4,7 @@
 
 
 # MacOS
-if [ "$(uname -s)" = "Darwin" ]; then
+if [ "$(uname -s)" = "Darwin" ] && ! command -v brew >/dev/null 2>&1; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
@@ -55,7 +55,9 @@ if command -v python3 >/dev/null 2>&1; then
 fi
 
 if command -v python >/dev/null 2>&1; then
-    curl -fsSL https://bootstrap.pypa.io/get-pip.py | $SUDO python
+    if ! command -v pip >/dev/null 2>&1; then
+        curl -fsSL https://bootstrap.pypa.io/get-pip.py | $SUDO python
+    fi
     $SUDO python -m pip install --upgrade --force-reinstall pip
     $SUDO pip install -r ${HOME}/.config/packages/pip.txt
 fi
@@ -77,3 +79,9 @@ sudo chsh -s $(which zsh) >/dev/null 2>&1
 git clone https://github.com/TheLocehiliosan/yadm.git ${HOME}/.local/opt/yadm
 ln -s ${HOME}/.local/opt/yadm/yadm ${HOME}/.local/bin/yadm
 ${HOME}/.local/bin/yadm alt
+
+
+# Apply "Assume unchanged" rules to yadm repo
+while read file; do
+    yadm update-index --assume-unchanged ${HOME}/$file
+done < ${HOME}/.config/git/assume-unchanged
