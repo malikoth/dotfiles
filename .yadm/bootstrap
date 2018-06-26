@@ -59,6 +59,8 @@ if command -v python >/dev/null 2>&1; then
         curl -fsSL https://bootstrap.pypa.io/get-pip.py | $SUDO python
     fi
     $SUDO python -m pip install --upgrade --force-reinstall pip
+
+    # Use pipsi here
     $SUDO pip install -r ${HOME}/.config/packages/pip.txt
 fi
 
@@ -72,7 +74,7 @@ fi
 # Setup ZSH / Prezto
 git clone --recursive https://github.com/sorin-ionescu/prezto.git ${HOME}/.config/zsh/.zprezto
 zsh ${HOME}/.yadm/bin/prezto.zsh || true
-sudo chsh -s $(which zsh) >/dev/null 2>&1
+$SUDO chsh -s $(which zsh) >/dev/null 2>&1
 
 
 # Install YADM
