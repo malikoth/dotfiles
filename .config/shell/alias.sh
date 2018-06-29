@@ -26,6 +26,7 @@ alias yau="yadm add -u ${HOME}"
 alias gbc='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'  # git branch clean
 alias gcb='git checkout -b'
 alias gcom='git checkout master'
+alias gmr='git mr'
 alias gnp='git --no-pager'
 alias grph='git rev-parse HEAD'
 alias gu='cd "$(git rev-parse --show-toplevel)"'
