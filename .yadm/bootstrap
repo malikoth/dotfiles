@@ -74,7 +74,7 @@ fi
 # Setup ZSH / Prezto
 git clone --recursive https://github.com/sorin-ionescu/prezto.git ${HOME}/.config/zsh/.zprezto
 zsh ${HOME}/.yadm/bin/prezto.zsh || true
-$SUDO chsh -s $(which zsh) >/dev/null 2>&1
+$SUDO chsh -s $(which zsh) $(whoami) >/dev/null 2>&1
 
 
 # Install YADM
