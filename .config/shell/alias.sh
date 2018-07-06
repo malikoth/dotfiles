@@ -11,6 +11,7 @@ alias zz='fasd_cd -i $(fc -nl -1 | awk '"'"'{print $NF}'"'"')'
 
 # System Management
 alias apt-up='sudo apt update && sudo apt upgrade -y'
+alias apt-down='sudo apt autoremove -y'
 alias bbu='brew bundle --file=~/.config/packages/Brewfile'
 alias bbc='brew bundle cleanup'
 alias bbd='brew bundle dump --force --file=~/.config/packages/Brewfile'
