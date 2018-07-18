@@ -45,6 +45,7 @@ if command -v apk >/dev/null 2>&1; then
 fi
 
 
+# TODO: Install pip iff not installed, upgrade iff not latest, install packages iff not installed, upgrade iff updates available
 # Anything with Python
 if command -v python3.6 >/dev/null 2>&1; then
     ln -s /usr/bin/python3.6 /usr/bin/python3
