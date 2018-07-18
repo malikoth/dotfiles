@@ -28,3 +28,7 @@ pyclean() {
 gstat() {
     git status --porcelain | awk "\$1 == \"$1\" { print \$2 }"
 }
+
+keygen() {
+    ssh-keygen -t ed25519 -a 100 -f ~/.ssh/keys/$1 -C "$1 $2 $(date +%Y-%m-%d)"
+}
