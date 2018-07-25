@@ -3,5 +3,6 @@ coreutils
 
 # my packages
 python3
+tmux
 vim
 zsh

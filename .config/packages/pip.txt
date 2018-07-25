@@ -3,6 +3,7 @@ envtpl
 faker
 httpie
 invoke
+powerline-status
 Pygments
 requests
 virtualenv

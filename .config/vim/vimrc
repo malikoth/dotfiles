@@ -1,14 +1,20 @@
 scriptencoding utf-8
 set encoding=utf-8
 
+" Environment
+let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
+set dictionary=/usr/share/dict/words
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CACHE_HOME/vim,$VIM,$VIMRUNTIME
+set viminfo='100,h,n$XDG_CACHE_HOME/vim/viminfo
+
 " Vim Plug automatic installation (https://github.com/junegunn/vim-plug/wiki/faq#automatic-installation)
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fsLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall | source $MYVIMRC
+if empty(glob('$XDG_CACHE_HOME/vim/autoload/plug.vim'))
+    silent !curl -fsLo $XDG_CACHE_HOME/vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " Plugins
-call plug#begin('~/.vim/plugged')
+call plug#begin('$XDG_CACHE_HOME/vim/plugins')
     " Color schemes
     Plug 'vim-scripts/wombat256.vim'
 
@@ -127,11 +133,7 @@ nnoremap <silent><Leader>dg :diffget<CR>:diffupdate<CR>
 nnoremap <silent><Leader>dp :diffput<CR>:diffupdate<CR>
 nnoremap <silent><Leader>du :diffupdate<CR>
 
-let myvimrc = $MYVIMRC
-if myvimrc != ''
-    nnoremap <silent> <leader>ce :e $MYVIMRC<CR>
-    nnoremap <silent> <leader>cs :w<cr> :so $MYVIMRC<CR>
-endif
+nnoremap <silent> <leader>ce :e $MYVIMRC<CR>
 
 function! ToggleVirtualEdit()
     if &virtualedit == ''
@@ -229,10 +231,6 @@ set writebackup
 set swapfile
 set undofile
 
-" Miscellaneous
-set dictionary=/usr/share/dict/words
-set viminfo='100,h,n~/.vim/viminfo
-
 " Initialize dirs for backups and undo
 function! InitDirs()
     if has('win32') || has('win32unix') "windows/cygwin
@@ -241,7 +239,7 @@ function! InitDirs()
         let l:separator = '.'
     endif
 
-    let l:parent = $HOME . '/' . l:separator . 'vim/'
+    let l:parent = $XDG_CACHE_HOME . '/' . l:separator . 'vim/'
     let l:dirs = [
         \ ['backupdir', l:parent . 'backup'],
         \ ['directory', l:parent . 'tmp'],
