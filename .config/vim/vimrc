@@ -233,13 +233,7 @@ set undofile
 
 " Initialize dirs for backups and undo
 function! InitDirs()
-    if has('win32') || has('win32unix') "windows/cygwin
-        let l:separator = '_'
-    else
-        let l:separator = '.'
-    endif
-
-    let l:parent = $XDG_CACHE_HOME . '/' . l:separator . 'vim/'
+    let l:parent = $XDG_CACHE_HOME . '/' . 'vim/'
     let l:dirs = [
         \ ['backupdir', l:parent . 'backup'],
         \ ['directory', l:parent . 'tmp'],
