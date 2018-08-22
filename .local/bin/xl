@@ -40,10 +40,10 @@ class XLTool:
     def _args(self):
         """
         Rules:
-            If read-format is specified, use that when reading
-            If write-format is specified, use that when writing
-            If write-format is not specified, derive from output-file
-            If output-file is not specified, but input-file and write-format are specified, combine them to make output-file
+            If read-format is not given, extract from input-file
+            If read-format is unavailable, raise error and exit
+            If write-format is not given, extract from output-file
+            If output-file is not given, but input-file and write-format are given, combine them to make output-file
             If write-format or output-file are unavailable, then enable print-data
 
         """
