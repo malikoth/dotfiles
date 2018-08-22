@@ -1,0 +1,155 @@
+#! /usr/bin/env python
+
+from __future__ import print_function, unicode_literals
+
+import argparse
+import csv
+import io
+import os
+import sys
+import textwrap
+
+from openpyxl import load_workbook
+from openpyxl.styles.colors import COLOR_INDEX
+
+
+COLOR_SET = set()
+
+
+class XLTool:
+    """Format converter and multi-tool for tabular data"""
+    # TODO: Add (more) support for csv, xls, xlsx, ods, SQLite
+
+    def __init__(self):
+        self.args = self._args()
+        self.color_map = self._color_map()
+        self.headers, self.data = [], []
+
+        # TODO: Add support for stdin.  Currently assumes reading from specified file
+        input_filename, input_extension = os.path.splitext(self.args.input_file)
+        input_format = self.args.read_format if self.args.read_format else input_extension[1:]
+        getattr(self, 'load_' + input_format)()
+
+        if self.args.print_data:
+            self.print_data()
+        else:
+            output_filename, output_extension = os.path.splitext(self.args.output_file)
+            output_format = self.args.write_format if self.args.write_format else output_extension[1:]
+            getattr(self, 'save_' + output_format)()
+
+    def _args(self):
+        """
+        Rules:
+            If read-format is specified, use that when reading
+            If write-format is specified, use that when writing
+            If write-format is not specified, derive from output-file
+            If output-file is not specified, but input-file and write-format are specified, combine them to make output-file
+            If write-format or output-file are unavailable, then enable print-data
+
+        """
+        # TODO: Bake these rules into the processing of arguments
+
+        class CombinedHelpFormatter(argparse.RawTextHelpFormatter, argparse.ArgumentDefaultsHelpFormatter):
+            """Prevents unnecessary line wrapping, and displays argument default values"""
+
+        parser = argparse.ArgumentParser(
+            description=textwrap.dedent(self.__class__.__doc__),
+            formatter_class=CombinedHelpFormatter
+        )
+
+        # read / write files and streams
+        parser.add_argument('-i', '--input-file', help='File to read')
+        parser.add_argument('-r', '--read-format', help='Explicitly specify the data format for reading (this is required if reading from stdin)')
+        parser.add_argument('-o', '--output-file', help='File to write')
+        parser.add_argument('-w', '--write-format', help='Explicitly specify the data format for writing')
+        parser.add_argument('-p', '--print-data', action='store_true', help='Write contents to stdout.  This is enabled automatically if no INPUT_FILE or OUTPUT_FILE is specified')
+
+        # headers
+        visible = parser.add_mutually_exclusive_group()
+        visible_help = 'Specify whether or not the data contains a header row'
+        visible.add_argument('-e', '--header', action='store_true', help=visible_help)
+        visible.add_argument('-E', '--no-header', action='store_true', help=visible_help)
+        parser.add_argument('-s', '--strip-headers', action='store_true', help='Strip headers if present')
+
+        # processing
+        parser.add_argument('-c', '--process-colors', action='append', help='Modify the textual value of a cell based on its background color.\n'
+                                                                            'format: "#<hex color code>,<value>,<action {prepend|append|replace}>,<column constraint index>"')
+        parser.add_argument('-d', '--deduplicate', action='store_true', help='Remove duplicate lines')
+
+        return parser.parse_args()
+
+    def _color_map(self):
+        color_map = {}
+        for color in self.args.process_colors:
+            hex_code, value, action, column = color.split(',')
+
+            if hex_code.startswith('#'):
+                hex_code = hex_code[1:]
+
+            if column:
+                column = int(column)
+
+            color_map[hex_code.upper()] = (value, action.lower(), column)
+
+        return color_map
+
+    def load_xlsx(self):
+        wb = load_workbook(filename=self.args.input_file, read_only=True)
+        ws = wb.active
+
+        for index, row in enumerate(ws.rows):
+            if index == 0 and self.args.header:
+                self.headers = [cell.value for cell in row]
+                continue
+
+            values = [cell.value for cell in row]
+            if self.args.process_colors:
+                self.process_colors(row, values)
+
+            if not (self.args.deduplicate and values in self.data):
+                self.data.append(values)
+
+        import pdb; pdb.set_trace()
+        if self.args.process_colors:
+            print('Colors seen:', COLOR_SET, file=sys.stderr)
+
+    def save_csv(self):
+        with open(self.args.output_file, 'w') as f:
+            writer = csv.writer(f)
+
+            if self.headers and not self.args.strip_headers:
+                writer.writerow(self.headers)
+
+            for row in self.data:
+                writer.writerow(row)
+
+    def process_colors(self, row, values):
+        for index, cell in enumerate(row):
+            color = cell.fill.start_color.index  # Could be a gradient, but these aren't
+
+            # This can be a string representing aRGB in hex, or an index into the COLOR_INDEX
+            if isinstance(color, (int, long)):
+                color = COLOR_INDEX[color]
+
+            # Keep track of colors seen, to make sure we're not overlooking a value we should be handling
+            COLOR_SET.add(color)
+
+            if color in self.color_map:
+                value, action, column = self.color_map[color]
+                if column and column != index:
+                    continue
+
+                if action == 'prepend':
+                    values[index] = value + values[index]
+                elif action == 'append':
+                    values[index] += value
+                elif action == 'replace':
+                    values[index] = value
+
+    def print_data(self):
+        # TODO: Implement this
+        raise NotImplementedError
+
+
+if __name__ == '__main__':
+    XLTool()
