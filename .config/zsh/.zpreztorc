@@ -25,22 +25,23 @@ zstyle ':prezto:*:*' color 'yes'
 # The order matters.
 zstyle ':prezto:load' pmodule \
   'environment' \
-  'ssh' \
   'archive' \
-  'terminal' \
-  'editor' \
-  'history' \
-  'directory' \
-  'spectrum' \
-  'gnu-utility' \
-  'utility' \
   'completion' \
+  'directory' \
+  'docker' \
+  'editor' \
   'fasd' \
   'git' \
-  'docker' \
+  'gnu-utility' \
+  'history' \
   'homebrew' \
   'osx' \
   'prompt' \
+  'spectrum' \
+  'ssh' \
+  'terminal' \
+  'tmux' \
+  'utility' \
   'syntax-highlighting'
 
 #

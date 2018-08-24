@@ -3,6 +3,7 @@ envtpl
 faker
 httpie
 invoke
+openpyxl
 Pygments
 requests
 virtualenv
