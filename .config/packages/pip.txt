@@ -3,6 +3,7 @@ envtpl
 faker
 httpie
 invoke
+ipython
 openpyxl
 Pygments
 requests
