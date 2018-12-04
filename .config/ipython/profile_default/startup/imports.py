@@ -14,7 +14,15 @@ import re
 import sys
 import time
 
-try:
+@contextlib.contextmanager
+def imports():
+    try:
+        yield
+    except ImportError:
+        pass
+
+with imports():
+    from mock import Mock, MagicMock, patch, sentinel
+
+with imports():
     from all import *
-except ImportError:
-    pass
