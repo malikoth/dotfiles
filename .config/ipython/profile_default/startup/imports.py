@@ -24,5 +24,6 @@ def imports():
 with imports():
     from mock import Mock, MagicMock, patch, sentinel
 
-with imports():
-    from all import *
+if os.getenv('DJANGO_SETTINGS_MODULE'):
+    with imports():
+        from all import *
