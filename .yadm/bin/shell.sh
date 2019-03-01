@@ -5,3 +5,7 @@ SHELLFILES_DIR=~/.config/shell
 for file in ${SHELLFILES_DIR}/*.*sh; do
     source $file
 done
+
+if [[ -s "${HOME}/.localrc" ]]; then
+  source "${HOME}/.localrc"
+fi
