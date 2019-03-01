@@ -9,16 +9,6 @@ fi
 
 
 # TODO: Install pip iff not installed, upgrade iff not latest, install packages iff not installed, upgrade iff updates available
-if command -v python3.6 >/dev/null 2>&1; then
-    ln -s /usr/bin/python3.6 /usr/bin/python3
-fi
-
-
-if command -v python3 >/dev/null 2>&1; then
-    ln -s /usr/bin/python3 /usr/bin/python
-fi
-
-
 if command -v python >/dev/null 2>&1; then
     if ! command -v pip >/dev/null 2>&1; then
         curl -fsSL https://bootstrap.pypa.io/get-pip.py | $SUDO python
