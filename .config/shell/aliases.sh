@@ -63,5 +63,6 @@ alias -g Tf='| tail -f'
 
 # Zsh suffix aliases
 alias -s git='git clone'
+alias -s xml='xmllint --format'
 
 # Uncategorized
