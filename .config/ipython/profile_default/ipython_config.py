@@ -214,7 +214,7 @@
 
 ## Start logging to the given file in append mode. Use `logfile` to specify a log
 #  file to **overwrite** logs to.
-#c.InteractiveShell.logappend = ''
+# c.InteractiveShell.logappend = '-ot'
 
 ## The name of the logfile to use.
 #c.InteractiveShell.logfile = ''
@@ -394,10 +394,10 @@ c.TerminalInteractiveShell.editing_mode = 'vi'
 
 ## Write to database every x commands (higher values save disk access & power).
 #  Values of 1 or less effectively disable caching.
-#c.HistoryManager.db_cache_size = 0
+c.HistoryManager.db_cache_size = 0
 
 ## Should the history database include output? (default: no)
-#c.HistoryManager.db_log_output = False
+c.HistoryManager.db_log_output = True
 
 #------------------------------------------------------------------------------
 # ProfileDir(LoggingConfigurable) configuration

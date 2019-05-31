@@ -47,6 +47,7 @@ alias ra='ranger'
 alias rl="source ${ZDOTDIR}/.zshrc"  # reload shell config
 alias rlc='eval $(dircolors ~/.config/dircolors.txt)'
 alias rg="rg --ignore-file ${HOME}/.config/ripgrep/ignore"
+alias rgg="rg -g '!*test*'"
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias v='vagrant'
 alias ws='python3 -m http.server'
