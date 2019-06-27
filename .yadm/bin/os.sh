@@ -38,6 +38,12 @@ install_ripgrep() {
     mandb >/dev/null 2>&1
 }
 
+install_git() {
+    $SUDO add-apt-repository -y ppa:git-core/ppa
+    $SUDO apt-get update
+    $SUDO apt-get install git
+}
+
 
 # Debian-like
 #############
@@ -45,6 +51,7 @@ install_ripgrep() {
 if command -v apt >/dev/null 2>&1; then
     $SUDO apt update && $SUDO apt install -y $(sed -e '/\s*#.*/d' ${HOME}/.config/packages/apt.txt)
     install_ripgrep
+    install_git
 fi
 
 
