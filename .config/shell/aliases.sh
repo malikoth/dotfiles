@@ -23,6 +23,11 @@ alias dkc-up='docker-compose pull && docker-compose up -d'
 alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
 alias yau="yadm add -u ${HOME}"
 
+# Docker
+alias dkhs='docker search'
+alias dksa='docker start --attach --interactive'
+alias dksA="docker start --attach --interactive $(docker ps --quiet --latest)"
+
 # Git
 alias gbc='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'  # git branch clean
 alias gcb='git checkout -b'
@@ -36,7 +41,6 @@ alias gwdnp='git --no-pager diff'
 # Miscellaneous
 alias -- -='cd -'
 alias csv='column -t -n -s,'
-alias dkhs='docker search'
 alias ff='for font in `figlist | head -$(echo $(figlist | grep -n "Figlet control files" | cut -d : -f 1) - 1 | bc) | tail -n +4`; do echo $font; figlet -f $font Hello Kyle; done'
 alias grep='grep -i --color=auto'
 alias i='invoke'
