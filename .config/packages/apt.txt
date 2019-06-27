@@ -3,6 +3,7 @@ build-essential
 autoconf
 libncurses5-dev
 libncursesw5-dev
+software-properties-common
 
 # my packages
 cloc
