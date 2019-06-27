@@ -16,7 +16,7 @@
 
 # TODO: Add credential.helper = osxkeychain, wincred, or cache, depending on OS
 [credential]
-    helper = {{ {'Linux': 'cache', 'Darwin': 'osxkeychain'}[YADM_OS] }}
+    helper = {{ {'Linux': 'cache', 'Darwin': 'osxkeychain'}.get(YADM_OS, 'cache') }}
 
 [tig]
     line-graphics = utf-8
