@@ -18,7 +18,7 @@ brew install bash curl git
 
 ### Debian
 ```bash
-apt-get update && apt-get install -y bash curl git
+apt update && apt install -y bash curl git
 ```
 
 ### Alpine
