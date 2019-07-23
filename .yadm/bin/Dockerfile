@@ -1,10 +1,12 @@
+# FROM ubuntu:bionic
 FROM alpine
 
 # ENV TERM=xterm
 # ARG DEBIAN_FRONTEND=noninteractive
 
 # RUN apt-get update && apt-get upgrade -y && apt-get install -y curl git sed
-RUN apk update && apk upgrade && apk add bash curl docker git sed sudo
+RUN apk update && apk upgrade && apk add \
+    bash curl docker git sed sudo
 RUN echo "%root ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/root
 
 # Docker

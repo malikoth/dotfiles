@@ -34,5 +34,5 @@ fi
 
 # Apply "Assume unchanged" rules to yadm repo
 while read file; do
-    yadm update-index --assume-unchanged ${HOME}/$file
+    ${HOME}/.local/bin/yadm update-index --assume-unchanged ${HOME}/$file
 done < ${HOME}/.config/git/assume-unchanged
