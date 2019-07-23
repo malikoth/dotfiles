@@ -8,6 +8,10 @@ if [ "$(id -u)" != "0" ] && command -v sudo; then
 fi
 
 
+if ! command -v python && command -v python3 >/dev/null 2>&1; then
+    $SUDO ln -s /usr/bin/python3 /usr/bin/python
+fi
+
 # TODO: Install pip iff not installed, upgrade iff not latest, install packages iff not installed, upgrade iff updates available
 if command -v python >/dev/null 2>&1; then
     if ! command -v pip >/dev/null 2>&1; then
