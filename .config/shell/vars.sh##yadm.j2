@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
 export PATH="${HOME}/.local/bin:${PATH}"
+export SHELL="$(which zsh)"
 
 export CLICOLOR=1
 export EDITOR=vim
@@ -12,7 +13,7 @@ export HTTPIE_CONFIG_DIR=${HOME}/.config/httpie
 # virtualenvwrapper
 export WORKON_HOME=${HOME}/.virtualenvs
 export PROJECT_HOME=${HOME}/dev
-source /usr/local/bin/virtualenvwrapper.sh
+source virtualenvwrapper.sh
 
 # -F -X is cool because then less exists and persists content when it fits on one screen
 # It's not cool however, because it persists content when it fills the entire screen
@@ -20,7 +21,9 @@ export LESS='-g -i -M -R -S -w -z-4'
 
 export PROJECT_HOME=$HOME/dev
 export VISUAL=$EDITOR
-export MANPATH=${HOME}/.local/share/man:$(manpath)
+if command -v manpath; then
+    export MANPATH=${HOME}/.local/share/man:$(manpath)
+fi
 
 eval "$(dircolors ~/.config/dircolors.txt)"
 
