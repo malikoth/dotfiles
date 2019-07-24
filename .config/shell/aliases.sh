@@ -2,7 +2,9 @@
 
 # File / System
 alias la='LC_ALL=C ls -AlhH'
-alias lt='\ls -AlhHt --color=auto'
+alias lA='la --color=always'
+alias lS='la -S'
+alias lt='la -t'
 alias l.='la -d .*'
 alias hl='history P'
 alias tree='tree -shC --du P'
