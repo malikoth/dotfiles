@@ -28,7 +28,7 @@ alias yiu="yadm add -u ${HOME}"
 # Docker
 alias dkhs='docker search'
 alias dksa='docker start --attach --interactive'
-alias dksA="docker start --attach --interactive $(docker ps --quiet --latest)"
+alias dksA='docker start --attach --interactive $(docker ps --quiet --latest)'
 
 # Git
 alias gbc='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'  # git branch clean
