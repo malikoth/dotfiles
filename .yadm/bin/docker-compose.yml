@@ -7,5 +7,7 @@ services:
       dockerfile: Dockerfile
     image: malikoth/devenv
     network_mode: host
+    hostname: devenv
+    container_name: devenv
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

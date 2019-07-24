@@ -25,7 +25,7 @@ fi
 
 
 install_ripgrep() {
-    RIPGREP_VERSION=0.10.0
+    RIPGREP_VERSION=11.0.1
     RIPGREP=ripgrep-${RIPGREP_VERSION}-x86_64-unknown-linux-musl
     RIPGREP_OPT=${HOME}/.local/opt/ripgrep
 

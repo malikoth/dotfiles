@@ -1,8 +1,29 @@
-# libraries
+cloc
 coreutils
-
-# my packages
+curl
+docker
+exiftool
+figlet
+fortune
+fossil
+git
+graphviz
+htop
+iftop
+imagemagick
+irssi
+jq
+m4
+man
+man-pages
+ncdu
+pwgen
 python3
+# ranger  # Uncomment when it makes its way back to edge or latest
+tig
 tmux
+tree
 vim
+w3m
+wget
 zsh
