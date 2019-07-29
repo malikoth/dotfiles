@@ -19,7 +19,7 @@ man-pages
 ncdu
 pwgen
 python3
-# ranger  # Uncomment when it makes its way back to edge or latest
+ranger
 tig
 tmux
 tree

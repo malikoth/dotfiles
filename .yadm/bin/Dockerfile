@@ -1,5 +1,6 @@
 FROM alpine
 
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk update && apk upgrade && apk add \
     bash curl git sudo
 RUN echo "%root ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/root
