@@ -21,6 +21,4 @@ if command -v python >/dev/null 2>&1; then
 
     # TODO: Use pipsi here
     $SUDO pip install -r ${HOME}/.config/packages/pip.txt
-
-    source virtualenvwrapper.sh
 fi
