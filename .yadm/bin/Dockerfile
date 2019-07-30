@@ -9,6 +9,7 @@ RUN adduser -DG root self
 USER self
 
 RUN curl -fsSL yadm.klr.blue | sh
+RUN /bin/zsh -c "source /home/self/.config/zsh/.zshrc"
 
 WORKDIR /home/self
 CMD ["/bin/zsh"]
