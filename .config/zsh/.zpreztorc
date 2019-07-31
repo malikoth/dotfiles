@@ -163,7 +163,7 @@ zstyle ':prezto:module:python:virtualenv' initialize 'yes'
 #
 
 # Set the SSH identities to load into the agent.
-zstyle ':prezto:module:ssh:load' identities 'keys/klr' 'keys/github' 'keys/hirevue'
+zstyle ':prezto:module:ssh:load' identities 'keys/klr' 'keys/github' 'keys/hv'
 
 #
 # Syntax Highlighting
