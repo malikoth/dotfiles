@@ -1,3 +1,5 @@
+# Remember that config.managed is auto-generated
+
 [user]
     name = Kyle Rich
     email = yutakafrog@gmail.com
@@ -16,7 +18,7 @@
 
 # TODO: Add credential.helper = osxkeychain, wincred, or cache, depending on OS
 [credential]
-    helper = {{ {'Linux': 'cache', 'Darwin': 'osxkeychain'}.get(YADM_OS, 'cache') }}
+    helper = {{ {'Darwin': 'osxkeychain'}.get(YADM_OS, 'cache') }}
 
 [tig]
     line-graphics = utf-8
