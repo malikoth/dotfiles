@@ -25,3 +25,8 @@ apt update && apt install -y bash curl git
 ```bash
 apk add --no-cache bash curl git
 ```
+
+# Devenv
+The development environment is usable via Docker.  Launch a container with `docker-compose run --name devenv devenv`.
+
+Reattach to the container later with `docker start -ai devenv`
