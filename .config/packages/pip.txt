@@ -4,6 +4,7 @@ faker
 httpie
 invoke
 ipython
+j2cli
 openpyxl
 Pygments
 requests

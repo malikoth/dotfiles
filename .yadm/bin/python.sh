@@ -15,9 +15,9 @@ fi
 # TODO: Install pip iff not installed, upgrade iff not latest, install packages iff not installed, upgrade iff updates available
 if command -v python >/dev/null 2>&1; then
     if ! command -v pip >/dev/null 2>&1; then
-        curl -fsSL https://bootstrap.pypa.io/get-pip.py | $SUDO python
+        curl -fsSL https://bootstrap.pypa.io/get-pip.py | $SUDO python3
     fi
-    $SUDO python -m pip install --upgrade --force-reinstall pip
+    $SUDO python3 -m pip install --upgrade --force-reinstall pip
 
     # TODO: Use pipsi here
     $SUDO pip install -r ${HOME}/.config/packages/pip.txt
