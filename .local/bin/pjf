@@ -1,0 +1,19 @@
+#! /usr/local/bin/python3
+
+import json
+from functools import partial
+
+from pygments import highlight
+from pygments.lexers import JsonLexer
+from pygments.formatters import TerminalTrueColorFormatter
+
+
+STYLE = 'monokai'
+
+
+if __name__ == "__main__":
+    raw_string = eval(input())
+    json_string = json.dumps(raw_string, indent=2)
+    formatter = TerminalTrueColorFormatter(style=STYLE)
+    highlighter = partial(highlight, lexer=JsonLexer(), formatter=formatter)
+    print(highlighter(json_string))
