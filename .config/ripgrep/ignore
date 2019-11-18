@@ -1,6 +1,6 @@
 *.js
 *.js.min
-*.min.map
+*.map
 *.xml
 *.css
 *.json
