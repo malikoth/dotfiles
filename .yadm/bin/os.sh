@@ -24,19 +24,16 @@ if command -v brew >/dev/null 2>&1; then
 fi
 
 
-install_git() {
-    $SUDO add-apt-repository -y ppa:git-core/ppa
-    $SUDO apt-get update
-    $SUDO apt-get install git
-}
-
-
 # Debian-like
 #############
 
 if command -v apt >/dev/null 2>&1; then
     $SUDO apt update && $SUDO apt install -y $(sed -e '/\s*#.*/d' ${HOME}/.config/packages/apt.txt)
-    install_git
+
+    # Git
+    $SUDO add-apt-repository -y ppa:git-core/ppa
+    $SUDO apt-get update
+    $SUDO apt-get install git
 fi
 
 
