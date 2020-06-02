@@ -1,12 +1,10 @@
 bashplotlib
-envtpl
 faker
 httpie
 invoke
 ipython
 j2cli
 openpyxl
+pipenv
 Pygments
 requests
-virtualenv
-virtualenvwrapper

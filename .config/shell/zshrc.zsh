@@ -25,8 +25,3 @@ sudo-command-line() {
 }
 zle -N sudo-command-line
 bindkey '^s' sudo-command-line
-
-# Initialize pyenv
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi

@@ -48,7 +48,7 @@ alias ff='for font in `figlist | head -$(echo $(figlist | grep -n "Figlet contro
 alias grep='grep -i --color=auto'
 alias i='invoke'
 alias pat='pygmentize -O style=monokai -f 16m -g'
-alias path='echo $PATH | tr ":" "\n" | nl'
+alias path='echo $path | tr " " "\n" | nl'
 alias plz='sudo $(fc -ln -1)'
 alias pyfmt='isort -rc -y . && black . && flake8'
 alias ra='ranger'

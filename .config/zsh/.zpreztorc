@@ -37,6 +37,7 @@ zstyle ':prezto:load' pmodule \
   'homebrew' \
   'osx' \
   'prompt' \
+  'python' \
   'spectrum' \
   'ssh' \
   'terminal' \

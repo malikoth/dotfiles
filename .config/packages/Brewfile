@@ -1,6 +1,6 @@
 tap "caskroom/cask"
-tap "homebrew/cask-drivers"
 tap "caskroom/fonts"
+tap "homebrew/cask-drivers"
 tap "homebrew/services"
 brew "aria2"
 brew "cloc"
