@@ -20,6 +20,7 @@ ncdu
 pwgen
 python3
 ranger
+ripgrep
 tig
 tmux
 tree

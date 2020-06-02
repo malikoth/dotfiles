@@ -21,6 +21,7 @@ ncdu
 pwgen
 python3
 ranger
+ripgrep
 silversearcher-ag
 tig
 tmux
