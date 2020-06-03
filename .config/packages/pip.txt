@@ -9,6 +9,7 @@ prompt-toolkit
 black
 flake8
 isort
+pytest
 
 # Utils
 bashplotlib

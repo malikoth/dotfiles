@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#! /usr/bin/env python3.8
 
 """
 Python Calculator - Comprehensive command line interface to python expressions.
@@ -12,7 +12,7 @@ import sys
 import os
 import importlib
 import argparse
-from functools import lru_cache
+from functools import cached_property
 
 from math import *
 from random import *
@@ -22,27 +22,21 @@ from pprint import pprint as pp
 
 class PyCalc:
     def __init__(self):
-        commands = self.args.commands
-        del vars(self.args)['commands']
+        command = self.args.command
+        del vars(self.args)['command']
         for k, v in vars(self.args).items():
             if v:
                 globals().update(vars(importlib.import_module(k)))
 
         namespace = {}
-        for cmd in commands:
-            try:
-                result = eval(cmd, globals(), namespace)
-                if result:
-                    print(result)
-            except Exception:
-                pass
-            else:
-                continue
+        try:
+            result = eval(command, globals(), namespace)
+            if result:
+                print(result)
+        except Exception:
+            exec(command, globals(), namespace)
 
-            exec(cmd, globals(), namespace)
-
-    @property
-    @lru_cache(1)
+    @cached_property
     def args(self):
         parser = argparse.ArgumentParser(
             description=__doc__,
@@ -52,14 +46,15 @@ class PyCalc:
         parser.add_argument('-C', '--csv', action='store_true')
         parser.add_argument('-d', '--datetime', action='store_true')
         parser.add_argument('-r', '--re', action='store_true')
-        parser.add_argument('-h', '--shutil', action='store_true')
+        parser.add_argument('-u', '--shutil', action='store_true')
         parser.add_argument('-s', '--statistics', action='store_true')
         parser.add_argument('-z', '--zlib', action='store_true')
-        parser.add_argument('commands', nargs=argparse.REMAINDER, help=argparse.SUPPRESS)
+        parser.add_argument('command', nargs=argparse.REMAINDER, help=argparse.SUPPRESS)
 
         args = parser.parse_args()
+        args.command = ' '.join(args.command)
 
-        if not args.commands:
+        if not args.command:
             parser.print_help()
             sys.exit(0)
         else:

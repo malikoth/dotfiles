@@ -1,7 +1,7 @@
-#!/usr/bin/env python3.6
+#!/usr/bin/env python3.8
 
 import argparse
-from functools import lru_cache
+from functools import cached_property
 import json
 from os.path import expanduser
 import sys
@@ -24,16 +24,14 @@ def exception_handler(f):
             pass
 
         except requests.HTTPError as e:
-            msg = """
-                Error communicating with server: {}
+            sys.exit(dd(f"""
+                Error communicating with server: {e}
 
-                Request URL: {}
-                Response status code: {}
+                Request URL: {e.request.url}
+                Response status code: {e.response.status_code}
                 Response body preview:
-                {}
-                """
-
-            sys.exit(dd(msg).format(e, e.request.url, e.response.status_code, indent(e.response.text[:500], ' ' * 4)))
+                {indent(e.response.text[:500])}
+                """))
 
         except requests.RequestException as e:
             sys.exit(f'Error communicating with server: {e}')
@@ -60,8 +58,7 @@ class CLI:
         else:
             self.run()
 
-    @property
-    @lru_cache(1)
+    @cached_property
     def args(self):
         parser = argparse.ArgumentParser(
             description=dd(self.__class__.__doc__),
@@ -79,8 +76,7 @@ class CLI:
 
         return parser.parse_args()
 
-    @property
-    @lru_cache(1)
+    @cached_property
     def config(self):
         try:
             with open(self.config_file) as f:
@@ -111,8 +107,7 @@ class CLI:
 
         return styles
 
-    @property
-    @lru_cache(1)
+    @cached_property
     def session(self):
         session = requests.Session()
         session.headers = {'PRIVATE-TOKEN': self.config.private_token}

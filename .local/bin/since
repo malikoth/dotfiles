@@ -1,14 +1,13 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.8
 
 """Counts time intervals between two dates"""
 
 import argparse
 import datetime
-from functools import lru_cache
+from functools import cached_property
 from os import path
 import sys
 from urllib.request import urlopen as get
-
 
 
 FORMATS = ['%Y-%m-%d', '%Y-%m-%d %H', '%Y-%m-%d %H:%M', '%Y-%m-%d %H:%M:%S']
@@ -46,8 +45,7 @@ class Since:
     def __str__(self):
         return '{}-{}-{} {}:{:02}:{:02}'.format(*self.interval)
 
-    @property
-    @lru_cache(1)
+    @cached_property
     def args(self):
         parser = argparse.ArgumentParser(
             description=__doc__,

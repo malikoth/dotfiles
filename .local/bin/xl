@@ -1,13 +1,11 @@
-#! /usr/bin/env python
-
-from __future__ import print_function, unicode_literals
+#! /usr/bin/env python3.8
 
 import argparse
 import csv
-import io
 import os
 import sys
 import textwrap
+from functools import cached_property
 
 from openpyxl import load_workbook
 from openpyxl.styles.colors import COLOR_INDEX
@@ -21,7 +19,6 @@ class XLTool:
     # TODO: Add (more) support for csv, xls, xlsx, ods, SQLite
 
     def __init__(self):
-        self.args = self._args()
         self.color_map = self._color_map()
         self.headers, self.data = [], []
 
@@ -37,7 +34,8 @@ class XLTool:
             output_format = self.args.write_format if self.args.write_format else output_extension[1:]
             getattr(self, 'save_' + output_format)()
 
-    def _args(self):
+    @cached_property
+    def args(self):
         """
         Rules:
             If read-format is not given, extract from input-file

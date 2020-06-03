@@ -41,16 +41,26 @@ alias grph='git rev-parse HEAD'
 alias gu='cd "$(git rev-parse --show-toplevel)"'
 alias gwdnp='git --no-pager diff'
 
+# Python
+alias i='invoke'
+alias pat='pygmentize -O style=monokai -f 16m -g'
+alias pec='pipenv clean'
+alias pei='pipenv install --dev'
+alias per='pipenv run'
+alias pes='pipenv shell'
+alias peS='pipenv sync --dev'
+alias peu='pipenv update --dev'
+alias peU='pipenv uninstall'
+alias pyfmt='isort -rc -y . && black . && flake8'
+alias ws='python3 -m http.server'
+
 # Miscellaneous
 alias -- -='cd -'
 alias csv='column -t -n -s,'
 alias ff='for font in `figlist | head -$(echo $(figlist | grep -n "Figlet control files" | cut -d : -f 1) - 1 | bc) | tail -n +4`; do echo $font; figlet -f $font Hello Kyle; done'
 alias grep='grep -i --color=auto'
-alias i='invoke'
-alias pat='pygmentize -O style=monokai -f 16m -g'
 alias path='echo $path | tr " " "\n" | nl'
 alias plz='sudo $(fc -ln -1)'
-alias pyfmt='isort -rc -y . && black . && flake8'
 alias ra='ranger'
 alias rl='exec zsh'
 alias rlc='eval $(dircolors ~/.config/dircolors.txt)'
@@ -58,7 +68,6 @@ alias rg="rg --ignore-file ${HOME}/.config/ripgrep/ignore"
 alias rgg="rg -g '!*test*'"
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias v='vagrant'
-alias ws='python3 -m http.server'
 
 # Zsh -g aliases
 alias -g G='| grep'
