@@ -2,6 +2,8 @@
 faker
 openpyxl
 requests
+rich
+prompt-toolkit
 
 # Tools
 black
