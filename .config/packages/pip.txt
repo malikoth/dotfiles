@@ -1,21 +1,29 @@
 # Packages
 faker
+httpx
 openpyxl
-requests
 rich
 prompt-toolkit
 
 # Tools
-black
-flake8
-isort
+ipython
+pipenv
 pytest
+pytest-sugar
 
 # Utils
+# TODO: Migrate these to pipx
 bashplotlib
+black
+flake8
 httpie
 invoke
-ipython
+isort
 j2cli
-pipenv
+pre-commit
+pydocstyle
 Pygments
+
+# Other (Unsure where these belong)
+# pipx
+# pyenv
