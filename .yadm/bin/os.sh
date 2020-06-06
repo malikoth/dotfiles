@@ -33,7 +33,7 @@ if command -v apt >/dev/null 2>&1; then
     # Git
     $SUDO add-apt-repository -y ppa:git-core/ppa
     $SUDO apt-get update
-    $SUDO apt-get install git
+    $SUDO apt-get install -y git
 fi
 
 
