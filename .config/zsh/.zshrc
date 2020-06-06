@@ -11,7 +11,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-if [[ -s "$HOME/.yadm/bin/shell.sh" ]]; then
-  source "$HOME/.yadm/bin/shell.sh"
+if [[ -s "$HOME/.config/shell/shell.zsh" ]]; then
+  source "$HOME/.config/shell/shell.zsh"
 fi
 
