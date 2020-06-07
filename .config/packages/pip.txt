@@ -4,26 +4,12 @@ httpx
 openpyxl
 rich
 prompt-toolkit
+Pygments
 
 # Tools
 ipython
 pipenv
+pipx
 pytest
 pytest-sugar
 
-# Utils
-# TODO: Migrate these to pipx
-bashplotlib
-black
-flake8
-httpie
-invoke
-isort
-j2cli
-pre-commit
-pydocstyle
-Pygments
-
-# Other (Unsure where these belong)
-# pipx
-# pyenv

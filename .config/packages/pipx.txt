@@ -1,0 +1,10 @@
+bashplotlib
+black
+flake8
+httpie
+invoke
+isort
+j2cli
+pre-commit
+pydocstyle
+Pygments
