@@ -10,7 +10,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+# Personalized shell initialization
 if [[ -s "$HOME/.config/shell/shell.zsh" ]]; then
   source "$HOME/.config/shell/shell.zsh"
 fi
