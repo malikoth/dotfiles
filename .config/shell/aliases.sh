@@ -23,7 +23,7 @@ alias cask-up='brew cask outdated | cut -d " " -f 1 | xargs brew cask install --
 alias dk-up='docker images | awk '"'"'(NR > 1) && ($2 !~ /none/) {print $1 ":" $2}'"'"' | xargs -L1 docker pull'
 alias dkc-up='docker-compose pull && docker-compose up -d'
 alias pip-up='pip list | cut -d " " -f 1 | xargs pip install --upgrade'
-alias yiu="yadm add -u ${HOME}"
+alias yiu="yadm add -u $HOME"
 
 # Docker
 alias dkhs='docker search'
@@ -64,7 +64,7 @@ alias plz='sudo $(fc -ln -1)'
 alias ra='ranger'
 alias rl='exec zsh'
 alias rlc='eval $(dircolors ~/.config/dircolors.txt)'
-alias rg="rg --ignore-file ${HOME}/.config/ripgrep/ignore"
+alias rg="rg --ignore-file $XDG_CONFIG_HOME/ripgrep/ignore"
 alias rgg="rg -g '!*test*'"
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias v='vagrant'

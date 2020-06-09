@@ -1,13 +1,7 @@
-if [[ -z "$XDG_CONFIG_HOME" ]]; then
-    export XDG_CONFIG_HOME="${HOME}/.config"
-fi
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_LOCAL_HOME="$HOME/.local"
+export XDG_DATA_HOME="$XDG_LOCAL_HOME/share"
 
-if [[ -z "$XDG_CACHE_HOME" ]]; then
-    export XDG_CACHE_HOME="${HOME}/.cache"
-fi
-
-if [[ -d "$XDG_CONFIG_HOME/zsh" ]]; then
-    export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
-fi
-
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 source $ZDOTDIR/.zshenv
