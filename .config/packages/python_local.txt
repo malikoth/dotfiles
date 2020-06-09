@@ -8,8 +8,6 @@ Pygments
 
 # Tools
 ipython
-pipenv
-pipx
 pytest
 pytest-sugar
 

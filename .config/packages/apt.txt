@@ -19,7 +19,6 @@ m4
 man
 ncdu
 pwgen
-python3
 ranger
 ripgrep
 silversearcher-ag
@@ -31,3 +30,16 @@ w3m
 wget
 xclip
 zsh
+
+# Python pyenv dependencies
+libbz2-dev
+libffi-dev
+liblzma-dev
+libreadline-dev
+libsqlite3-dev
+libssl-dev
+llvm
+python-openssl
+tk-dev
+xz-utils
+zlib1g-dev

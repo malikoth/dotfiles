@@ -1,23 +1,22 @@
 #! /usr/bin/env sh
 
-# Install and setup Python, pip, and install system packages I like for Python
+# Install and setup Python, pip, and install packages I like for Python
 
+export PYENV_ROOT=${HOME}/.local/opt/pyenv
+curl https://pyenv.run | bash
+ln -sf "${HOME}/.local/opt/pyenv/bin/pyenv" "${HOME}/.local/bin/pyenv"
+PATH=$PYENV_ROOT/bin:$PATH
+eval "$(pyenv init -)"
 
-if [ "$(id -u)" != "0" ] && command -v sudo >/dev/null 2>&1; then
-    SUDO=sudo
-fi
+PYTHON_VERSION=$(pyenv install -l | grep -E " [[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$" | tail -1)
+pyenv install --skip-existing $PYTHON_VERSION
+pyenv global $PYTHON_VERSION
 
+pip install -U pip
 
-# TODO: Install pyenv
-# TODO: Install latest CPython via pyenv and set it as global
-# TODO: Install pip iff not installed, upgrade iff not latest, install packages iff not installed, upgrade iff updates available
-if command -v python >/dev/null 2>&1; then
-    if ! command -v pip >/dev/null 2>&1; then
-        curl -fsSL https://bootstrap.pypa.io/get-pip.py | $SUDO python3
-    fi
-    $SUDO python3 -m pip install --upgrade --force-reinstall pip
+pip install -r ${HOME}/.config/packages/python_global.txt
+pip install -r ${HOME}/.config/packages/python_local.txt
 
-    for package in $(cat ${HOME}/.config/packages/pipx.txt); do
-        pipx install $package
-    done
-fi
+for package in $(sed -e '/\s*#.*/d' ${HOME}/.config/packages/python_tools.txt); do
+    pipx install $package
+done

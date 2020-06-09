@@ -23,7 +23,7 @@ $SUDO chsh -s $(which zsh) $(whoami) >/dev/null 2>&1
 
 # Install YADM
 git clone https://github.com/TheLocehiliosan/yadm.git ${HOME}/.local/opt/yadm
-ln -s ${HOME}/.local/opt/yadm/yadm ${HOME}/.local/bin/yadm
+ln -fs ${HOME}/.local/opt/yadm/yadm ${HOME}/.local/bin/yadm
 ${HOME}/.local/bin/yadm alt
 if ssh-add -l 2>&1 | grep -q 'klr'; then
     ${HOME}/.local/bin/yadm remote set-url origin git@git.klr.blue:kyle/dotfiles.git
