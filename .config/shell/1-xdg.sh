@@ -1,5 +1,9 @@
+# fasd
+
+export _FASD_DATA="$XDG_LOCAL_HOME/var/fasd"
+
 # gnupg
-export GNUPGHOME=$XDG_CONFIG_HOME/gnupg
+export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
 # httpie
 export HTTPIE_CONFIG_DIR="$XDG_CONFIG_HOME/httpie"
