@@ -1,2 +1,2 @@
-~/.local/etc/git/config
+.local/etc/git/config
 .ssh/config
