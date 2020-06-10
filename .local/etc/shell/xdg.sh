@@ -7,8 +7,8 @@ export XDG_VAR_HOME="$XDG_LOCAL_HOME/var"
 export XDG_OPT_HOME="$XDG_LOCAL_HOME/opt"
 
 # fasd
-
 export _FASD_DATA="$XDG_VAR_HOME/fasd/history"
+export _FASD_VIMINFO="$XDG_CACHE_HOME/vim/viminfo"
 
 # gnupg
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"

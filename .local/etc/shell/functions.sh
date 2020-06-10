@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
 
 aa() {
-    echo "alias $1='$2'" >> $SHELLFILES_DIR/alias
+    echo "alias $1='$2'" >> $XDG_CONFIG_HOME/shell/aliases.sh
 }
 
 ee() {
-    $EDITOR $SHELLFILES_DIR/$1.sh
+    $EDITOR $XDG_CONFIG_HOME/shell/$1.sh
 }
 
 freeport() {
