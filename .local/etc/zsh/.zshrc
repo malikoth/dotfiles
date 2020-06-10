@@ -11,7 +11,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Personalized shell initialization
-if [[ -s "$HOME/.config/shell/shell.zsh" ]]; then
-  source "$HOME/.config/shell/shell.zsh"
+if [[ -s "$XDG_CONFIG_HOME/shell/shell.zsh" ]]; then
+  source "$XDG_CONFIG_HOME/shell/shell.zsh"
 fi
 

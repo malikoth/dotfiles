@@ -1,2 +1,2 @@
-source $HOME/.config/shell/xdg.sh
+source $HOME/.local/etc/shell/xdg.sh
 source $ZDOTDIR/.zshenv

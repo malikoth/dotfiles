@@ -4,7 +4,7 @@
 # This will install packages and do other OS-specific stuff
 
 
-if [ "$(id -u)" != "0" ] && command -v sudo >/dev/null 2>&1; then
+if [ "$(id -u)" != "0" ] && command -v sudo &> /dev/null; then
     SUDO=sudo
 fi
 
@@ -13,22 +13,22 @@ fi
 #######
 
 # Install Homebrew
-if [ "$(uname -s)" = "Darwin" ] && ! command -v brew >/dev/null 2>&1; then
+if [ "$(uname -s)" = "Darwin" ] && ! command -v brew &> /dev/null; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 
 # Install packages via Homebrew
-if command -v brew >/dev/null 2>&1; then
-    brew bundle --file=${HOME}/.config/packages/Brewfile
+if command -v brew &> /dev/null; then
+    brew bundle --file=$HOME/.local/etc/packages/Brewfile
 fi
 
 
 # Debian-like
 #############
 
-if command -v apt >/dev/null 2>&1; then
-    $SUDO apt update && $SUDO apt install -y $(sed -e '/\s*#.*/d' ${HOME}/.config/packages/apt.txt)
+if command -v apt &> /dev/null; then
+    $SUDO apt update && $SUDO apt install -y $(sed -e '/\s*#.*/d' $HOME/.local/etc/packages/apt.txt)
 
     # Git
     $SUDO add-apt-repository -y ppa:git-core/ppa
@@ -40,6 +40,6 @@ fi
 # Alpine
 ########
 
-if command -v apk >/dev/null 2>&1; then
-    $SUDO apk add --no-cache $(sed -e '/\s*#.*/d' ${HOME}/.config/packages/apk.txt)
+if command -v apk &> /dev/null; then
+    $SUDO apk add --no-cache $(sed -e '/\s*#.*/d' $HOME/.local/etc/packages/apk.txt)
 fi

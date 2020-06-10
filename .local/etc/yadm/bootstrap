@@ -1,0 +1,6 @@
+#! /usr/bin/env sh
+
+YADM_INSTALLER_HOME="$HOME/.local/etc/yadm/bin"
+$YADM_INSTALLER_HOME/os.sh
+$YADM_INSTALLER_HOME/python.sh
+$YADM_INSTALLER_HOME/setup.sh

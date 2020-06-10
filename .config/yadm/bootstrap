@@ -1,5 +1,0 @@
-#! /usr/bin/env sh
-
-${HOME}/.config/yadm/bin/os.sh
-${HOME}/.config/yadm/bin/python.sh
-${HOME}/.config/yadm/bin/setup.sh

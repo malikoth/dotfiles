@@ -14,9 +14,9 @@ alias zz='fasd_cd -i $(fc -nl -1 | awk '"'"'{print $NF}'"'"')'
 # System Management
 alias apt-up='sudo apt update && sudo apt upgrade -y'
 alias apt-down='sudo apt autoremove -y'
-alias bbu='brew bundle --file=~/.config/packages/Brewfile'
+alias bbu="brew bundle --file=$XDG_CONFIG_HOME/packages/Brewfile"
 alias bbc='brew bundle cleanup'
-alias bbd='brew bundle dump --force --file=~/.config/packages/Brewfile'
+alias bbd="brew bundle dump --force --file=$XDG_CONFIG_HOME/packages/Brewfile"
 alias bbC='brew bundle cleanup --force'
 alias brew-up='brew update && brew upgrade && brew cleanup'
 alias cask-up='brew cask outdated | cut -d " " -f 1 | xargs brew cask install --force'
@@ -63,7 +63,7 @@ alias path='for p in $path; do; echo $p; done | nl'
 alias plz='sudo $(fc -ln -1)'
 alias ra='ranger'
 alias rl='exec zsh'
-alias rlc='eval $(dircolors ~/.config/dircolors.txt)'
+alias rlc="eval $(dircolors $XDG_CONFIG_HOME/dircolors/config.txt)"
 alias rg="rg --ignore-file $XDG_CONFIG_HOME/ripgrep/ignore"
 alias rgg="rg -g '!*test*'"
 alias updatedb='sudo /usr/libexec/locate.updatedb'
