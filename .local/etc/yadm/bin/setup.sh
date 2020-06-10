@@ -16,23 +16,23 @@ fi
 
 
 # Setup ZSH / Prezto
-git clone --recursive https://github.com/sorin-ionescu/prezto.git $HOME/.local/etc/zsh/.zprezto
-zsh $HOME/.local/etc/yadm/bin/prezto.zsh || true
+git clone --recursive https://github.com/sorin-ionescu/prezto.git $XDG_CONFIG_HOME/zsh/.zprezto
+zsh $XDG_CONFIG_HOME/yadm/bin/prezto.zsh || true
 $SUDO chsh -s $(which zsh) $(whoami) &> /dev/null
 
 
 # Install YADM
-git clone https://github.com/TheLocehiliosan/yadm.git $HOME/.local/opt/yadm
-ln -fs $HOME/.local/opt/yadm/yadm $HOME/.local/bin/yadm
-$HOME/.local/bin/yadm alt
+git clone https://github.com/TheLocehiliosan/yadm.git $XDG_OPT_HOME/yadm
+ln -fs $XDG_OPT_HOME/yadm/yadm $XDG_LOCAL_HOME/bin/yadm
+$XDG_LOCAL_HOME/bin/yadm alt
 if ssh-add -l 2>&1 | grep -q 'klr'; then
-    $HOME/.local/bin/yadm remote set-url origin git@git.klr.blue:kyle/dotfiles.git
+    $XDG_LOCAL_HOME/bin/yadm remote set-url origin git@git.klr.blue:kyle/dotfiles.git
 else
-    $HOME/.local/bin/yadm remote add origin-ssh git@git.klr.blue:kyle/dotfiles.git
+    $XDG_LOCAL_HOME/bin/yadm remote add origin-ssh git@git.klr.blue:kyle/dotfiles.git
 fi
 
 
 # Apply "Assume unchanged" rules to yadm repo
 while read file; do
-    $HOME/.local/bin/yadm update-index --assume-unchanged $HOME/$file
-done < $HOME/.local/etc/git/assume-unchanged
+    $XDG_LOCAL_HOME/bin/yadm update-index --assume-unchanged $HOME/$file
+done < $XDG_CONFIG_HOME/git/assume-unchanged

@@ -2,9 +2,9 @@
 
 # Install and setup Python, pip, and install packages I like for Python
 
-export PYENV_ROOT=$HOME/.local/opt/pyenv
+export PYENV_ROOT=$XDG_OPT_HOME/pyenv
 curl https://pyenv.run | bash
-ln -sf "$HOME/.local/opt/pyenv/bin/pyenv" "$HOME/.local/bin/pyenv"
+ln -sf "$XDG_OPT_HOME/pyenv/bin/pyenv" "$XDG_LOCAL_HOME/bin/pyenv"
 PATH=$PYENV_ROOT/bin:$PATH
 eval "$(pyenv init -)"
 
@@ -14,9 +14,9 @@ pyenv global $PYTHON_VERSION
 
 pip install -U pip
 
-pip install -r $HOME/.local/etc/packages/python_global.txt
-pip install -r $HOME/.local/etc/packages/python_local.txt
+pip install -r $XDG_CONFIG_HOME/packages/python_global.txt
+pip install -r $XDG_CONFIG_HOME/packages/python_local.txt
 
-for package in $(sed -e '/\s*#.*/d' $HOME/.local/etc/packages/python_tools.txt); do
+for package in $(sed -e '/\s*#.*/d' $XDG_CONFIG_HOME/packages/python_tools.txt); do
     pipx install $package
 done
