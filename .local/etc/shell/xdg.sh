@@ -23,6 +23,9 @@ export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
 export LESSHISTFILE="$XDG_VAR_HOME/less/history"
 export LESSKEY="$XDG_CONFIG_HOME/less/keys"
 
+# pipenv
+export WORKON_HOME="$XDG_VAR_HOME/venvs"
+
 # pipx
 export PIPX_HOME="$XDG_VAR_HOME/pipx"
 
