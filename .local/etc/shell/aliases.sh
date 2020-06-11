@@ -7,7 +7,7 @@ alias lS='la -S'
 alias lt='la -t'
 alias l.='la -d .*'
 alias hl='history P'
-alias tree='tree -shC --du P'
+alias tree='tree -sha --du'
 alias z='fasd_cd'
 alias zz='fasd_cd -i $(fc -nl -1 | awk '"'"'{print $NF}'"'"')'
 
