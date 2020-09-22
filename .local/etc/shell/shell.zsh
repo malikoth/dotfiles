@@ -10,5 +10,3 @@ done
 if [[ -s "$HOME/.localrc" ]]; then
     source "$HOME/.localrc"
 fi
-
-cd
