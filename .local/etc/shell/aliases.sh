@@ -47,11 +47,11 @@ alias pat='pygmentize -O style=monokai -f 16m -g'
 alias pec='pipenv clean'
 alias pei='pipenv install --dev'
 alias per='pipenv run'
-alias pes='pipenv shell'
+alias pes='pipenv shell --fancy'
 alias peS='pipenv sync --dev'
 alias peu='pipenv update --dev'
 alias peU='pipenv uninstall'
-alias pyfmt='isort -rc -y . && black . && flake8'
+alias pyfmt='isort . && black . && flake8'
 alias ws='python3 -m http.server'
 
 # Miscellaneous
