@@ -5,6 +5,7 @@ httpie
 invoke
 isort[pyproject]
 j2cli
+mypy
 pre-commit
 pydocstyle
 Pygments
