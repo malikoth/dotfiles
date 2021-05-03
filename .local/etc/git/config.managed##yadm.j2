@@ -16,6 +16,9 @@
     editor = vim
     excludesfile = ~/.local/etc/git/ignore
 
+[init]
+    defaultBranch = main
+
 [alias]
     mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
 
