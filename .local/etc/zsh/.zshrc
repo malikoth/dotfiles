@@ -14,3 +14,4 @@ fi
 if [[ -s "$XDG_CONFIG_HOME/shell/shell.zsh" ]]; then
   source "$XDG_CONFIG_HOME/shell/shell.zsh"
 fi
+

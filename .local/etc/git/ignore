@@ -11,6 +11,7 @@ bin/
 env/
 node_modules/
 obj/
+tmp/
 
 atlassian*
 
@@ -23,3 +24,4 @@ atlassian*
 *.py?
 *.sqlite*
 *.bak
+tmp.*
